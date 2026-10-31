@@ -19,14 +19,16 @@ Agents operating on this repository must adhere to the rules, boundaries, and wo
 
 ---
 
-## 2. Stable Endpoint Conventions
+## 2. Game Hosting and Link Conventions
 
-Each published game must live at `public/games/<slug>/index.html` retaining original version numbers to guarantee durable, direct links:
+Games in the arcade may be hosted in Bruce-Box or linked from an external host. Bruce-Box-hosted games live at `public/games/<slug>/index.html`, retaining original version numbers to guarantee durable, direct links:
 
 - EcoHex 4 &rarr; `/games/ecohex4/`
 - Hopper 2 &rarr; `/games/hopper2/`
 - My Garden Grow &rarr; `/games/my-garden-grow/`
 - Smother 3 &rarr; `/games/smother3/`
+
+Externally hosted games should link directly to their stable playable URL and be identified as externally hosted in the catalog. Do not copy external game files into Bruce-Box unless specifically requested.
 
 Game code copied to `public/games/<slug>/index.html` must remain identical to Bruce's original code, with only non-destructive additions:
 

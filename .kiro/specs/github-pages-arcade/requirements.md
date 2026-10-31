@@ -2,7 +2,7 @@
 
 ## 1. Overview & Goals
 
-Bruce-Box is a lightweight showcase website hosted on GitHub Pages that hosts and displays browser-based games created by Bruce Baskir. The system provides a clean, framework-free landing page ("Bruce-Box Arcade"), presents each game at a predictable, permanent URL/endpoint, and keeps raw original files isolated so new game drops from Bruce can be imported cleanly without overwriting release history.
+Bruce-Box is a lightweight showcase website hosted on GitHub Pages that catalogs browser-based games created by Bruce Baskir. Games may be hosted in Bruce-Box or linked from another host. The system provides a clean, framework-free landing page ("Bruce-Box Arcade"), presents each game at a stable playable URL, and keeps raw original files isolated so new game drops from Bruce can be imported cleanly without overwriting release history.
 
 The repository also includes standard project maintenance files: `README.md`, `LICENSE` (MIT), `AGENTS.md` (with `.agents/skills` for agent tooling), `CONTRIBUTING.md`, and an automated GitHub Actions deployment workflow for GitHub Pages.
 
@@ -21,7 +21,7 @@ The repository also includes standard project maintenance files: `README.md`, `L
 
 ### 3.1 Game Preservation & Ingestion Pipeline
 - **FR-1.1 (Raw Preservation)**: The existing `games/` folder shall remain the untouched drop-zone for raw game files directly received from Bruce (e.g., `games/ecohex4.html`, `games/Hopper2 (3).html`, `games/MyGardenGrow.html`, `games/smother3.html`).
-- **FR-1.2 (Clean Hosting Directory)**: A dedicated web-root directory (`public/` or `docs/`) shall hold the hosted assets. Games shall be exposed under stable canonical paths (e.g., `public/games/<slug>/index.html` or `public/games/<slug>.html`).
+- **FR-1.2 (Clean Hosting Directory)**: Games hosted by Bruce-Box shall be exposed under stable canonical paths in the web root (e.g., `public/games/<slug>/index.html` or `public/games/<slug>.html`). The catalog may also link directly to games hosted elsewhere without copying their assets.
 - **FR-1.3 (Zero-to-Minimal Mutation)**: When copying games to their published endpoint, game code, mechanics, artwork, and styling must not be altered, except for non-destructive mechanical adaptations if strictly needed for standalone path resolution (such as ensuring self-contained relative assets or adding standard `<title>` tags if missing).
 - **FR-1.4 (Stable Endpoints with Version Numbers)**: Each game's URL endpoint must retain its raw version/game number to reflect Bruce's original naming and remain stable across releases:
   - EcoHex 4: `/games/ecohex4/`
@@ -31,13 +31,13 @@ The repository also includes standard project maintenance files: `README.md`, `L
 
 ### 3.2 Landing Page (Bruce-Box Arcade)
 - **FR-2.1 (Framework-Free Architecture)**: The landing page (`index.html`) must use pure HTML5, CSS3, and vanilla JavaScript with zero external frameworks or heavy runtime dependencies.
-- **FR-2.2 (Game Catalog Presentation)**: The landing page must present a clean, aesthetic card or list view of all published games, including:
+- **FR-2.2 (Game Catalog Presentation)**: The landing page must present a clean, aesthetic card or list view of all featured games, including:
   - Game Title
   - Short summary or description
-  - Direct "Play Now" link navigating to the stable endpoint
-  - Bruce Baskir creator attribution
+  - Direct "Play Now" link to the stable playable URL, whether local or external
+  - Bruce Baskir creator attribution; externally hosted entries are identified as external
 - **FR-2.3 (Responsive & Accessible)**: The landing page must adapt cleanly across desktop, tablet, and mobile browsers with clear typography and keyboard/touch navigation.
-- **FR-2.4 (Return Navigation)**: Each game container or wrapper (or landing link) must provide an intuitive way or guidance for players to return to the Bruce-Box landing page.
+- **FR-2.4 (Return Navigation)**: Bruce-Box-hosted games provide an intuitive way to return to the landing page. External game links open in a new tab so the catalog remains available.
 
 ### 3.3 CI/CD & GitHub Pages Deployment
 - **FR-3.1 (GitHub Actions Workflow)**: A GitHub Actions workflow (`.github/workflows/deploy.yml` or `pages.yml`) must build/bundle the site directory and deploy directly to GitHub Pages using the official `actions/deploy-pages` action.

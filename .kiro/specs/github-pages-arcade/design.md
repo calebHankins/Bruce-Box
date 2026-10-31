@@ -58,7 +58,7 @@ Maintenance scripts use vanilla JavaScript in `.mjs` files and run with Node.js.
 ### 2.1 Web Root (`public/`)
 GitHub Pages action will upload and deploy the `public/` directory.
 
-### 2.2 Stable Endpoints Mapping
+### 2.2 Bruce-Box-Hosted Endpoints
 
 | Game Name | Raw Source File | Published Stable Path | Relative URL Endpoint |
 | :--- | :--- | :--- | :--- |
@@ -70,6 +70,10 @@ GitHub Pages action will upload and deploy the `public/` directory.
 **Advantage of `/index.html` within folder:**
 - URL paths are directory-based (e.g. `https://<user>.github.io/Bruce-Box/games/ecohex4/`).
 - If Bruce releases a revision to version 4 or drops a future `ecohex5.html`, version-specific links remain intact and durable.
+
+### 2.3 External Game Links
+
+Games hosted elsewhere are cataloged with their stable playable URL, without copying their assets into `public/`. Their cards identify the external hosting and open the game in a new tab, leaving the Bruce-Box catalog available.
 
 ---
 
@@ -96,8 +100,9 @@ Each game card will feature:
 1. **Title**: Clean display name (e.g., "EcoHex", "Hopper", "My Garden Grow", "Smother").
 2. **Badge / Version**: e.g., "v4 (Drop)", "Strategy / Puzzle".
 3. **Short Description**: Brief overview of gameplay based on the in-game instructions.
-4. **Action**: High-visibility "Play Game" button directing to the stable endpoint.
-5. **Direct Link / Copy Link**: Quick way to copy or open direct URL.
+4. **Action**: High-visibility "Play Game" button directing to the stable local endpoint or external playable URL.
+5. **Direct Link / Copy Link**: Quick way to copy or open the direct URL.
+6. **Hosting Indicator**: External games are identified as externally hosted.
 
 ---
 

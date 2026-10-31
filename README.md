@@ -6,7 +6,7 @@ The arcade features a framework-free catalog landing page, responsive dark arcad
 
 ## Live Site
 
-- **Arcade Showcase**: [calebHankins.github.io/Bruce-Box/](https://calebHankins.github.io/Bruce-Box/) *(or your configured GitHub Pages domain)*
+- **Arcade Showcase**: [Bruce-Box/](https://calebHankins.github.io/Bruce-Box/) *(or your configured GitHub Pages domain)*
 
 ## Game Catalog
 

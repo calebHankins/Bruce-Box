@@ -37,6 +37,40 @@
                 background-color: white;
             }
 
+			
+			.dpad {
+				clear: both;
+				display: grid;
+				grid-template-columns: repeat(3, 56px);
+				grid-template-rows: repeat(3, 56px);
+				gap: 6px;
+				justify-content: center;
+				padding-top: 14px;
+				width: 180px;
+				user-select: none;
+				-webkit-user-select: none;
+				touch-action: manipulation;
+			}
+			.dpad-btn {
+				background: #222;
+				color: #fff;
+				border: 2px solid #000;
+				border-radius: 8px;
+				font-size: 24px;
+				line-height: 1;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				padding: 0;
+			}
+			.dpad-btn:active {
+				background: #555;
+			}
+			.dpad-up { grid-column: 2; grid-row: 1; }
+			.dpad-left { grid-column: 1; grid-row: 2; }
+			.dpad-down { grid-column: 2; grid-row: 3; }
+			.dpad-right { grid-column: 3; grid-row: 2; }
 			.banner{
 				float: left;
 				width: 110px;
@@ -275,6 +309,10 @@
                 }
             }
 
+            
+            function movePlayer(code){
+                pickkey({ which: code });
+            }
             function pickkey(theKey){     //initiated if key is pressed
                 if (gameflag!=1){return;}   //clicking keys does nothing if game not in motion
                 if (player.dir>0){return;}  //no action if player already in motion
@@ -502,6 +540,12 @@
                     AND TRY TO<br>
                     TRAP YOU!!!
                 </div>
+		</div>
+		<div class="dpad" aria-label="Game Controls">
+			<button type="button" class="dpad-btn dpad-up" onclick="movePlayer(38)" aria-label="Up">&uarr;</button>
+			<button type="button" class="dpad-btn dpad-left" onclick="movePlayer(37)" aria-label="Left">&larr;</button>
+			<button type="button" class="dpad-btn dpad-down" onclick="movePlayer(40)" aria-label="Down">&darr;</button>
+			<button type="button" class="dpad-btn dpad-right" onclick="movePlayer(39)" aria-label="Right">&rarr;</button>
 		</div>
 		<script>
             

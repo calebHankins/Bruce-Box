@@ -34,9 +34,9 @@
     - Guidance to leverage `.agents/skills/game-intake`.
   - [x] 5.2 Create `.agents/skills/game-intake/SKILL.md` following [Agent Skills specification](https://agentskills.io/home):
     - Frontmatter (`name`, `description`).
-    - Step-by-step instructions for ingesting, slugifying, and publishing Bruce's new game drops.
+    - Step-by-step instructions for one-time intake of a genuinely new title, distinct from updates to maintained games.
     - Checklist for updating landing page cards when new games are added.
-  - [x] 5.3 Create `.agents/skills/game-intake/sync-games.mjs` as a vanilla JavaScript script runnable with Node.js to copy a selected raw game into its stable published path without modifying the source. Use Node.js built-in modules only.
+  - [x] 5.3 Create `.agents/skills/game-intake/intake-game.mjs` as a vanilla JavaScript helper runnable with Node.js to create the initial copy for one selected new game. Require an explicit slug and refuse to overwrite an existing endpoint; use Node.js built-in modules only.
 
 - [x] **Task 6: Verification & Validation**
   - [x] 6.1 Create `scripts/serve.mjs`, a vanilla JavaScript static HTTP server using Node.js built-in modules only, and document `node scripts/serve.mjs` as the local preview command.

@@ -11,31 +11,31 @@ Bruce-Box is a lightweight showcase website hosted on GitHub Pages that archives
 1. **Zero External Runtime Dependencies**: The published site (`public/`) must remain 100% vanilla HTML5, modern CSS3, and browser JavaScript. Do not introduce npm frameworks, bundlers (Vite, Webpack), or CSS preprocessors.
 2. **Immutability of Raw Drops**: The `games/` directory contains original game files exactly as delivered by Bruce. Never edit, reformat, or alter files inside `games/`.
 3. **Stable Game Links**: Each catalog entry must link to a stable playable URL. Bruce-Box-hosted games use a predictable, versioned path under `public/games/<slug>/index.html` (e.g. `/games/ecohex4/`); games hosted elsewhere link directly to their external URL and are identified as external.
-4. **Minimal Code Mutations**: When syncing raw games to `public/games/`, maintain Bruce's game logic, algorithms, layout, and art byte-for-byte. Only non-destructive standardizations (e.g. `<title>`, `<meta charset="utf-8">`, viewport tags, and back-navigation) are added.
+4. **Maintain Published Games**: `public/games/` contains maintained versions that may include fixes and adaptations beyond the original raw drops. Do not overwrite them from `games/`. Review each new Bruce contribution and manually integrate relevant changes into the maintained game with appropriate testing.
 
 ---
 
-## Ingesting a New or Updated Game Drop
+## Adding a New Game or Updating an Existing One
 
-When Bruce delivers a new game file (or an updated version of an existing game):
+When Bruce delivers a new game file:
 
 1. **Add Raw File to `games/`**:
    Place the raw file in `games/` without renaming or modifying it (e.g. `games/smother4.html`).
 
-2. **Sync to Public Web Root**:
-   Run the intake sync script:
+2. **Create the Initial Published Copy**:
+   For a genuinely new title only, add its mapping to `GAME_MANIFEST` and run the one-time intake helper. It refuses to overwrite an existing endpoint:
 
    ```bash
-   node .agents/skills/game-intake/sync-games.mjs
+   node .agents/skills/game-intake/intake-game.mjs --slug <slug>
    ```
-
-   If introducing a completely new title, add its entry to `GAME_MANIFEST` in [`.agents/skills/game-intake/sync-games.mjs`](.agents/skills/game-intake/sync-games.mjs).
 
 3. **Update the Landing Page (`public/index.html`)**:
    Add a new `<article class="game-card">` entry with the game title, genre, description, and direct link. For an external game, use an external-host badge and link to its stable playable URL instead of creating a local copy.
 
 4. **Update Documentation**:
    Add the new title to the catalog table in [`README.md`](README.md).
+
+For an update to an existing game, keep the raw contribution unchanged in `games/` and review it against the maintained copy in `public/games/`. Manually integrate the intended changes (or have an agent do so), preserving existing fixes and adaptations; never use the one-time intake helper to update an existing endpoint.
 
 ---
 

@@ -7,8 +7,8 @@
   "scripts": {
     "start": "node scripts/serve.mjs",
     "serve": "node scripts/serve.mjs",
-    "sync-games": "node .agents/skills/game-intake/sync-games.mjs",
-    "sync-games:dry": "node .agents/skills/game-intake/sync-games.mjs --dry-run"
+    "intake-game": "node .agents/skills/game-intake/intake-game.mjs",
+    "intake-game:dry": "node .agents/skills/game-intake/intake-game.mjs --dry-run"
   },
   "keywords": [
     "arcade",

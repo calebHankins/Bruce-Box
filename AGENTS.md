@@ -10,8 +10,8 @@ Agents operating on this repository must adhere to the rules, boundaries, and wo
 
 - **`games/` is STRICTLY READ-ONLY**:
   The `games/` folder is the intake area for raw, untouched files delivered directly from Bruce Baskir (e.g., `games/ecohex4.html`, `games/Hopper2 (3).html`). **NEVER** edit, reformat, or delete files inside `games/`.
-- **`public/` is the Web Root**:
-  All deployed web assets belong in `public/`. GitHub Pages serves the contents of this folder directly.
+- **`public/` is the maintained Web Root**:
+  All deployed web assets belong in `public/`. GitHub Pages serves the contents of this folder directly. Hosted games here are maintained implementations and may contain fixes or adaptations beyond Bruce's raw drops. Never overwrite them from `games/`.
 - **Zero-Dependency Mandate**:
   Do not introduce external front-end frameworks (React, Vue, Tailwind, etc.), build bundlers, or npm dependencies.
 - **Pure Node.js Maintenance Scripts**:
@@ -30,7 +30,7 @@ Games in the arcade may be hosted in Bruce-Box or linked from an external host. 
 
 Externally hosted games should link directly to their stable playable URL and be identified as externally hosted in the catalog. Do not copy external game files into Bruce-Box unless specifically requested.
 
-Game code copied to `public/games/<slug>/index.html` must remain identical to Bruce's original code, with only non-destructive additions:
+For a genuinely new title, the one-time intake helper may create `public/games/<slug>/index.html` from its raw drop, with only non-destructive additions:
 
 1. Standard `<meta charset="utf-8">` and viewport tags if missing.
 2. Descriptive `<title>` tag.
@@ -39,11 +39,11 @@ Game code copied to `public/games/<slug>/index.html` must remain identical to Br
 
 ## 3. Agent Skills
 
-To save context and ensure repeatable operations, use the specialized agent skill:
+Existing game updates must be reviewed and manually integrated into the maintained version in `public/games/`; do not recopy raw files over it. For a genuinely new title only, use the one-time intake helper and its specialized agent skill:
 
 - **Game Intake Skill**: [`.agents/skills/game-intake/SKILL.md`](.agents/skills/game-intake/SKILL.md)
-  - Execute `node .agents/skills/game-intake/sync-games.mjs` to ingest and publish game drops.
-  - Follow the skill instructions when Bruce provides a new game or an update.
+  - Execute `node .agents/skills/game-intake/intake-game.mjs --slug <slug>` to create a new game's initial published copy.
+  - The helper refuses to write to an existing game endpoint.
 
 ---
 

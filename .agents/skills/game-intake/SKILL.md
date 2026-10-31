@@ -1,22 +1,23 @@
 ---
 name: game-intake
-description: Ingests raw browser game drops from Bruce Baskir into stable public GitHub Pages endpoints with zero-mutation preservation.
+description: Creates the initial published copy for a genuinely new Bruce Baskir browser game; never overwrites maintained game endpoints.
 ---
 
 # Game Intake Skill
 
-Use this skill whenever a new game drop is added to `games/` or an existing game receives a new version file from creator Bruce Baskir.
+Use this skill only when adding a genuinely new title. Existing games in `public/games/` are maintained versions that may include fixes and adaptations; updates from Bruce must be reviewed and manually integrated (by a maintainer or agent), never recopied over the published version.
 
 ## Operational Rules
 
 1. **Never edit files in `games/`**: Treat `games/` as an immutable drop folder.
 2. **Deterministic slug paths**: Target games into `public/games/<slug>/index.html`. Always retain game version numbers in the slug (e.g. `ecohex4`, `hopper2`).
-3. **Preserve game mechanics**: Do not refactor canvas logic, algorithms, or inline styles.
+3. **Never overwrite a published game**: The helper refuses to write when the target endpoint already exists. Do not remove that guard to update a title.
+4. **Initial conversion only**: The helper can add missing standard metadata, but it does not convert an existing maintained game or integrate updates.
 
 ## Ingestion Workflow
 
 ### Step 1: Update the Manifest
-Open `.agents/skills/game-intake/sync-games.mjs` and ensure the game is listed in `GAME_MANIFEST`:
+Add the new title to `GAME_MANIFEST` in `.agents/skills/game-intake/intake-game.mjs`:
 
 ```javascript
 {
@@ -32,15 +33,15 @@ Open `.agents/skills/game-intake/sync-games.mjs` and ensure the game is listed i
 }
 ```
 
-### Step 2: Run the Sync Script
-Run the sync script to copy and adapt the file safely:
+### Step 2: Create the Initial Copy
+Select only the new game's slug. The helper requires an explicit slug and refuses to overwrite an existing target:
 
 ```bash
 # Dry run check
-node .agents/skills/game-intake/sync-games.mjs --dry-run
+node .agents/skills/game-intake/intake-game.mjs --slug <slug> --dry-run
 
-# Execute sync
-node .agents/skills/game-intake/sync-games.mjs
+# Create the initial published copy
+node .agents/skills/game-intake/intake-game.mjs --slug <slug>
 ```
 
 ### Step 3: Update `public/index.html`

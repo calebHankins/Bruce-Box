@@ -19,10 +19,10 @@ The repository also includes standard project maintenance files: `README.md`, `L
 
 ## 3. Functional Requirements
 
-### 3.1 Game Preservation & Ingestion Pipeline
+### 3.1 Raw Preservation, One-Time Intake & Game Maintenance
 - **FR-1.1 (Raw Preservation)**: The existing `games/` folder shall remain the untouched drop-zone for raw game files directly received from Bruce (e.g., `games/ecohex4.html`, `games/Hopper2 (3).html`, `games/MyGardenGrow.html`, `games/smother3.html`).
 - **FR-1.2 (Clean Hosting Directory)**: Games hosted by Bruce-Box shall be exposed under stable canonical paths in the web root (e.g., `public/games/<slug>/index.html` or `public/games/<slug>.html`). The catalog may also link directly to games hosted elsewhere without copying their assets.
-- **FR-1.3 (Zero-to-Minimal Mutation)**: When copying games to their published endpoint, game code, mechanics, artwork, and styling must not be altered, except for non-destructive mechanical adaptations if strictly needed for standalone path resolution (such as ensuring self-contained relative assets or adding standard `<title>` tags if missing).
+- **FR-1.3 (One-Time New-Game Intake)**: A helper may create the initial published copy of a genuinely new game and add missing standard metadata. It must require an explicit game selection and refuse to overwrite an existing endpoint. Existing published games are maintained implementations and may include fixes or adaptations beyond the raw drop; updates must be reviewed and manually integrated by a maintainer or agent, never blindly recopied from `games/`.
 - **FR-1.4 (Stable Endpoints with Version Numbers)**: Each game's URL endpoint must retain its raw version/game number to reflect Bruce's original naming and remain stable across releases:
   - EcoHex 4: `/games/ecohex4/`
   - Hopper 2: `/games/hopper2/`
@@ -48,7 +48,7 @@ The repository also includes standard project maintenance files: `README.md`, `L
 - **FR-4.2 (LICENSE)**: An permissive, zero-warranty open-source license (MIT License) clarifying the code is provided "as is" with no warranty or support liability.
 - **FR-4.3 (AGENTS.md & Agent Skills)**:
   - Concise `AGENTS.md` defining project guidelines, boundaries, and pointers to agent skills.
-  - An Agent Skill in `.agents/skills/game-intake/` containing instructions and a vanilla JavaScript `.mjs` script, runnable with Node.js, for taking a raw game file from `games/` and publishing it into the public web root.
+  - An Agent Skill in `.agents/skills/game-intake/` containing instructions and a vanilla JavaScript `.mjs` helper, runnable with Node.js, for one-time initial intake of a genuinely new title. It must not be an update or synchronization pipeline for existing published games.
 - **FR-4.4 (CONTRIBUTING.md)**: Human-oriented instructions for adding a new game, updating existing games, reporting issues, and testing locally.
 - **FR-4.5 (Node.js Maintenance Scripts)**: Any project-authored maintenance or local-server scripts must be vanilla JavaScript in `.mjs` files runnable with Node.js. Scripts must use only Node.js built-in modules; Python, PowerShell, external packages, and build tooling must not be required.
 

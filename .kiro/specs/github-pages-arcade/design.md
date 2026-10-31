@@ -10,7 +10,7 @@ Bruce-Box/
 │   └── skills/
 │       └── game-intake/
 │           ├── SKILL.md
-│           └── sync-games.mjs
+│           └── intake-game.mjs
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml
@@ -77,14 +77,14 @@ Games hosted elsewhere are cataloged with their stable playable URL, without cop
 
 ---
 
-## 3. Game Intake & Mutation Boundary
+## 3. One-Time Intake & Maintenance Boundary
 
 ### 3.1 Preservation Policy
 - Raw drop files in `games/` remain 100% byte-for-byte intact.
-- In `public/games/<slug>/index.html`, we maintain code integrity:
-  - Game canvas, DOM elements, and Bruce's game algorithms remain untouched.
-  - A small, unobtrusive, non-intrusive floating top-bar or "Return to Arcade" floating button can be optionally provided if it does not collide with the game layout, or the landing page opens games in a dedicated tab with a clear return navigation header.
-  - Character encoding (`<meta charset="utf-8">`) and responsive meta viewport are verified.
+- `public/games/<slug>/index.html` is the maintained, deployed game and may include fixes or adaptations beyond the raw drop.
+- The intake helper is for the initial copy of a genuinely new title only. It refuses to write to an existing endpoint.
+- Updates to an existing title are reviewed and manually integrated into the maintained implementation by a maintainer or agent. Never recopy the raw drop over that implementation.
+- Initial intake may add missing standard metadata such as character encoding (`<meta charset="utf-8">`), a descriptive title, and a responsive viewport.
 
 ---
 
@@ -127,13 +127,13 @@ Using the modern `actions/deploy-pages` and `actions/upload-pages-artifact` work
 ### 6.2 `AGENTS.md`
 - Concise instruction set specifying:
   - Repository purpose and structure.
-  - Rules of engagement (never edit `games/` raw files; always update `public/`).
-  - Pointer to `.agents/skills/game-intake` for synchronizing or onboarding new games.
+  - Rules of engagement (never edit `games/` raw files; maintain `public/` game implementations without overwriting them from raw drops).
+  - Pointer to `.agents/skills/game-intake` for one-time onboarding of genuinely new games.
 
 ### 6.3 `.agents/skills/game-intake/SKILL.md`
 - Standard Agent Skill format (agentic YAML frontmatter + concise operational instructions).
 - Teaches agents how to:
-  1. Inspect `games/` for new or updated game files.
-  2. Slugify game names to determine target directories under `public/games/<slug>/`.
-  3. Deploy the file to `index.html` while preserving original source code.
-  4. Update `public/index.html` card metadata if a new game was introduced.
+  1. Add a genuinely new title to the intake manifest.
+  2. Create its initial file at `public/games/<slug>/index.html`, refusing to overwrite an existing endpoint.
+  3. Update `public/index.html` card metadata and documentation.
+  4. Leave updates to existing games for manual or agent-assisted integration into their maintained versions.

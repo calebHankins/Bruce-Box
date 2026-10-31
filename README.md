@@ -29,13 +29,13 @@ npm start
 node scripts/serve.mjs
 ```
 
-To re-sync game drops from `games/` to `public/games/`:
+For a genuinely new title, the one-time intake helper can create its initial copy from a raw drop. It refuses to overwrite an existing published game:
 
 ```bash
-npm run sync-games
+node .agents/skills/game-intake/intake-game.mjs --slug <slug>
 ```
 
-This intake process is for games hosted in Bruce-Box. To feature a game hosted elsewhere, add a catalog card that links to its stable playable URL and mark it as externally hosted; do not copy it into `public/games/`.
+Existing games in `public/games/` are maintained versions and may include fixes and adaptations beyond the raw files in `games/`. Integrate Bruce's updates into those versions manually or with an agent; do not run the intake helper for an existing title. To feature a game hosted elsewhere, add a catalog card that links to its stable playable URL and mark it as externally hosted; do not copy it into `public/games/`.
 
 Then open [http://localhost:8080](http://localhost:8080) in any modern browser.
 
@@ -45,7 +45,7 @@ Press `Ctrl+C` to stop the preview server.
 
 ```text
 Bruce-Box/
-├── .agents/skills/game-intake/  # Agent skill and script for syncing raw game drops
+├── .agents/skills/game-intake/  # Agent skill and one-time new-game intake helper
 ├── .github/workflows/deploy.yml # Automated GitHub Pages deployment
 ├── games/                       # Raw, unmodified drops received from Bruce
 ├── public/                      # Web root deployed to GitHub Pages

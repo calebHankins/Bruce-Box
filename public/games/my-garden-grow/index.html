@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>My Garden Grow - Bruce-Box Arcade</title>
+		<meta charset="utf-8">
+        <style>
+            .frame{
+                float: left;
+                height: 600px;
+                width: 800px;
+            }
+            .leftHalf{
+                float: left;
+                height: 600px;
+                width: 420px;
+            }
+            .rightHalf{
+                float: left;
+                height: 600px;
+                width: 380px;
+            }
+            .board{
+                float: left;
+                height: 300px;
+                width: 420px;
+            }
+            .row{
+                float: left;
+                height: 60px;
+                width: 420px;;
+            }
+            .halfSpace{
+                float: left;
+                height: 60px;
+                width: 30px;
+            }
+            .fullSpace{
+                float: left;
+                height: 50px;
+                width: 50px;
+                border-width: 5px;
+                border-color: gray;
+                border-style: solid;
+            }
+            .redSpace{
+                float: left;
+                height: 50px;
+                width: 50px;
+                border-width: 5px;
+                border-color: red;
+                border-style: solid;
+            }
+            .whiteSpace{
+                float: left;
+                height: 50px;
+                width: 50px;
+                border-width: 5px;
+                border-color: white;
+                border-style: solid;
+            }
+
+            .whiteBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color: white;
+            }
+            .greenBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color: palegreen;
+            }
+            .blackBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color: black;
+            }
+            .yellowBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color: yellow;
+            }
+            .blueBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color: blue;
+            }
+            .redBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color: red;
+            }
+            .darkGreenBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color: darkgreen; 
+            }
+            .brownBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color: brown;  
+            }
+            .pinkBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color: pink;  
+            }
+            .underSpace{
+                float: left;
+                height: 50px;
+                width: 420px;
+            }
+            .hSpace{
+                float: left;
+                height: 50px;
+                width: 300px;
+                color: black;
+                text-align: center;
+                font-size: 20px;
+            }
+            .hSpaceButton{
+                float: left;
+                height: 40px;
+                width: 100px;
+                background-color: pink;
+                color: black;
+                text-align: center;
+                font-size: 14px;
+                margin-left:10px;
+                border-style: solid;
+                border-color: black;
+                border-width: 5px;
+            }
+            .hSpaceButtonBlank{
+                float: left;
+                height: 50px;
+                width: 100px;
+                background-color: white;
+            }
+            .shed{
+                float: left;
+                height: 180px;
+                width: 300px;
+            }
+
+            .message{
+                float: left;
+                height: 100px;
+                width: 380px;
+            }
+
+            .messageSpace{
+                float: left;
+                height: 100px;
+                width: 100px;
+                text-align: center;
+                font-size: 16pt;
+            }
+
+            .sellNow{
+                float: left;
+                height: 70px;
+                width: 100px;
+                padding-top: 10px;
+                background-color: lavender;  
+                text-align: center;
+                font-size: 16pt;
+                border-style:solid;
+                border-color:black;
+                border-width:5px;
+            }
+
+            .sellBlank{
+                float: left;
+                height: 90px;
+                width: 110px; 
+                background-color: white;
+            }
+
+            .buyFrame{
+                float: left;
+                height: 60px;
+                padding-top: 10px;
+                width: 420px;
+            }
+
+            .buyButton{
+                float: left;
+                height: 50px;
+                width: 120px;
+                background-color: ivory; 
+                border-style: solid;
+                border-color: black;
+                border-width: 5px;
+                text-align: center;
+                font-size: 14px;
+            }
+
+            .blankBuyButton{
+                float: left;
+                height: 60px;
+                width: 130px;
+                background-color: white; 
+            }
+
+            .instructions{
+                float: left;
+                height: 440px;
+                width: 365px;
+                background-color: lemonchiffon;
+                text-align: left;
+                font-size: 12px;
+                color: black;
+                margin-left:10px;
+                padding-left:5px;
+            }
+            .diffEasy{
+                float: left;
+                height: 50px;
+                width: 100px;
+                background-color: palegreen; 
+                border-style: solid;
+                border-color: black;
+                border-width: 5px;
+                text-align: center;
+                font-size: 14px;
+            }
+            .diffNormal{
+                float: left;
+                height: 50px;
+                width: 100px;
+                background-color: yellow; 
+                border-style: solid;
+                border-color: black;
+                border-width: 5px;
+                text-align: center;
+                font-size: 14px;
+            }
+            .diffHard{
+                float: left;
+                height: 50px;
+                width: 100px;
+                background-color: pink; 
+                border-style: solid;
+                border-color: black;
+                border-width: 5px;
+                text-align: center;
+                font-size: 14px;
+            }
+            .diffBlank{
+                float: left;
+                height: 60px;
+                width: 110px;
+                background-color: white; 
+            }
+            .tileStack{
+                float: left;
+                height: 100px;
+                width: 60px;
+            }
+            .tileNumber{
+                float: left;
+                height: 40px;
+                width: 60px;
+                text-align: center;
+                font-size: 14px;
+                color: black;
+            }
+
+        </style>
+        <script>
+
+            function setBox(boxName){
+                var theBox = document.getElementById(boxName);
+                for (var i = 0; i < 625; i++){
+                    divAdd = document.createElement("div");
+                    theBox.appendChild(divAdd);
+                    theBox.children[i].className = "whiteBox";
+                } 
+            }
+
+            function startUp(chosenDeck){
+                for (k=0;k<45;k++){
+                    myDeck[k] = chosenDeck[k];       //sets myDeck to difficulty setting
+                }
+                for (k=0;k<27;k++){              //sets tiles for first board
+                    smallDeck[k]=myDeck[k];
+                }
+            }
+
+            function makeBoard(){
+                for (k=0; k < 32; k++){
+                    lable = "box"+boardTiles[k];
+                    setBox(lable);
+                }
+                for (k=0; k<15; k++){
+                    lable = "tool"+k;
+                    setBox(lable);
+                }
+                document.getElementById("placeTile").className = "whiteSpace";
+                setBox("placeTile");
+            }
+
+            function setStage(){
+                for (p = 0;p<65;p++){
+                    invalid[p] = true;     //initially sets so cannot play in any tile
+                    strengthMat[p] = 0;    //initially sets strength of all tiles to 0
+                }
+                harvest = [0,0,0,0,0,0,0,0];
+                dealTiles();                  //uses array smallDeck
+      //          printStage();
+                setStrength();
+                printStage();
+                checkValid();
+                printShed();
+                document.getElementById("banner").innerHTML = "YEAR "+year;
+                document.getElementById("continue").className = "hSpaceButton";
+                document.getElementById("continue").innerHTML = "CLICK HERE<br>TO CONTINUE";
+                contFlag = false;
+                contState = 2;
+                blankStore();
+             }
+
+             function toolUp(toolTime){
+                    if (toolShed[toolTime]==-1){
+                        printCan("placeTile");
+                        sellMess = "Sell for <br> 1 Coin";
+                        }
+                    else if (toolShed[toolTime]==-2){
+                        printRake("placeTile");
+                        sellMess = "Sell for <br> 2 Coins";
+                        }
+                    else if (toolShed[toolTime]==-3){
+                        printShovel("placeTile");
+                        sellMess = "Sell for <br> 1 Pride";
+                        } 
+                    document.getElementById("placeTile").className = "fullSpace";
+                    document.getElementById("sellBox").className = "sellNow";
+                    document.getElementById("sellBox").innerHTML = sellMess;
+             }
+
+            function setStrength(){
+                checkWeeds();
+                for (p=1;p<64;p=p+2){
+                    ic = iconMat[p];
+                    if (ic == -3){strengthMat[p]= -3;}
+                    else if (ic == -2){strengthMat[p]= -2;}
+                    else if (ic == -1){strengthMat[p]= -1;}
+                    else if (ic == 0){strengthMat[p]=0;}    //empty space
+                    else if (ic == 1){strengthMat[p]=1;}    //stone
+                    else if (ic == 2){strengthMat[p]=1;}     //yellow
+                    else if (ic == 3){strengthMat[p]=2;}     //blue
+                    else if (ic == 4){strengthMat[p]=3;}    //red
+       //             else if (ic == 5){                       strength of weeds determined by checkWeeds function
+       //                 checkAround(p);
+      //                  strengthMat[p]=1+checkSum[0];}    //weeds -- strength increases with adjacent weeds
+                    else if (ic == 6){strengthMat[p]=5;}       //rock
+                    else if (ic == 7){strengthMat[p]=8;}     //stump
+
+                }
+            }
+
+            function checkWeeds(){
+                for (p=1;p<64;p=p+2){
+                    if (iconMat[p]==5){        //space contains a week
+                        checkAround(p);
+                        strengthMat[p]=1+checkSum[0];}    //weeds -- strength increases with adjacent weeds
+                    }
+            }
+
+            function checkValid(){
+                for (p=1;p<64;p=p+2){
+                    if (strengthMat[p]<0){invalid[p]=true;}  //space filled with tool -- should be true
+                    else if (strengthMat[p]==0){invalid[p]=false;}    //space is empty  -- should be false
+                    else {
+                        checkAround(p);
+                        if (strengthMat[p]+checkSum[1]>0){invalid[p]=true;}  //  strength plant greater than strength tools
+                        else {invalid[p]=false;}
+                    }
+                }
+                printValid();
+            }
+
+            function printValid(){
+                for (p=1;p<64;p=p+2){
+                    xVal = Math.floor(p/13);
+                    yVal = p - (xVal*13);
+                    xVal++;       //correction because boxes start at 1, not 0
+                    yVal++;
+                    label = "box"+xVal+yVal;
+                    var theBox = document.getElementById(label);
+                    if (invalid[p]){theBox.className = "fullSpace";}
+                    else {theBox.className = "redSpace";}
+                }
+            }
+
+            function dealTools(){           //needs revision in final
+                toolShed = shuffleTools(toolShed);
+  //              printShed();
+            }
+
+
+            function printShed(){
+                for (k=0;k<15;k++){
+                    toolName = "tool"+k;
+                    document.getElementById(toolName).className = "fullSpace";
+                    if (toolShed[k]==0){document.getElementById(toolName).className = "whiteSpace";}
+                    else if (toolShed[k]==-1){printCan(toolName);}
+                    else if (toolShed[k]==-2){printRake(toolName);}
+                    else if (toolShed[k]==-3){printShovel(toolName);}
+                }
+                toolsNum = -1;                 //counts tools
+                for (k=0;k<15;k++){          
+                    if (toolShed[k]<0){toolsNum++;}
+                }
+            }   
+
+            function shuffleTools(toolDeck){
+                tempDeck = new Array(15);
+                for (var n=15; n>0; n--){
+                    randNum = Math.floor(Math.random()*n);
+                    tempDeck[n-1] = toolDeck[randNum];
+                    for (var nn = randNum;nn<14;nn++){
+                        toolDeck[nn]=toolDeck[nn+1];
+                    }
+                }
+                tempDeck = pack15(tempDeck)
+                return tempDeck;  
+            }
+
+            function pack15(squash){                 //compresses tools
+                tempMat = new Array(15);
+                for (q = 0;q < 15; q++){
+                    tempMat[q] = 0;
+                }
+                matPoint = 0;
+                for (q = 0;q<15; q++){
+                    if (squash[q]!=0){
+                        tempMat[matPoint] = squash[q];
+                        matPoint++;
+                        }
+                    }
+                return tempMat;
+                }
+
+            function checkAround(checkLoc){    
+                subX = Math.floor(checkLoc/13);
+                subY = checkLoc - (subX*13);
+                checkSum = [0,0];    //first value is surrounding weeds, second is strength of surrounding tools
+                topLeft(checkLoc,subX,subY);
+                topRight(checkLoc,subX,subY);
+                right(checkLoc,subX,subY);
+                bottomRight(checkLoc,subX,subY);
+                bottomLeft(checkLoc,subX,subY);
+                left(checkLoc,subX,subY);   
+            }
+
+            function topLeft(loc1,x1,y1){
+                if (x1<1){return;}
+                if (y1<1){return;}
+                if (iconMat[loc1-14]==5){checkSum[0]++;return;}      //adjacent to weeds
+                if (strengthMat[loc1-14]>0){return;}
+                checkSum[1] = checkSum[1]+strengthMat[loc1-14];
+            }
+
+            function topRight(loc1,x1,y1){
+                if (x1<1){return;}
+                if (y1>11){return;}
+                if (iconMat[loc1-12]==5){checkSum[0]++;return;}      //adjacent to weeds
+                if (strengthMat[loc1-12]>0){return;}
+                checkSum[1] = checkSum[1]+strengthMat[loc1-12];
+            }
+
+            function right(loc1,x1,y1){
+                if (y1>10){return;}
+                if (iconMat[loc1+2]==5){checkSum[0]++;return;}      //adjacent to weeds
+                if (strengthMat[loc1+2]>0){return;}
+                checkSum[1] = checkSum[1]+strengthMat[loc1+2];
+            }
+
+            function bottomRight(loc1,x1,y1){
+                if (x1>3){return;}
+                if (y1>11){return;}
+                if (iconMat[loc1+14]==5){checkSum[0]++;return;}      //adjacent to weeds
+                if (strengthMat[loc1+14]>0){return;}
+                checkSum[1] = checkSum[1]+strengthMat[loc1+14];
+            }
+
+            function bottomLeft(loc1,x1,y1){
+                if (x1>3){return;}
+                if (y1<1){return;}
+                if (iconMat[loc1+12]==5){checkSum[0]++;return;}      //adjacent to weeds
+                if (strengthMat[loc1+12]>0){return;}
+                checkSum[1] = checkSum[1]+strengthMat[loc1+12];
+            }
+
+            function left(loc1,x1,y1){
+                if (y1<2){return;}
+                if (iconMat[loc1-2]==5){checkSum[0]++;return;}      //adjacent to weeds
+                if (strengthMat[loc1-2]>0){return;}
+                checkSum[1] = checkSum[1]+strengthMat[loc1-2];
+            }
+
+            function printStage(){
+                for (k=0;k<32;k++){
+                    matLoc = iconMat[2*k + 1];     //loads icon type at location in board
+                    locName = "box"+boardTiles[k];
+                    if (matLoc == 1){printStone(locName);}
+                    else if (matLoc == 2){printYellow(locName);}
+                    else if (matLoc == 3){printBlue(locName);}
+                    else if (matLoc == 4){printRed(locName);}   
+                    else if (matLoc == 5){
+                        weedStrength = strengthMat[2*k+1];
+                        printWeed(locName,weedStrength);}  
+                    else if (matLoc == 6){printRock(locName);}   
+                    else if (matLoc == 7){printStump(locName);}
+                    else if (matLoc == -1){printCan(locName);}
+                    else if (matLoc == -2){printRake(locName);}
+                    else if (matLoc == -3){printShovel(locName);}
+                }
+            }
+
+            function printHarvest(harvLoc){
+                matLoc = iconMat[harvLoc];
+                locName = "tool"+harvestPointer;
+                if (matLoc==0){return;}                  //tool placed in empty space
+                document.getElementById(locName).className = "fullSpace";
+                if (matLoc == 1){printStone(locName);}
+                else if (matLoc == 2){printYellow(locName);}
+                else if (matLoc == 3){printBlue(locName);}
+                else if (matLoc == 4){printRed(locName);}   
+                else if (matLoc == 5){printWeed(locName,0);}      
+                else if (matLoc == 6){printRock(locName);}  
+                else if (matLoc == 7){printStump(locName);}
+                harvestPointer++; 
+            }
+
+            function printStone(boxName){
+                var theBox = document.getElementById(boxName);
+                for (var i = 0; i < 625; i++){
+                    theBox.children[i].className = "greenBox";
+                } 
+                for (i = 0; i < 32; i++){
+                    theBox.children[stone[i]].className = "blackBox";
+                }
+                printOne(boxName);
+            }
+
+            function printYellow(boxName){
+                var theBox = document.getElementById(boxName);
+                for (var i = 0; i < 625; i++){
+                    theBox.children[i].className = "greenBox";
+                } 
+                for (i = 0; i < 28; i++){
+                    theBox.children[yellow1[i]].className = "yellowBox";
+                    theBox.children[yellow2[i]].className = "yellowBox";
+                    theBox.children[yellow3[i]].className = "yellowBox";
+                    theBox.children[yellow4[i]].className = "yellowBox";
+                    theBox.children[yellow5[i]].className = "yellowBox";
+                    theBox.children[yellow6[i]].className = "yellowBox";
+                }
+                printOne(boxName);
+            }
+
+            function printBlue(boxName){
+                var theBox = document.getElementById(boxName);
+                for (var i = 0; i < 625; i++){
+                    theBox.children[i].className = "greenBox";
+                } 
+                for (i = 0; i < 35; i++){
+                    theBox.children[blue1[i]].className = "blueBox";
+                    theBox.children[blue2[i]].className = "blueBox";
+                    theBox.children[blue3[i]].className = "blueBox";
+                    theBox.children[blue4[i]].className = "blueBox";
+                    theBox.children[blue5[i]].className = "blueBox";
+                    theBox.children[blue6[i]].className = "blueBox";
+                }
+                printTwo(boxName);
+            }
+
+            function printRed(boxName){
+                var theBox = document.getElementById(boxName);
+                for (var i = 0; i < 625; i++){
+                    theBox.children[i].className = "greenBox";
+                } 
+                for (i = 0; i < 7; i++){
+                    theBox.children[redDot[i]].className = "redBox";
+                }
+                for (i = 0; i < 33; i++){
+                    for (kk = redL[i]; kk <= redR[i]; kk++){
+                        theBox.children[kk].className = "redBox";
+                    }
+                }
+                printThree(boxName);
+            }
+
+            function printRock(boxName){
+                var theBox = document.getElementById(boxName);
+                for (var i = 0; i < 625; i++){
+                    theBox.children[i].className = "greenBox";
+                } 
+                for (i = 0; i < 24; i++){
+                    theBox.children[rock1[i]].className = "blackBox";
+                    theBox.children[rock2[i]].className = "blackBox";
+                    theBox.children[rock3[i]].className = "blackBox";
+                }
+                printFive(boxName);
+            }
+
+            function printWeed(boxName,str){
+                var theBox = document.getElementById(boxName);
+                for (var i = 0; i < 625; i++){
+                    theBox.children[i].className = "greenBox";
+                } 
+                for (i = 0; i < 24; i++){
+                    theBox.children[weed1[i]].className = "darkGreenBox";
+                    theBox.children[weed2[i]].className = "darkGreenBox";
+                    theBox.children[weed3[i]].className = "darkGreenBox";
+                    theBox.children[weed4[i]].className = "darkGreenBox";
+                    theBox.children[weed5[i]].className = "darkGreenBox";
+                }
+                if (str==1){printOne(boxName);}
+                else if (str==2){printTwo(boxName);}
+                else if (str==3){printThree(boxName);}
+                else if (str==4){printFour(boxName);}
+                else if (str==5){printFive(boxName);}
+                else if (str==6){printSix(boxName);}
+                else if (str==7){printSeven(boxName);}    //seven is maximum strength
+            }
+
+            function printStump(boxName){
+                var theBox = document.getElementById(boxName);
+                for (var i = 0; i < 625; i++){
+                    theBox.children[i].className = "greenBox";
+                } 
+                for (i = 0; i < 23; i++){
+                    theBox.children[stump1[i]].className = "brownBox";
+                    theBox.children[stump2[i]].className = "brownBox";
+                    theBox.children[stump3[i]].className = "brownBox";
+                    theBox.children[stump4[i]].className = "brownBox";
+                    theBox.children[stump5[i]].className = "brownBox";
+                }
+                printEight(boxName);
+            }
+
+            function printCan(boxName){
+                var theBox = document.getElementById(boxName);
+                for (var i = 0; i < 625; i++){
+                    theBox.children[i].className = "pinkBox";
+                } 
+                for (i = 0; i < 25; i++){
+                    theBox.children[can1[i]].className = "blackBox";
+                    theBox.children[can2[i]].className = "blackBox";
+                    theBox.children[can3[i]].className = "blackBox";
+                    theBox.children[can4[i]].className = "blackBox";
+                    theBox.children[can5[i]].className = "blackBox";
+                    theBox.children[can6[i]].className = "blackBox";
+                    theBox.children[can7[i]].className = "blackBox";
+                    theBox.children[can8[i]].className = "blackBox";
+                }
+                printOne(boxName);
+            }
+
+            function printRake(boxName){
+                var theBox = document.getElementById(boxName);
+                for (var i = 0; i < 625; i++){
+                    theBox.children[i].className = "pinkBox";
+                } 
+                for (i = 0; i < 22; i++){
+                    theBox.children[rake1[i]].className = "blackBox";
+                    theBox.children[rake2[i]].className = "blackBox";
+                    theBox.children[rake3[i]].className = "blackBox";
+                    theBox.children[rake4[i]].className = "blackBox";
+                    theBox.children[rake5[i]].className = "blackBox";
+                    theBox.children[rake6[i]].className = "blackBox";
+                }
+                printTwo(boxName);
+            }
+
+            function printShovel(boxName){
+                var theBox = document.getElementById(boxName);
+                for (var i = 0; i < 625; i++){
+                    theBox.children[i].className = "pinkBox";
+                } 
+                for (i = 0; i < 23; i++){
+                    theBox.children[shovel1[i]].className = "blackBox";
+                    theBox.children[shovel2[i]].className = "blackBox";
+                    theBox.children[shovel3[i]].className = "blackBox";
+                    theBox.children[shovel4[i]].className = "blackBox";
+                    theBox.children[shovel5[i]].className = "blackBox";
+                }
+                printThree(boxName);
+            }
+
+
+
+
+            function dealTiles(){
+                shuffledDeck = shuffle(smallDeck)
+                iter = 0;
+                for (i=1;i<65;i=i+2){
+                    if ((i-1)*(i-13)*(i-27)*(i-39)*(i-53)==0){     //starting column
+                        iconMat[i] = 0;
+                    }
+                    else {
+                        iconMat[i] = shuffledDeck[iter];
+                        iter++;
+                    }
+                }
+            }
+
+            function shuffle(theDeck){
+                tempDeck = new Array(27);
+                for (var n=27; n>0; n--){
+                    randNum = Math.floor(Math.random()*n);
+                    tempDeck[n-1] = theDeck[randNum];
+                    for (var nn = randNum;nn<26;nn++){
+                        theDeck[nn]=theDeck[nn+1];
+                    }
+                }
+                return tempDeck;    //shuffling process destroys theDeck which will need to be reset
+            }
+
+
+            function printOne(subLoc){
+                var theBox = document.getElementById(subLoc);
+                for (xx = 0;xx<8;xx++){
+                    theBox.children[oneMat[xx]].className = "blackBox";   
+                }
+            }
+
+            function printTwo(subLoc){
+                var theBox = document.getElementById(subLoc);
+                for (xx = 0;xx<10;xx++){
+                    theBox.children[twoMat[xx]].className = "blackBox";   
+                }
+            }
+
+            function printThree(subLoc){
+                var theBox = document.getElementById(subLoc);
+                for (xx = 0;xx<10;xx++){
+                    theBox.children[threeMat[xx]].className = "blackBox";   
+                }
+            }
+
+            function printFour(subLoc){
+                var theBox = document.getElementById(subLoc);
+                for (xx = 0;xx<9;xx++){
+                    theBox.children[fourMat[xx]].className = "blackBox";   
+                }
+            }
+
+            function printFive(subLoc){
+                var theBox = document.getElementById(subLoc);
+                for (xx = 0;xx<10;xx++){
+                    theBox.children[fiveMat[xx]].className = "blackBox";   
+                }
+            }
+
+            function printSix(subLoc){
+                var theBox = document.getElementById(subLoc);
+                for (xx = 0;xx<12;xx++){
+                    theBox.children[sixMat[xx]].className = "blackBox";   
+                }
+            }
+
+            function printSeven(subLoc){
+                var theBox = document.getElementById(subLoc);
+                for (xx = 0;xx<7;xx++){
+                    theBox.children[sevenMat[xx]].className = "blackBox";   
+                }
+            }
+
+
+            function printEight(subLoc){
+                var theBox = document.getElementById(subLoc);
+                for (xx = 0;xx<13;xx++){
+                    theBox.children[eightMat[xx]].className = "blackBox";   
+                }
+            }
+
+            function choose(xLoc,yLoc){
+                if (stageEnd){return;}       //cannot do anything if stage is over
+                sumLoc = xLoc*13 + yLoc;
+                if (invalid[sumLoc]){return;}      //cannot choose invalid tile
+                toolsNum--;          //decreases number of tools left
+                if (toolsNum>-1){spreadWeeds();}    //check for weed spread
+                printToolNum();
+                printHarvest(sumLoc);             //item harvested is printed in toolshed
+                harvest[iconMat[sumLoc]]++;       //item harvested incremented in harvest array
+                strengthMat[sumLoc] = toolShed[toolPointer];     
+                iconMat[sumLoc] = toolShed[toolPointer];
+                checkWeeds();      //reset weed strengths
+                printStage();
+                checkValid();
+                toolPointer++;
+                if (toolPointer>14){stageEnd = true;}               //stage over when last tool is placed
+                else if (toolShed[toolPointer]==0){stageEnd = true;}
+                else {toolUp(toolPointer);}
+                if (stageEnd){interStage();}
+            }
+
+            function sell(){
+                if (stageEnd){return;}
+                if (toolShed[toolPointer]>-3){coins = coins - toolShed[toolPointer];}
+                else {pride++;}
+                toolPointer++;
+                toolsNum--;      //decreases number of tools left
+                if (toolsNum>-1){
+                    spreadWeeds();
+                    printStage();
+                    checkValid();
+                }
+                printToolNum();
+                if (toolPointer>14){stageEnd = true;}               //stage over when last tool is sold
+                if (toolShed[toolPointer]==0){stageEnd = true;}
+                toolUp(toolPointer);
+                if (stageEnd){interStage();}
+            }
+
+            function blank(whiteOut){
+                erase = document.getElementById(whiteOut);
+                erase.className = "whiteSpace";
+                for (var i = 0; i < 625; i++){
+                    erase.children[i].className = "whiteBox";
+                }
+            }
+
+            function blankShed(){
+                for (k = 0;k<15;k++){
+                    blank("tool"+k);
+                }
+            }
+
+            function interStage(){
+                pride = pride + 2*harvest[6];     //2 pride per rock
+                pride = pride + 3*harvest[7];     //3 pride per stump
+                for (k=1;k<64;k=k+2){
+                    if (iconMat[k]==5){pride--;}          //decreases pride for weeds left on board
+                }
+                if (year==5){         // if year ending is 5 then game over
+                        gameOver();
+                        return;
+                    }  
+                document.getElementById("banner").innerHTML = "END OF YEAR "+year;
+                document.getElementById("continue").className = "hSpaceButton";
+                document.getElementById("continue").innerHTML = "CLICK HERE<br>TO CONTINUE";
+                coins = coins+harvest[1];        //one coin per stone
+                least = harvest[2];
+                if (harvest[3] < least) {least = harvest [3];}    //5 coins for each full bouquet
+                if (harvest[4] < least) {least = harvest [4];}
+                coins = coins + 5*least;
+                blank("placeTile");
+                document.getElementById("sellBox").className = "sellBlank";
+                document.getElementById("sellBox").innerHTML = "";
+                messageL = "<br>Coins: "+coins;
+                document.getElementById("leftMessage").innerHTML = messageL;
+                messageR = "<br>Pride: "+pride;
+                document.getElementById("rightMessage").innerHTML = messageR; 
+                contFlag = false;
+            }  
+
+            function gameOver(){
+                blank("placeTile");
+                document.getElementById("sellBox").innerHTML = "";
+                document.getElementById("sellBox").className = "sellBlank";
+                document.getElementById("continue").innerHTML = "";
+                document.getElementById("continue").className = "hSpaceButtonBlank";
+                contFlag = true;
+                document.getElementById("banner").innerHTML = "GAME OVER";
+                messageL = "<br>Pride: "+pride;
+                document.getElementById("leftMessage").innerHTML = messageL; 
+                if (pride<20){messageR = "YOU<br>LOSE!";}
+                else {messageR = "YOU<br>WIN!!!!";}
+                document.getElementById("rightMessage").innerHTML = messageR;
+                contFlag = false;
+                contState = 3;                       //game over
+                document.getElementById("continue").innerHTML = "PLAY<br>AGAIN?";
+                document.getElementById("continue").className = "hSpaceButton";
+            }
+            
+            function contGame(){
+                if (contFlag){return}
+                if (contState == 0){       //stage over, not yet at buying portion
+                    blankBoard();
+                    year++;        
+                    tally();
+                    printShed();
+                    contFlag = false;
+                    contState = 1;
+                    document.getElementById("continue").innerHTML = "CLICK TO<br>EXIT STORE";
+                    document.getElementById("banner").innerHTML = "GARDEN SALE:<br>BUY MORE TOOLS";
+                    canBuy();
+                    contState = 1;
+                    return;
+                }
+                else if (contState == 1){       //begin next stage
+                    contState = 2;
+                    setStage();
+                                                //insert stuff if no tools available
+                    
+                }
+                else if (contState == 2) {                        //contState = 2, begin stage after initial set-up
+                    blankShed();
+                    contState = 0;
+                    contFlag = true;
+                    dealTools();
+                    toolPointer = 0;
+                    harvestPointer = 0;
+                    toolUp(toolPointer);
+                    stageEnd = false;
+                    if (toolShed[0]==0){        //skips stage if no tools
+                        contFlag = false; 
+                        stageEnd = true; 
+                        interStage();
+                        return;}                  
+                    document.getElementById("continue").innerHTML = "";
+                    document.getElementById("continue").className = "hSpaceButtonBlank";
+                    document.getElementById("leftMessage").innerHTML = "<br>PLACE";
+                    document.getElementById("rightMessage").innerHTML = "<br>OR";
+                    printToolNum();
+                }
+                else if (contState == 3){      //replay game
+                    resetGame();                 //will need to put reset subroutine here
+                    return;                   
+                }
+            }
+
+            function printToolNum(){
+                if (toolsNum>0){toolsMess = "TOOLS:<br>"+toolsNum;}
+                else if(toolsNum==0){toolsMess = "LAST<br>TOOL";}
+                else {toolsMess = "";}
+                document.getElementById("toolsLeft").innerHTML = toolsMess;
+            }
+
+            function canBuy(){
+                blankStore();
+                if (toolShed[14] < 0){
+                        document.getElementById("banner").innerHTML = "NO ROOM IN SHED";
+                        return;
+                    }
+                if (coins < 2){
+                        document.getElementById("banner").innerHTML = "NOT ENOUGH COINS";
+                        return;
+                    }
+                invBuy1 = false;
+                document.getElementById("buyOne").className = "buyButton";
+                document.getElementById("buyOne").innerHTML = "BUY<br>WATERING CAN<br>2 COINS";
+                if (coins < 3){return;}
+                invBuy2 = false;
+                document.getElementById("buyTwo").className = "buyButton";
+                document.getElementById("buyTwo").innerHTML = "BUY<br>RAKE<br>3 COINS";
+                if (coins < 5){return;}
+                invBuy3 = false;
+                document.getElementById("buyThree").className = "buyButton";
+                document.getElementById("buyThree").innerHTML = "BUY<br>SHOVEL<br>5 COINS";
+            }
+
+
+            function blankBoard(){
+                for (i = 0; i < 32 ; i++){       //blanks out board
+                    block = "box"+boardTiles[i];
+                    blank(block);
+                }
+
+            }
+
+            function blankStore(){
+                invBuy1 = true;        //turns off buy buttons
+                invBuy2 = true;
+                invBuy3 = true;
+                document.getElementById("buyOne").className = "blankBuyButton";
+                document.getElementById("buyTwo").className = "blankBuyButton";
+                document.getElementById("buyThree").className = "blankBuyButton";
+                document.getElementById("buyOne").innerHTML = "";
+                document.getElementById("buyTwo").innerHTML = "";
+                document.getElementById("buyThree").innerHTML = "";
+
+            }
+
+            function tally(){            //tallies tools and remaining garden tiles, repopulates smallDeck
+                tools = [0,0,0,0];
+                for (k = 0;k < 27; k++){      //zeroes out tile deck
+                    smallDeck[k] = 0;
+                }
+                smallDeckPointer = 0;       //shows which slot in smallDeck is next to be filled
+                for (k = 1; k < 64; k = k+2){      //cycles through spaces on board
+                    thing = iconMat[k];
+                    if (thing > 0){
+                        smallDeck[smallDeckPointer] = thing;
+                        smallDeckPointer++;
+                    }
+                    else {
+                        tools[0 - thing]++;    //increment slot on toolmatrix
+                    }
+                }
+                for (k = smallDeckPointer;k<27;k++){
+                    if (largeDeckPointer < 45){
+                    smallDeck[k] = myDeck[largeDeckPointer];
+                    }
+                    else {smallDeck[k] = 7;}      //fills with stumps after deck runs out (45 tiles)
+                    largeDeckPointer++
+                    if (largeDeckPointer==47){largeDeckPointer = 37;}    //resets after 3 stumps
+                }
+                stackTools();
+                blankShed();                            //may need to move in final               
+            }
+
+            function stackTools(){
+                for (k = 0;k<15;k++){toolShed[k] = 0;}     //zeroes toolShed
+                    toolPointer = 0;
+                    for (i = 1; i < 4; i++){
+                        for (k = 0; k < tools[i]; k++){          //fills with tools in order
+                            toolShed[toolPointer] = -1 * i;
+                            toolPointer++;
+                        }
+                    }
+            }          
+
+            function buy(it){        //add stuff
+                if (it==1){
+                    if (invBuy1){return}
+                    tools[1]++;
+                    coins = coins - 2;
+                }
+                else if (it==2){
+                    if (invBuy2){return}
+                    tools[2]++;
+                    coins = coins - 3;
+                }
+                else {
+                    if (invBuy3){return}
+                    tools[3]++;
+                    coins = coins - 5;
+                }
+                stackTools();
+                printShed();
+                messageL = "<br>Coins: "+coins;
+                document.getElementById("leftMessage").innerHTML = messageL;
+                canBuy();
+                return;
+            }
+
+            function diff(df){       //sets difficulty
+                if (diffFlag){return;}      //inactivates except at beginning of game
+                if (df==1){startUp(easyDeck);}
+                else if (df==2){startUp(normalDeck);}
+                else if (df==3){startUp(hardDeck);}
+                diffFlag = true;     //inactivates the buttons
+                document.getElementById("easy").innerHTML = "";
+                document.getElementById("normal").innerHTML = "";
+                document.getElementById("hard").innerHTML = "";
+                document.getElementById("easy").className = "diffBlank";
+                document.getElementById("normal").className = "diffBlank";
+                document.getElementById("hard").className = "diffBlank";
+   //             startUp();      //needed to restart game
+                setStage();     //needed to reset each stage
+            }
+
+            function resetGame(){
+                blankShed();      //blanks board, may be helpful to put in a function
+                blankBoard();
+                document.getElementById("continue").innerHTML = "";
+                document.getElementById("continue").className = "hSpaceButtonBlank";
+                toolShed = [-1,-1,-1,-1,-2,-2,-2,-3,-3,0,0,0,0,0,0];
+                coins = 0;
+                pride = 0;
+                year = 1;                //resets things
+                toolsNum = 8;
+                diffFlag = false;
+                resetDiff();
+                stageEnd = true;
+                toolPointer = 0;      //shows which tool is next to be placed
+                harvestPointer = 0;
+                largeDeckPointer = 27;      //next garden item taken from large deck
+                document.getElementById("leftMessage").innerHTML = ""       //blanks out leftover messages from preceding game
+                document.getElementById("rightMessage").innerHTML = ""
+     //           diffFlag = false;
+     //           diff(2);         //need to reset depending on difficulty
+            }
+
+            function resetDiff(){
+                document.getElementById("easy").className = "diffEasy";
+                document.getElementById("normal").className = "diffNormal";
+                document.getElementById("hard").className = "diffHard";
+                document.getElementById("easy").innerHTML = "CLICK FOR<br>EASY GAME";
+                document.getElementById("normal").innerHTML = "CLICK FOR<br>NORMAL GAME";
+                document.getElementById("hard").innerHTML = "CLICK FOR<br>HARD GAME";
+                document.getElementById("banner").innerHTML = "";
+            }
+
+            function spreadWeeds(){
+              for (q=1;q<64;q=q+2){
+                  f =  iconMat[q];
+                  if ((f-2)*(f-3)*(f-4)==0){                    //checks to see if flower in space
+                      checkAround(q);
+                      attacks = checkSum[0];
+                      spread = invade(f,attacks);
+                      if (spread){iconMat[q]=10;}     //weeds have spread, will need to convert after all flowers checked
+                  }           
+              }  
+              for (q=1;q<64;q=q+2){
+                  if (iconMat[q]==10){iconMat[q]=5;}    //taken over by weeds
+              }
+              checkWeeds();        //resets strength of weeds after spread
+            }
+
+            function invade(subf,subatt){            //subf is type of flower, subatt is number of surrounding weeds
+                invaded = false;
+                if (subf==2){probab = 0.05;}          //probability of yellow converting
+                else if (subf==3){probab = 0.03;}     //probability of blue converting
+                else if (subf==4){probab = 0.01;}      //probability of red converting
+                for (r=0;r<subatt;r++){
+                    roll = Math.random();
+                    if (roll<probab){invaded = true;}
+                }
+                return invaded;
+            }
+
+           boardTiles = new Array(32);            //array with label of board tiles
+           boardTiles = [12,14,16,18,110,112,21,23,25,27,29,211,213,32,34,36,38,310,312,41,43,45,47,49,411,413,52,54,56,58,510,512]; 
+           startTiles = new Array(5);
+           startTiles = [12,21,32,41,52];
+           stone = new Array(32);
+           stone = [260,261,262,263,283,284,288,289,307,308,314,315,332,339,340,357,358,362,363,364,365,383,384,386,387,388,389,409,410,411,412,413]
+           oneMat = new Array(8);
+           oneMat = [513,537,538,563,588,612,613,614];
+           twoMat = new Array(10);
+           twoMat = [512,513,514,537,539,564,588,612,613,614];
+           threeMat = new Array(10);
+           threeMat = [512,513,539,563,589,612,613,514,614,564];
+           fourMat = new Array(9);
+           fourMat = [512,514,537,539,562,563,564,589,614];
+           fiveMat = new Array(10);
+           fiveMat = [512,513,514,537,562,563,564,589,612,613];
+           sixMat = new Array(12);
+           sixMat = [512,513,514,537,562,563,564,587,589,612,613,614];
+           sevenMat = new Array(7);
+           sevenMat = [512,513,514,539,563,587,612];
+           eightMat = new Array(13);
+           eightMat = [512,513,514,537,539,562,563,564,587,589,612,613,614];
+           yellow1 = new Array(28);
+           yellow2 = new Array(28);
+           yellow3 = new Array(28);
+           yellow4 = new Array(28);
+           yellow5 = new Array(28);
+           yellow6 = new Array(28);
+           yellow1 = [5,6,16,17,30,31,32,39,40,41,42,55,56,57,58,59,60,64,65,66,67,81,82,83,84,85,86,88];
+           yellow2 = [89,90,91,92,107,108,109,110,111,113,114,115,127,128,129,133,134,135,136,138,139,140,142,143,144,145,152,153];
+           yellow3 = [154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,177,178,179,180,181,182,183,184,185,186];
+           yellow4 = [187,188,189,190,191,192,193,194,195,203,204,205,206,207,208,209,210,211,212,213,229,230,231,232,233,234,235,236];
+           yellow5 = [237,238,239,240,241,242,259,260,261,262,263,264,265,266,267,268,269,282,283,284,285,286,287,290,291,292,293,294];
+           yellow6 = [295,306,307,308,309,310,311,315,316,317,318,319,320,331,332,333,334,335,342,343,344,356,357,358,359,369,381,382];
+           blue1 = new Array(35);
+           blue2 = new Array(35);
+           blue3 = new Array(35);
+           blue4 = new Array(35);
+           blue5 = new Array(35);
+           blue6 = new Array(35);
+           blue1 = [2,3,4,5,6,7,8,9,27,31,31,32,33,34,35,52,53,56,57,58,59,60,61,77,78,79,81,82,83,84,85,86,102,103,104];
+           blue2 = [105,109,110,111,127,128,129,130,131,132,133,135,136,137,153,154,155,156,157,158,160,161,162,165,166,167,168,178,179,180,181,182,183,184,186];
+           blue3 = [187,188,189,190,191,192,193,194,195,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,231,232,233,234,235,236,237,238,239];
+           blue4 = [240,241,242,243,244,245,246,255,256,257,258,259,260,261,262,263,268,269,270,271,278,279,280,281,282,283,284,285,286,287,288,289,290,295,296];
+           blue5 = [302,303,304,305,306,309,310,311,312,313,314,315,326,327,328,329,333,334,335,336,337,339,340,341,351,352,353,358,359,362,363,365,366,367,376];
+           blue6 = [377,378,379,383,384,387,388,389,391,392,393,401,402,403,404,408,409,413,414,416,417,418,427,428,429,434,438,439,441,442,463,464,465,466,466];
+           redDot = new Array(7);
+           redL = new Array(33);
+           redR = new Array(33);
+           redDot = [136,155,159,180,182,194,409];
+           redL = [58,64,81,88,104,113,129,138,142,162,165,184,189,206,209,218,230,235,243,255,261,267,280,290,306,313,332,338,358,363,383,387,412];
+           redR = [60,65,86,92,111,118,131,139,144,163,168,185,192,207,216,219,233,241,244,258,264,268,284,293,311,317,336,342,361,366,385,390,413]
+            rock1 = new Array(24);
+            rock2 = new Array(24);
+            rock3 = new Array(24);
+            rock1 = [133,134,135,136,158,162,163,182,186,189,190,205,206,212,214,216,230,238,240,242,255,264,266,440]
+            rock2 = [268,269,279,287,290,292,295,304,306,316,319,320,329,336,339,343,344,345,355,357,359,366,368,441]
+            rock3 = [369,370,380,387,390,392,393,394,406,407,410,414,415,416,417,418,433,434,435,436,437,438,439,441]
+            weed1 = new Array(24);
+            weed2 = new Array(24);
+            weed3 = new Array(24);
+            weed4 = new Array(24);
+            weed5 = new Array(24);
+            weed1 = [7,29,33,55,59,60,61,81,84,85,107,108,111,115,116,132,133,137,138,139,142,157,159,160];
+            weed2 = [161,162,163,181,182,185,188,206,209,211,214,231,233,234,236,239,255,256,258,261,264,280,282,283];
+            weed3 = [286,287,289,290,304,305,307,312,314,315,329,330,331,332,337,338,340,341,351,354,355,356,357,359];
+            weed4 = [362,363,365,366,371,374,375,376,377,379,380,381,384,385,388,389,390,391,395,396,397,398,399,400];
+            weed5 = [401,402,403,404,405,406,407,408,409,410,411,412,413,414,415,416,417,418,419,420,421,422,423,424];
+            stump1 = new Array (23);
+            stump2 = new Array (23);
+            stump3 = new Array (23);
+            stump4 = new Array (23);
+            stump5 = new Array (23);
+            stump1 = [84,85,86,87,88,89,90,108,109,111,113,116,132,133,134,135,137,139,142,157,158,159,418];
+            stump2 = [160,161,163,166,167,182,183,184,185,186,187,188,189,190,191,192,207,208,211,212,213,214,418];
+            stump3 = [217,232,233,234,237,238,241,242,257,258,259,260,261,262,263,264,265,266,267,268,271,272,444];
+            stump4 = [282,283,284,285,286,287,288,289,290,291,292,293,294,295,306,307,308,309,310,311,312,313,444];
+            stump5 = [314,315,316,329,330,331,334,335,336,337,338,339,353,354,364,365,376,377,390,391,416,417,444];
+            can1 = new Array (25);
+            can2 = new Array (25);
+            can3 = new Array (25);
+            can4 = new Array (25);
+            can5 = new Array (25);
+            can6 = new Array (25);
+            can7 = new Array (25);
+            can8 = new Array (25);
+            can1 = [29,30,31,32,33,34,35,36,37,38,53,54,55,56,57,58,59,60,61,62,63,64,69,77,78];
+            can2 = [79,80,81,82,83,84,85,86,87,88,89,93,94,101,102,104,105,106,107,108,109,110,111,112,113];
+            can3 = [114,117,118,119,125,126,129,130,131,132,133,134,135,136,137,138,139,141,142,143,144,150,151,154,155];
+            can4 = [156,157,158,159,160,161,162,163,164,165,166,167,169,175,176,179,180,181,182,183,184,185,186,187,188];
+            can5 = [189,190,191,200,201,204,205,206,207,208,209,210,211,212,213,214,215,225,226,227,229,230,231,232,233];
+            can6 = [234,235,236,237,238,239,251,252,253,254,255,256,257,258,259,260,261,262,263,264,277,278,279,280,281];
+            can7 = [282,283,284,285,286,287,288,289,304,305,306,307,308,309,310,311,312,313,314,329,330,331,332,333,334];
+            can8 = [335,336,337,338,339,354,355,356,357,358,359,360,361,362,363,364,380,381,382,383,384,385,386,387,388];   
+            rake1 = new Array(22);
+            rake2 = new Array(22);
+            rake3 = new Array(22);
+            rake4 = new Array(22);
+            rake5 = new Array(22);
+            rake6 = new Array(22);
+            rake1 = [36,37,38,61,62,63,86,87,88,111,112,113,136,137,138,161,162,163,186,187,188,465];
+            rake2 = [211,212,213,236,237,238,261,262,263,284,285,286,287,288,289,290,307,308,309,310,311,467];
+            rake3 = [312,313,314,315,316,317,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,469];
+            rake4 = [341,342,343,344,345,346,347,348,351,353,355,357,359,361,363,365,367,369,371,373,376,471];
+            rake5 = [378,380,382,384,386,388,390,392,394,396,398,401,403,405,407,409,411,413,415,417,419,473];
+            rake6 = [421,423,426,428,430,432,434,436,438,440,442,444,446,448,451,453,455,457,459,461,463,473];
+            shovel1 = new Array(23);
+            shovel2 = new Array(23);
+            shovel3 = new Array(23);
+            shovel4 = new Array(23);
+            shovel5 = new Array(23);
+            shovel1 = [138,139,140,141,142,152,153,154,163,164,165,166,167,168,169,176,179,180,188,189,190,191,192];
+            shovel2 = [193,194,195,196,201,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221];
+            shovel3 = [222,226,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,251];
+            shovel4 = [254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,276,279,280,288];
+            shovel5 = [289,290,291,292,293,294,295,296,302,303,304,313,314,315,316,317,318,319,338,339,340,341,342];
+
+            easyDeck = new Array(45);
+            normalDeck = new Array(45);
+            hardDeck = new Array(45);
+            myDeck = new Array(45);          //deck chosen                                          6,5,6,5,2,3,4,6,7,7,7
+            easyDeck =   [1,1,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,6,6,6,5,5,1,2,2,3,4,3,5,5,1,2,3,4,1,2,5,6];
+            normalDeck = [1,1,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,6,6,6,5,5,1,2,2,5,4,3,5,5,1,2,3,4,6,2,5,6];
+            hardDeck =   [1,1,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,6,6,6,5,5,1,2,2,5,4,3,5,5,1,2,3,4,5,2,5,6];  
+            smallDeck = new Array(27);       //deck of icons that will be dealt out
+            shuffledDeck = new Array(27);
+            iconMat = new Array(65);
+            strengthMat = new Array(65);
+            invalid = new Array(65);      //false means tool can be placed in tile
+            tools = new Array(4);  //0 is empty, 1 is watering can, 2 is rake, 3 is shovel
+            toolShed = new Array(15);
+            toolShed = [-1,-1,-1,-1,-2,-2,-2,-3,-3,0,0,0,0,0,0];
+            checkSum = new Array(2);       //first value is surrounding weeds, second is surrounding tools
+            stageEnd = true;
+            toolPointer = 0;      //shows which tool is next to be placed
+            harvestPointer = 0;
+            largeDeckPointer = 27;      //next garden item taken from large deck
+            Harvest = new Array(8);   //shows how many of each type is harvested
+            coins = 0;
+            pride = 0;
+            year = 1;
+            invBuy1 = true;      //unable to buy listed tool
+            invBuy2 = true;
+            invBuy3 = true;
+            contState = 2;       //0 is after round ends    1 is after buying ends     2 is after initial board shown
+            contFlag = true;
+            diffFlag = false;      //flag for difficulty buttons, true is inactivated
+            toolsNum = 8;
+    </script>
+	</head>
+	<body>
+
+<!-- Bruce-Box Arcade Return Navigation -->
+<style id="bruce-box-nav-style">
+  .bruce-box-top-nav {
+    position: fixed;
+    top: 10px;
+    right: 12px;
+    z-index: 999999;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .bruce-box-top-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(17, 24, 39, 0.92);
+    color: #f3f4f6;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(6px);
+    transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+  }
+  .bruce-box-top-nav a:hover {
+    background: #111827;
+    border-color: #f59e0b;
+    color: #fbbf24;
+    transform: translateY(-1px);
+  }
+  .bruce-box-top-nav a:focus-visible {
+    outline: 2px solid #f59e0b;
+    outline-offset: 2px;
+  }
+</style>
+<div class="bruce-box-top-nav" aria-label="Arcade navigation">
+  <a href="../../" title="Return to Bruce-Box Arcade catalog">&larr; Bruce-Box Arcade</a>
+</div>
+<!-- End Bruce-Box Arcade Return Navigation -->
+
+        <div class = "frame">
+            <div class = "leftHalf">
+                <div class = "board">
+                    <div class = "row">
+                        <div class = "halfSpace"></div>
+                        <div class = "whiteSpace" id = "box12" onclick = "choose(0,1)"></div>
+                        <div class = "whiteSpace" id = "box14" onclick = "choose(0,3)"></div>
+                        <div class = "whiteSpace" id = "box16" onclick = "choose(0,5)"></div>
+                        <div class = "whiteSpace" id = "box18" onclick = "choose(0,7)"></div>
+                        <div class = "whiteSpace" id = "box110" onclick = "choose(0,9)"></div>
+                        <div class = "whiteSpace" id = "box112" onclick = "choose(0,11)"></div>
+                    </div>
+                    <div class = "row">
+                        <div class = "whiteSpace" id = "box21" onclick = "choose(1,0)"></div>
+                        <div class = "whiteSpace" id = "box23" onclick = "choose(1,2)"></div>
+                        <div class = "whiteSpace" id = "box25" onclick = "choose(1,4)"></div>
+                        <div class = "whiteSpace" id = "box27" onclick = "choose(1,6)"></div>
+                        <div class = "whiteSpace" id = "box29" onclick = "choose(1,8)"></div>
+                        <div class = "whiteSpace" id = "box211" onclick = "choose(1,10)"></div>
+                        <div class = "whiteSpace" id = "box213" onclick = "choose(1,12)"></div>
+                    </div>
+                    <div class = "row">
+                        <div class = "halfSpace"></div>
+                        <div class = "whiteSpace" id = "box32" onclick = "choose(2,1)"></div>
+                        <div class = "whiteSpace" id = "box34" onclick = "choose(2,3)"></div>
+                        <div class = "whiteSpace" id = "box36" onclick = "choose(2,5)"></div>
+                        <div class = "whiteSpace" id = "box38" onclick = "choose(2,7)"></div>
+                        <div class = "whiteSpace" id = "box310" onclick = "choose(2,9)"></div>
+                        <div class = "whiteSpace" id = "box312" onclick = "choose(2,11)"></div>
+                    </div>
+                    <div class = "row">
+                        <div class = "whiteSpace" id = "box41" onclick = "choose(3,0)"></div>
+                        <div class = "whiteSpace" id = "box43" onclick = "choose(3,2)"></div>
+                        <div class = "whiteSpace" id = "box45" onclick = "choose(3,4)"></div>
+                        <div class = "whiteSpace" id = "box47" onclick = "choose(3,6)"></div>
+                        <div class = "whiteSpace" id = "box49" onclick = "choose(3,8)"></div>
+                        <div class = "whiteSpace" id = "box411" onclick = "choose(3,10)"></div>
+                        <div class = "whiteSpace" id = "box413" onclick = "choose(3,12)"></div>
+                    </div>
+                    <div class = "row">
+                        <div class = "halfSpace"></div>
+                        <div class = "whiteSpace" id = "box52" onclick = "choose(4,1)"></div>
+                        <div class = "whiteSpace" id = "box54" onclick = "choose(4,3)"></div>
+                        <div class = "whiteSpace" id = "box56" onclick = "choose(4,5)"></div>
+                        <div class = "whiteSpace" id = "box58" onclick = "choose(4,7)"></div>
+                        <div class = "whiteSpace" id = "box510" onclick = "choose(4,9)"></div>
+                        <div class = "whiteSpace" id = "box512" onclick = "choose(4,11)"></div>
+                    </div>
+                </div>
+                <div class = "underSpace">
+                    <div class = "hSpace" id = "banner"></div>
+                    <div class = "hSpaceButton" id = "continue" onclick = "contGame()"></div>
+                </div>
+                <div class = "shed">
+                    <div class = "whiteSpace" id = "tool0"></div>
+                    <div class = "whiteSpace" id = "tool1"></div>
+                    <div class = "whiteSpace" id = "tool2"></div>
+                    <div class = "whiteSpace" id = "tool3"></div>
+                    <div class = "whiteSpace" id = "tool4"></div>
+                    <div class = "whiteSpace" id = "tool5"></div>
+                    <div class = "whiteSpace" id = "tool6"></div>
+                    <div class = "whiteSpace" id = "tool7"></div>
+                    <div class = "whiteSpace" id = "tool8"></div>
+                    <div class = "whiteSpace" id = "tool9"></div>
+                    <div class = "whiteSpace" id = "tool10"></div>
+                    <div class = "whiteSpace" id = "tool11"></div>
+                    <div class = "whiteSpace" id = "tool12"></div>
+                    <div class = "whiteSpace" id = "tool13"></div>
+                    <div class = "whiteSpace" id = "tool14"></div>
+                </div>
+                <div class = "buyFrame">
+                    <div class = "blankBuyButton" id = "buyOne" onClick = "buy(1)";></div>
+                    <div class = "blankBuyButton" id = "buyTwo" onClick = "buy(2)";></div>
+                    <div class = "blankBuyButton" id = "buyThree" onClick = "buy(3)";></div>
+                </div>
+            </div>
+            <div class = "rightHalf" id = "rightSide">
+                <div class = "message">
+                    <div class = "messageSpace" id = "leftMessage"></div>
+                    <div class = "tileStack">
+                        <div id = "placeTile"></div>  
+                        <div class = "tileNumber" id = "toolsLeft"></div>
+                    </div>
+                    <div class = "messageSpace" id = "rightMessage"></div>
+                    <div id = "sellBox" onclick = "sell()"></div>
+                </div>
+                <div class = "instructions">
+                    INSTRUCTIONS<br>
+                    You have five years to make your garden a place of pride.<br>
+                    At the beginning of each year you can see the lay-out of your garden<br> 
+                    and your tools.  Your tool shed is a mess, so your tools become available<br>
+                    in random order.<br>
+                    Each object in the garden shows how much effort it takes to remove it.<br>
+                    Each tool shows its utility.  You may either place a tool in an empty space<br>
+                    or on top of an object adjacent to tools whose combined utility is<br>
+                    at least equal to the effort of that object.<br>
+                    Objects removed are displayed below the game board.<br>
+                    Spaces in which you may place a tool are outlined in red.<br>
+                    If you do not wish to place a tool, you may instead sell it.<br>
+                    Each year ends when you have either placed or sold each of your tools.<br>
+                    YEAR END SCORING<br>
+                    For each small stone you remove, you receive 1 coin.<br>
+                    For each complete bouquet of red, yelow and blue flowers you remove,<br>
+                    you receive 5 coins.<br>
+                    For each large rock you remove, you receive 2 pride.<br>
+                    For each stump you remove, you receive 3 pride.<br>
+                    Weeds score nothing, but each weed in your garden at the end of the year<br>
+                    subtracts 1 pride.  Weeds are harder to remove when in clumps<br>
+                    and weeds may invade adjacent flower beds.<br>
+                    BUYING MORE TOOLS<br>
+                    At the end of each year, you may spend your coins to buy more tools.<br>
+                    Your shed may only house fifteen tools, so it may be useful to sell<br>
+                    some of the lower value ones during the year to leave space to buy<br>
+                    more useful ones.<br>
+                    END OF GAME<br>
+                    The game is over at the end of the fifth year<br>
+                    You win if you score at least 20 pride.<br>
+
+                </div>
+                <div class = "diffEasy" id = "easy" onclick = "diff(1)">CLICK FOR<br>EASY GAME</div>
+                <div class = "diffNormal" id = "normal" onclick = "diff(2)">CLICK FOR<br>NORMAL GAME</div>
+                <div class = "diffHard" id = "hard" onclick = "diff(3)">CLICK FOR<br>HARD GAME</div>
+            </div>
+        </div>
+
+        <script>
+            makeBoard();    //only needed when window opened
+            blankShed();      //blanks board, may be helpful to put in a function
+            blankBoard();
+            document.getElementById("continue").innerHTML = "";
+            document.getElementById("continue").className = "hSpaceButtonBlank";
+    //        startUp();      //needed to restart game
+     //       setStage();     //needed to reset each stage
+        </script>
+	</body>
+</html>

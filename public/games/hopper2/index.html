@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Hopper 2 - Bruce-Box Arcade</title>
+		<meta charset="utf-8">
+		<style>
+			.bigbox{
+				height: 500px;
+				width: 500px;
+				float: left;
+			}
+			.leftbox{
+				height: 350px;
+				width: 350px;
+				float: left;
+				background-color: lightgreen;
+			}
+			.bottombox{
+				height: 150px;
+				width: 500px;
+				float: left;
+			}
+			.gamerow{
+				height: 70px;
+				width: 350px;
+				float: left;
+				background-color:#c0efdb ;
+			}
+			.blankbox{
+				height: 70px;
+				width: 70px;
+				float: left;
+				background-color: #c0efdb ;
+			}
+			.halfbox{
+				height: 70px;
+				width: 35px;
+				float: left;
+				background-color: #c0efdb ;
+			}
+			.blackbord{
+				height: 60px;
+				width: 60px;
+				float: left;
+				border-color: black;
+				border-style: solid;
+				border-width: 5px;
+			}
+			.redbord{
+				height: 60px;
+				width: 60px;
+				float: left;
+				border-color: red;
+				border-style: solid;
+				border-width: 5px;
+			}
+			.midbox{
+				height: 350px;
+				width: 30px;
+				float: left;
+			}
+			.rightbox{
+				height: 350px;
+				width: 120px;
+				float: left;
+			}
+			.smallrow{
+				height: 40px;
+				width: 120px;
+				float: left;
+			}
+			.smallbox{
+				height: 30px;
+				width: 30px;
+				float: left;
+				border-color: lightgray;
+				border-style: solid;
+				border-width: 5px;
+			}
+			.scorebox{
+				height: 100px;
+				width: 120px;
+				float: left;
+				color: black;
+				font-size: 13pt;
+				text-align: center;
+			}
+			.scoringbox{
+				height: 150px;
+				width: 150px;
+				float: left;
+				color: black;
+				font-size: 12pt;
+				text-align: center;
+			}
+			.buttbox{
+				height: 40px;
+				width: 110px;
+				float: left;
+				background-color: pink;
+				border-style: solid;
+				border-color: black;
+				border-width: 5px;
+				text-align:  center;
+				font-size: 15px;
+			}
+
+			.blankbutt{
+				height: 50px;
+				width: 120px;
+				float: left;
+				background-color: white;
+			}
+
+			.instructbox{
+				height: 150px;
+				width: 350px;
+				float: left;
+				background-color: lightyellow;
+				color: black;
+				text-align: left;
+				font-size: 10pt;
+			}	
+			
+            .whiteBox{
+                height: 2px;
+                width: 2px;
+                float: left;
+                background-color: #c0efdb;
+            }
+            .silverBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:silver;
+            }
+            .cyanBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:cyan;
+            }
+            .blueBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:blue;
+            }
+            .greenBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:green;
+            }
+            .lightgreenBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color: white;
+            }
+            .yellowBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:yellow;
+            }
+            .greenyellowBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:greenyellow;
+            }
+            .orangeBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:orange;
+            }
+            .redBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:red;
+            }
+            .pinkBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:pink;
+            }
+            .violetBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:violet;
+            }
+            .grayBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:gray;
+            }
+            .lightgrayBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:lightgray;
+            }
+            .blackBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:black;
+            }
+            .brownBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:brown;
+            }
+            .tanBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:tan;
+            }
+            .goldBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:gold;
+            }
+
+
+		</style>
+		<script>
+			function makebox(locat){      //makes 30 x 30 box
+				var thelocat = document.getElementById(locat);
+                for (iii = 0;iii<900;iii++){
+                        divAdd = document.createElement("div");
+                        thelocat.appendChild(divAdd);
+						thelocat.children[iii].className = "whiteBox";
+                }
+			}
+			function blankbox(locat){
+				var thelocat = document.getElementById(locat);
+				for (iii=0;iii<900;iii++){
+					thelocat.children[iii].className = "whiteBox";
+				}
+			}
+
+			function blankicon(locat){
+				var thelocat = document.getElementById(locat);
+				for (iii=0;iii<225;iii++){
+					thelocat.children[iii].className = "whiteBox";
+				}
+			}
+			function makeicon(locat){      //makes 15 x 15 box
+				var thelocat = document.getElementById(locat);
+                for (iii = 0;iii<225;iii++){
+                        divAdd = document.createElement("div");
+                        thelocat.appendChild(divAdd);
+						thelocat.children[iii].className = "whiteBox";
+                }
+			}
+			function gameStart(){    //used once to set up the board
+				for (ii=0;ii<19;ii++){
+					makebox(squares[ii]);
+				}
+				makeicon("red1");
+				makeicon("red2");
+				makeicon("blue1");
+				makeicon("blue2");
+				makeicon("yellow1");
+				makeicon("yellow2");
+				makeicon("black1");
+				makeicon("white1");
+			}
+
+			function reset(){
+				document.getElementById("resetbutt").innerHTML = "";
+				document.getElementById("resetbutt").className = "blankbutt";				
+				printPic(FROG,"square24");    //starts in center square
+				xcoord = 4;
+				ycoord = 2;
+				topLevel = shuffle(18,topLevel);
+				for (iii=0;iii<9;iii++){
+					printPic(topLevel[iii].pic,squares[iii]);
+					content[iii][0]=topLevel[iii];
+					printPic(topLevel[iii+9].pic,squares[iii+10]);
+					content[iii+10][0]=topLevel[iii+9];
+				}
+				midLevel = shuffle(19,midLevel);
+				botLevel = shuffle(19,botLevel);
+				for (iii=0;iii<19;iii++){
+					content[iii][1] = midLevel[iii];
+					content[iii][2] = botLevel[iii];
+				}
+
+
+				content[9][0]=web;    //sets frog space name to 0, will likely be removed later
+				rednum = 0;    //starts the game with no pigments of each type
+				yellownum = 0;
+				bluenum = 0;
+				whitenum = 0;
+				blacknum = 0;
+				blankicon("red1");
+				blankicon("red2");
+				blankicon("yellow1");
+				blankicon("yellow2");
+				blankicon("blue1");
+				blankicon("blue2"); 
+				blankicon("white1");
+				blankicon("black1");
+				morePoints();
+				thepoints = 0;
+				pointdisp = "";
+				pointdisp = pointdisp + "Green: "+green.points+" points<br>";
+				pointdisp = pointdisp + "Orange: "+orange.points+ " points<br>";
+				pointdisp = pointdisp + "Violet: "+violet.points+ " points<br>";
+				pointdisp = pointdisp + "Brown: "+brown.points+ " points<br>";
+				pointdisp = pointdisp + "Gray: "+gray.points+" points<br>";
+				pointdisp = pointdisp + "Red: "+newt.points+" points<br>";
+				pointdisp = pointdisp + "Yellow: "+duck.points+" points<br>";
+				pointdisp = pointdisp + "Blue: "+fly.points+" points<br>";
+				document.getElementById("scoring").innerHTML = pointdisp;
+				scorestring = "<br>SCORE: "+thepoints+" pts";
+				document.getElementById("scorevalues").innerHTML = scorestring;
+				checkMoves(ycoord,xcoord);   //legal moves the first turn of the game
+				isPaused = false;
+
+			}
+
+			function morePoints(){
+				green.points = 2;
+				violet.points = 2;
+				orange.points = 2;
+				newt.points = 5;
+				duck.points = 5;
+				fly.points = 5;
+				brown.points = 4;
+				gray.points = 3;
+				for (iii=0;iii<3;iii++){     //adds additional points three times
+					rand = Math.random();
+					if (rand<.1){green.points++}
+					else if (rand<.2){orange.points++}
+					else if (rand<.3){violet.points++}
+					else if (rand<.5){brown.points = brown.points+2;}
+					else if (rand<.7){gray.points = gray.points+2;}
+					else if (rand<.8){newt.points = newt.points+3;}
+					else if (rand<.9){duck.points = duck.points+3;}
+					else {fly.points = fly.points+3;}
+				}
+			}
+
+			function resett(){
+				if (gameOver){reset();}
+			}
+
+			
+			function thing(name,pic,points){  //constructor for thing object  -  name, points, picture
+                this.name = name;
+                this.pic = pic;      //picture of object
+				this.points = points;
+                pic = new Array(30);
+            }
+
+			function checkMoves(yc,xc){    //y-coordinate is placed first
+				gameOver = true;
+				canHop = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
+				for (iii=0;iii<19;iii++){      //rezeroes square borders
+					blip = "square"+yCoords[iii]+xCoords[iii];
+					document.getElementById(blip).className = "blackbord";
+				}
+
+
+				for (iii=0;iii<12;iii++){
+					xtemp = xc+del[iii][1];
+					ytemp = yc+del[iii][0];
+					if (xtemp<0){continue;}
+					if (xtemp>8){continue;}
+					if (ytemp<0){continue;}
+					if (ytemp>4){continue;}
+					if ((xtemp==0)&&(ytemp==0)){continue;} //checking the four corners
+					if ((xtemp==0)&&(ytemp==4)){continue;}
+					if ((xtemp==8)&&(ytemp==0)){continue;}
+					if ((xtemp==8)&&(ytemp==4)){continue;}
+					jj = checkIndex(ytemp,xtemp)
+					occ = content[jj][0].name;    //checks object on top of stack
+					if (occ==Web){continue;} //cannot enter space containing web
+					else if (occ==Red){
+						if (rednum==2){continue;}
+					}
+					else if (occ==Yellow){
+						if (yellownum==2){continue;}
+					}
+					else if (occ==Blue){
+						if (bluenum==2){continue;}
+					}
+					else if (occ==Orange){
+						if (rednum*yellownum==0){continue;}
+					}
+					else if (occ==Green){
+						if (yellownum*bluenum==0){continue;}
+					}
+					else if (occ==Violet){
+						if (bluenum*rednum==0){continue;}
+					}
+					else if (occ==White){
+						if (whitenum==1){continue;}
+					}
+					else if (occ==Black){
+						if (blacknum==1){continue;}
+					}
+					else if (occ==Brown){
+						if (rednum*yellownum*bluenum==0){continue;}
+					}
+					else if (occ==Gray){
+						if (whitenum*blacknum==0){continue;}
+					}
+					else if (occ==Newt){
+						if (rednum<2){continue;}
+					}
+					else if (occ==Duck){
+						if (yellownum<2){continue;}
+					}
+					else if (occ==Fly){
+						if (bluenum<2){continue;}
+					}
+					gameOver = false // game not over if at least one move remains
+					turnred = "square"+ytemp+xtemp;
+					document.getElementById(turnred).className = "redbord";
+					canHop[checkIndex(ytemp,xtemp)]=true;
+				}
+				if (gameOver){gameEnd();}
+			}
+
+			function checkIndex(yy,xx){
+				if (yy==0){
+					if (xx==2){return 0;}
+					else if (xx==4){return 1;}
+					else {return 2;}
+				}
+				if (yy==1){
+					if (xx==1){return 3;}
+					else if (xx==3){return 4;}
+					else if (xx==5){return 5;}
+					else {return 6;}
+				}
+				if (yy==2){
+					if (xx==0){return 7;}
+					else if (xx==2){return 8;}
+					else if (xx==4){return 9;}
+					else if (xx==6){return 10;}
+					else if (xx==8){return 11;}
+				}
+				if (yy==3){
+					if (xx==1){return 12;}
+					else if (xx==3){return 13;}
+					else if (xx==5){return 14;}
+					else {return 15;}
+				}
+				if (yy==4){
+					if (xx==2){return 16;}
+					else if (xx==4){return 17;}
+					else {return 18;}
+				}
+			}
+
+			function printPic(picture,loc){            //prints 30 x 30 "picture" in location "loc"
+                locat = document.getElementById(loc);
+                for (ii = 0; ii<30; ii++){
+                    for (jj = 0; jj<30; jj++){
+                        hue = picture[ii][jj];
+                        cellNum = (ii*30)+jj;
+                        cell = locat.children[cellNum];
+                        cell.className = rainbow[hue]+"Box";
+                    }
+                }
+            }
+
+			function printIcon(picture,loc){
+				locat = document.getElementById(loc);
+                for (ii = 0; ii<15; ii++){
+                    for (jj = 0; jj<15; jj++){
+                        hue = picture[ii][jj];
+                        cellNum = (ii*15)+jj;
+                        cell = locat.children[cellNum];
+                        cell.className = rainbow[hue]+"Box";
+                    }
+                }
+			}
+
+			function shuffle(numb,thedeck){ 
+				temp1 = thedeck; 
+                temp2 = new Array(numb);
+                for (iter=numb;iter>0;iter--){
+                    rand = Math.floor(Math.random()*iter)
+                    temp2[iter-1]=thedeck[rand];
+                    for (iter2=rand;iter2<numb;iter2++){
+                        temp1[iter2]=temp1[iter2+1];
+                    }
+                }
+                return temp2;
+            }
+
+			function hop(hh){
+				if (isPaused){return;} // cannot move while game is paused
+				if (canHop[hh]==false){return;}  //not a valid square
+				thepoints = thepoints+content[hh][0].points
+				scorestring = "<br>SCORE: "+thepoints+" pts";
+				document.getElementById("scorevalues").innerHTML = scorestring;
+				occ = content[hh][0].name  // shows what is in square just hopped into
+				if (occ == Red){
+					rednum++;
+					printIcon(RICON,"red"+rednum);
+				}
+				if (occ == Yellow){
+					yellownum++;
+					printIcon(YICON,"yellow"+yellownum);
+				}
+				if (occ == Blue){
+					bluenum++;
+					printIcon(BICON,"blue"+bluenum);
+				}
+				if (occ == Green){   //will need to add scoring
+					bluenum--;
+					yellownum--;
+					blankicon("blue2");
+					if (bluenum==0){blankicon("blue1");}
+					blankicon("yellow2");
+					if (yellownum==0){blankicon("yellow1");}
+				}
+				if (occ == Orange){
+					yellownum--;
+					rednum--;
+					blankicon("yellow2");
+					if (yellownum==0){blankicon("yellow1");}
+					blankicon("red2");
+					if (rednum == 0){blankicon("red1");}
+				}
+				if (occ == Violet){
+					bluenum--;
+					rednum--;
+					blankicon("blue2");
+					if (bluenum == 0){blankicon("blue1");}
+					blankicon("red2");
+					if (rednum == 0){blankicon("red1");}
+				}
+				if (occ == Black){
+					blacknum++;
+					printIcon(BLICON,"black1");
+				}
+				if (occ == White){
+					whitenum++;
+					printIcon(WICON,"white1");
+				}
+				if (occ == Gray){
+					whitenum--;
+					blacknum--;
+					blankicon("white1")
+					blankicon("black1");
+				}
+				if (occ == Brown){
+					rednum--;
+					bluenum--;
+					yellownum--;
+					blankicon("red2");
+					blankicon("yellow2");
+					blankicon("blue2");
+					if (rednum==0){blankicon("red1");}
+					if (yellownum==0){blankicon("yellow1");}
+					if (bluenum==0){blankicon("blue1");}
+				}
+				if (occ == Newt){
+					rednum = 0;
+					blankicon("red1");
+					blankicon("red2");
+				}
+				if (occ == Duck){
+					yellownum = 0;
+					blankicon("yellow1");
+					blankicon("yellow2");
+				}
+				if (occ == Fly){
+					bluenum = 0;
+					blankicon("blue1");
+					blankicon("blue2");
+				}
+				prior = checkIndex(ycoord,xcoord);
+				fillin = "square"+ycoord+xcoord;
+				blankbox(fillin);  
+				setTimeout(turnTile,200);
+				printPic(FROG,"square"+yCoords[hh]+xCoords[hh]);
+
+				ycoord = yCoords[hh];    //repositions frog
+				xcoord = xCoords[hh];
+		//		checkMoves(ycoord,xcoord);
+				isPaused = true;  //pauses game until tile is turned
+			}
+
+			function turnTile(){   //turns tile in square just vacated
+
+				content[prior][0]=content[prior][1]; //shifts stack, last element becomes web
+				content[prior][1]=content[prior][2];
+				content[prior][2]=web;
+
+				printPic(content[prior][0].pic,fillin);    //reveals tile on top of stack
+				checkMoves(ycoord,xcoord);
+				isPaused = false;  //returns game to active status
+			}
+
+			function gameEnd(){
+				document.getElementById("resetbutt").className = "buttbox";			 
+				document.getElementById("resetbutt").innerHTML = "GAME OVER<br>PLAY AGAIN?";
+				if (thepoints<40){snark = "YOU LOSE!!!!";}
+				else if (thepoints<45){snark = "Barely a win.";}
+				else if (thepoints<50){snark = "Good job!";}
+				else {snark = "Excellent<br>work!";}
+				scorestring = "<br>SCORE: "+thepoints+" pts<br>"+snark;
+				document.getElementById("scorevalues").innerHTML = scorestring;
+			}
+
+		</script>
+	</head>
+	<body>
+
+<!-- Bruce-Box Arcade Return Navigation -->
+<style id="bruce-box-nav-style">
+  .bruce-box-top-nav {
+    position: fixed;
+    top: 10px;
+    right: 12px;
+    z-index: 999999;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .bruce-box-top-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(17, 24, 39, 0.92);
+    color: #f3f4f6;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(6px);
+    transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+  }
+  .bruce-box-top-nav a:hover {
+    background: #111827;
+    border-color: #f59e0b;
+    color: #fbbf24;
+    transform: translateY(-1px);
+  }
+  .bruce-box-top-nav a:focus-visible {
+    outline: 2px solid #f59e0b;
+    outline-offset: 2px;
+  }
+</style>
+<div class="bruce-box-top-nav" aria-label="Arcade navigation">
+  <a href="../../" title="Return to Bruce-Box Arcade catalog">&larr; Bruce-Box Arcade</a>
+</div>
+<!-- End Bruce-Box Arcade Return Navigation -->
+
+		<div class = "bigbox">
+			<div class = "leftbox">
+				<div class = "gamerow">
+					<div class = "blankbox"></div>
+					<div class = "blackbord" id = "square02" onclick = "hop(0);"></div>
+					<div class = "blackbord" id = "square04" onclick = "hop(1);"></div>
+					<div class = "blackbord" id = "square06" onclick = "hop(2);"></div>
+				</div>
+				<div class = "gamerow">
+					<div class = "halfbox"></div>
+					<div class = "blackbord" id = "square11" onclick = "hop(3);"></div>
+					<div class = "blackbord" id = "square13" onclick = "hop(4);"></div>
+					<div class = "blackbord" id = "square15" onclick = "hop(5);"></div>
+					<div class = "blackbord" id = "square17" onclick = "hop(6);"></div>
+				</div>
+				<div class = "gamerow">
+					<div class = "blackbord" id = "square20" onclick = "hop(7);"></div>
+					<div class = "blackbord" id = "square22" onclick = "hop(8);"></div>
+					<div class = "blackbord" id = "square24" onclick = "hop(9);"></div>
+					<div class = "blackbord" id = "square26" onclick = "hop(10);"></div>
+					<div class = "blackbord" id = "square28" onclick = "hop(11);"></div>
+				</div>
+				<div class = "gamerow">
+					<div class = "halfbox"></div>
+					<div class = "blackbord" id = "square31" onclick = "hop(12);"></div>
+					<div class = "blackbord" id = "square33" onclick = "hop(13);"></div>
+					<div class = "blackbord" id = "square35" onclick = "hop(14);"></div>
+					<div class = "blackbord" id = "square37" onclick = "hop(15);"></div>
+				</div>
+				<div class = "gamerow">
+					<div class = "blankbox"></div>
+					<div class = "blackbord" id = "square42" onclick = "hop(16);"></div>
+					<div class = "blackbord" id = "square44" onclick = "hop(17);"></div>
+					<div class = "blackbord" id = "square46" onclick = "hop(18);"></div>
+				</div>
+			</div>
+			<div class = "midbox"></div>
+			<div class = "rightbox">
+				<div class = "smallrow">
+					<div class = "smallbox" id = "red1"></div>
+					<div class = "smallbox" id = "red2"></div>
+				</div>
+				<div class = "smallrow">
+					<div class = "smallbox" id = "blue1"></div>
+					<div class = "smallbox" id = "blue2"></div>
+				</div>
+				<div class = "smallrow">
+					<div class = "smallbox" id = "yellow1"></div>
+					<div class = "smallbox" id = "yellow2"></div>
+				</div>
+				<div class = "smallrow">
+					<div class = "smallbox" id = "black1"></div>
+				</div>
+				<div class = "smallrow">
+					<div class = "smallbox" id = "white1"></div>
+				</div>
+				<div class = "scorebox" id = "scorevalues"></div>
+				<div class = "buttbox" id = "resetbutt" onclick = "resett()"></div>
+			</div>
+			<div class = "bottombox">
+				<div class = "instructbox" id = "instructions">
+					Help Hopper collect friends.  Each turn Hopper may jump over<br>
+					a square to land on the square beyond.  If Hopper lands on a<br>
+					mushroom, then collect that mushroom's pigment.  If Hopper<br>
+					lands on a friend and has the necessary pigments, then collect<br>
+					that friend and score points.  Hopper may not store more than two<br>
+					each of red, yellow and blue pigments, nor more than one white<br>
+					and one black pigment.  Hopper may jump over but not land on<br>
+					a web.  Game is over when Hopper has no more moves.<br>  
+					Score at least forty points to win!
+
+				</div>
+
+				<div class = "scoringbox" id = "scoring"></div>
+			</div>
+
+ 		</div>
+
+		<script>
+			    	const a = 0;    //white
+            const b = 1;    //silver
+            const c = 2;    //cyan
+            const d = 3;    //blue
+            const e = 4;    //green
+            const f = 5;    //light green
+            const g = 6;    //yellow
+            const h = 7;    //greenyellow
+            const j = 8;    //orange
+            const k = 9;    //red
+            const m = 10;   //pink
+            const n = 11;   //violet
+            const p = 12;   //gray
+            const q = 13;   //light gray
+            const r = 14;   //black
+            const s = 15;   //brown
+            const t = 16;   //tan
+            const u = 17;   //gold
+            rainbow = new Array(18);
+            rainbow = ["white","silver","cyan","blue","green","lightgreen","yellow","greenyellow","orange","red","pink","violet","gray","lightgray","black","brown","tan","gold"];
+
+			squares = new Array(19);
+			squares = ["02","04","06","11","13","15","17","20","22","24","26","28","31","33","35","37","42","44","46"];
+			for (ii=0;ii<19;ii++){
+				squares[ii]="square"+squares[ii];
+			}
+
+			del = new Array(12);
+			del = [[-2,-2],[-2,0],[-2,2],[-1,-3],[-1,3],[0,-4],[0,4],[1,-3],[1,3],[2,-2],[2,0],[2,2]];
+			const Web = 0;
+			const Red = 1;
+			const Yellow = 2;
+			const Blue = 3;
+			const Black = 4;
+			const White = 5;
+			const Green = 6;
+			const Orange = 7;
+			const Violet = 8;
+			const Brown = 9;
+			const Gray = 10;
+			const Newt = 11;
+			const Duck = 12;
+			const Fly = 13;
+
+
+			FROG = new Array(30);
+			FROG[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			FROG[1] = [a,a,a,a,a,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,a,a,a,a,a];
+			FROG[2] = [a,a,a,f,f,f,f,u,u,u,u,f,f,f,f,f,f,u,u,u,u,f,f,f,f,f,f,a,a,a];
+			FROG[3] = [a,a,f,f,f,f,f,u,r,r,r,u,u,f,f,f,u,u,r,r,r,u,f,f,f,f,f,f,a,a];
+			FROG[4] = [a,a,f,f,f,f,f,u,r,r,r,r,u,u,f,u,u,r,r,r,r,u,f,f,f,f,f,f,a,a];
+			FROG[5] = [a,a,f,f,f,f,f,u,r,r,r,u,u,u,u,u,u,u,r,r,r,u,f,f,f,f,f,f,a,a];
+			FROG[6] = [a,f,f,f,f,f,f,u,u,u,u,u,u,u,u,u,u,u,u,u,u,u,f,f,f,f,f,f,f,a];
+			FROG[7] = [a,f,f,f,f,f,f,u,u,u,u,u,u,u,u,u,u,u,u,u,u,u,f,f,f,f,f,f,f,a];
+			FROG[8] = [a,f,f,f,f,f,u,u,u,u,u,u,u,u,u,u,u,u,u,u,u,u,u,f,f,f,f,f,f,a];
+			FROG[9] = [a,f,f,f,f,f,u,u,u,u,u,u,u,u,u,u,u,u,u,u,u,u,u,f,f,f,f,f,f,a];
+			FROG[10] = [a,f,f,f,f,f,u,u,e,e,u,u,u,u,u,u,u,u,u,e,e,u,u,f,f,f,f,f,f,a];
+			FROG[11] = [a,f,f,f,f,f,f,u,u,u,e,e,e,e,e,e,e,e,e,u,u,u,f,f,f,f,f,f,f,a];
+			FROG[12] = [a,f,f,f,f,f,f,f,f,u,u,u,u,u,u,u,u,u,u,u,f,f,f,f,f,f,f,f,f,a];
+			FROG[13] = [a,f,f,f,f,f,f,f,f,u,u,u,u,j,j,j,u,u,u,u,f,f,f,f,f,f,f,f,f,a];
+			FROG[14] = [a,f,f,f,f,f,f,f,u,u,u,j,j,j,j,j,j,j,u,u,u,f,f,f,f,f,f,f,f,a];
+			FROG[15] = [a,f,f,u,u,u,f,f,u,u,j,j,j,j,j,j,j,j,j,u,u,f,f,u,u,u,f,f,f,a];
+			FROG[16] = [a,f,u,u,u,u,u,f,u,u,j,j,j,j,j,j,j,j,j,u,u,f,u,u,u,u,u,f,f,a];
+			FROG[17] = [a,f,u,u,u,u,u,u,u,u,j,j,j,j,j,j,j,j,j,u,u,u,u,u,u,u,u,f,f,a];
+			FROG[18] = [a,f,u,u,u,u,u,u,u,u,j,j,j,j,j,j,j,j,j,u,u,u,u,u,u,u,u,f,f,a];
+			FROG[19] = [a,f,u,u,u,u,u,u,u,u,j,j,j,j,j,j,j,j,j,u,u,u,u,u,u,u,u,f,f,a];
+			FROG[20] = [a,f,u,u,u,f,f,u,u,u,j,j,j,j,j,j,j,j,j,u,u,u,f,f,u,u,u,f,f,a];
+			FROG[21] = [a,f,f,u,u,f,f,f,u,u,j,j,j,j,j,j,j,j,j,u,u,f,f,f,u,u,f,f,f,a];
+			FROG[22] = [a,f,f,u,u,f,f,f,u,u,u,j,j,j,j,j,j,j,u,u,u,f,f,f,u,u,f,f,f,a];
+			FROG[23] = [a,f,f,u,u,f,f,f,u,u,u,u,u,u,u,u,u,u,u,u,u,f,f,f,u,u,f,f,f,a];
+			FROG[24] = [a,f,u,u,u,u,f,f,u,u,f,u,u,u,u,u,u,u,f,u,u,f,f,u,u,u,u,f,f,a];
+			FROG[25] = [a,u,f,u,f,u,f,f,u,u,f,f,f,f,f,f,f,f,f,u,u,f,f,u,f,u,f,u,f,a];
+			FROG[26] = [a,a,f,f,f,f,f,f,u,u,u,f,f,f,f,f,f,f,u,u,u,f,f,f,f,f,f,f,a,a];
+			FROG[27] = [a,a,a,f,f,f,f,u,f,u,f,u,f,f,f,f,f,u,f,u,f,u,f,f,f,f,a,a,a,a];
+			FROG[28] = [a,a,a,a,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,a,a,a,a,a,a,a];
+			FROG[29] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+			red = new thing();
+			red.name = Red;
+			RED = new Array(30);
+			RED[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			RED[1] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			RED[2] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			RED[3] = [a,a,a,a,a,a,a,a,a,a,m,k,k,k,k,k,m,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			RED[4] = [a,a,a,a,a,a,m,k,k,k,k,k,k,k,k,k,k,k,k,k,m,a,a,a,a,a,a,a,a,a];
+			RED[5] = [a,a,a,a,m,k,k,k,k,k,k,k,k,k,k,k,f,m,k,k,k,k,m,a,a,a,a,a,a,a];
+			RED[6] = [a,a,a,m,k,k,k,k,k,k,k,k,f,m,k,k,f,f,k,k,k,k,k,k,a,a,a,a,a,a];
+			RED[7] = [a,a,m,k,k,k,k,k,k,k,k,k,f,f,k,k,k,k,k,k,k,k,k,k,m,a,a,a,a,a];
+			RED[8] = [a,m,k,k,k,f,m,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,a,a,a,a,a];
+			RED[9] = [a,k,k,k,k,f,f,k,k,k,f,m,k,k,k,k,k,k,f,m,k,k,k,k,k,a,a,a,a,a];
+			RED[10] = [a,k,k,k,k,k,k,k,k,k,f,f,k,k,k,k,k,k,f,f,k,k,k,k,k,a,a,a,a,a];
+			RED[11] = [a,m,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,m,a,a,a,a,a];
+			RED[12] = [a,a,a,j,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,m,a,a,a,a,a,a];
+			RED[13] = [a,a,a,a,a,m,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,k,m,a,a,a,a,a,a,a];
+			RED[14] = [a,a,a,a,a,a,a,a,a,a,a,m,m,m,m,m,m,m,m,m,a,a,a,a,a,a,a,a,a,a];
+			RED[15] = [a,a,a,a,a,a,a,a,a,a,a,a,m,m,m,m,m,m,m,a,a,a,a,a,a,a,a,a,a,a];
+			RED[16] = [a,a,a,a,a,a,a,a,a,a,a,a,m,m,m,m,m,m,m,a,a,a,a,a,a,a,a,a,a,a];
+			RED[17] = [a,a,a,a,a,a,a,a,a,a,a,a,m,m,m,m,m,m,m,a,a,a,a,a,a,a,a,a,a,a];
+			RED[18] = [a,a,a,a,a,a,a,a,a,a,a,a,m,m,m,m,m,m,m,a,a,a,a,a,a,a,a,a,a,a];
+			RED[19] = [a,a,a,a,a,a,a,a,a,a,a,a,m,m,m,m,m,m,m,a,a,a,a,a,a,a,a,a,a,a];
+			RED[20] = [a,a,a,a,a,a,a,a,a,a,a,a,m,m,m,m,m,m,m,a,a,a,a,a,a,a,a,a,a,a];
+			RED[21] = [a,a,a,a,a,a,a,a,a,a,a,m,m,m,m,m,m,m,m,m,a,a,a,a,a,a,a,a,a,a];
+			RED[22] = [a,a,a,a,a,a,a,a,a,a,m,m,m,m,m,m,m,m,m,m,m,a,a,a,a,a,a,a,a,a];
+			RED[23] = [a,a,a,a,a,a,a,a,a,a,a,a,a,m,m,m,m,m,m,a,a,a,a,a,a,a,a,a,a,a];
+			RED[24] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			RED[25] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			RED[26] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			RED[27] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			RED[28] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			RED[29] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			red.pic = RED;
+			red.points = 0;
+
+			yellow = new thing();
+			yellow.name = Yellow;
+			YELLOW = new Array(30);
+			YELLOW[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[1] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[2] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[3] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[4] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[5] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[6] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[7] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[8] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[9] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[10] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[11] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[12] = [a,a,a,a,a,a,a,a,a,a,a,a,a,g,g,g,g,g,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[13] = [a,a,a,a,a,a,a,a,a,a,g,g,g,g,g,g,g,g,g,g,g,a,a,a,a,a,a,a,a,a];
+			YELLOW[14] = [a,a,a,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,a,a];
+			YELLOW[15] = [a,a,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,a,a];
+			YELLOW[16] = [a,a,a,g,a,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,a,a,a];
+			YELLOW[17] = [a,a,a,a,a,a,a,a,a,a,a,a,u,u,u,u,u,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[18] = [a,a,a,a,a,a,a,a,a,a,a,a,u,u,u,u,u,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[19] = [a,a,a,a,a,a,a,a,a,a,a,a,u,u,u,u,u,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[20] = [a,a,a,a,a,a,a,a,a,a,a,u,u,u,u,u,u,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[21] = [a,a,a,a,a,a,a,a,a,a,a,u,u,u,u,u,u,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[22] = [a,a,a,a,a,a,a,a,a,a,u,u,u,u,u,u,u,u,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[23] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[24] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[25] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[26] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[27] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[28] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YELLOW[29] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			yellow.pic = YELLOW;
+			yellow.points = 0;
+
+			blue = new thing();
+			blue.name = Blue;
+			BLUE = new Array(30);
+			BLUE[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLUE[1] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLUE[2] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,c,d,d,d,d,c,a,a,a,a,a,a,a,a,a];
+			BLUE[3] = [a,a,a,a,a,a,a,a,a,a,a,a,a,c,d,d,d,d,d,d,d,a,a,a,a,a,a,a,a,a];
+			BLUE[4] = [a,a,a,a,a,a,a,a,a,a,a,a,a,d,d,d,d,d,d,d,d,a,a,a,a,a,a,a,a,a];
+			BLUE[5] = [a,a,a,a,a,a,a,a,a,a,a,a,a,d,d,d,d,d,d,d,d,c,a,a,a,a,a,a,a,a];
+			BLUE[6] = [a,a,a,a,a,a,a,a,a,a,a,a,a,d,c,c,d,d,d,d,d,d,a,a,a,a,a,a,a,a];
+			BLUE[7] = [a,a,a,a,a,a,a,a,a,a,a,a,c,d,c,c,d,d,d,d,d,d,a,a,a,a,a,a,a,a];
+			BLUE[8] = [a,a,a,a,a,a,a,a,a,a,a,c,d,d,d,d,d,d,d,d,d,d,a,a,a,a,a,a,a,a];
+			BLUE[9] = [a,a,a,a,a,a,a,a,a,a,a,d,d,d,d,d,d,d,c,c,d,d,a,a,a,a,a,a,a,a];
+			BLUE[10] = [a,a,a,a,a,a,a,a,a,a,a,d,d,d,d,d,d,d,c,c,d,d,c,a,a,a,a,a,a,a];
+			BLUE[11] = [a,a,a,a,a,a,a,a,a,a,a,d,d,d,d,d,d,d,d,d,d,d,d,a,a,a,a,a,a,a];
+			BLUE[12] = [a,a,a,a,a,a,a,a,a,c,d,d,d,d,d,d,d,d,d,d,d,d,d,a,a,a,a,a,a,a];
+			BLUE[13] = [a,a,a,a,a,a,a,a,a,d,d,d,d,d,d,d,d,d,d,d,d,d,d,a,a,a,a,a,a,a];
+			BLUE[14] = [a,a,a,a,a,a,a,a,a,d,d,d,d,c,c,d,d,d,d,d,d,d,d,a,a,a,a,a,a,a];
+			BLUE[15] = [a,a,a,a,a,a,a,a,a,d,d,d,d,c,c,d,d,d,d,d,d,d,d,c,a,a,a,a,a,a];
+			BLUE[16] = [a,a,a,a,a,a,a,a,a,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,a,a,a,a,a,a];
+			BLUE[17] = [a,a,a,a,a,a,a,a,a,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,a,a,a,a,a,a];
+			BLUE[18] = [a,a,a,a,a,a,a,a,a,d,d,d,d,d,d,d,d,d,d,d,d,d,c,a,a,a,a,a,a,a];
+			BLUE[19] = [a,a,a,a,a,a,a,a,a,a,c,d,d,d,d,d,d,d,c,a,a,a,a,a,a,a,a,a,a,a];
+			BLUE[20] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,c,c,c,c,a,a,a,a,a,a,a,a,a,a,a];
+			BLUE[21] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,c,c,c,c,a,a,a,a,a,a,a,a,a,a,a];
+			BLUE[22] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,c,c,c,c,c,a,a,a,a,a,a,a,a,a,a,a];
+			BLUE[23] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,c,c,c,c,c,c,a,a,a,a,a,a,a,a,a,a];
+			BLUE[24] = [a,a,a,a,a,a,a,a,a,a,a,a,a,c,c,c,c,c,c,c,c,a,a,a,a,a,a,a,a,a];
+			BLUE[25] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLUE[26] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLUE[27] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLUE[28] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLUE[29] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			blue.pic = BLUE;
+			blue.points = 0;
+
+			black = new thing();
+			BLACK = new Array(30);
+			black.name = Black;
+			BLACK[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLACK[1] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLACK[2] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,q,r,r,r,r,r,q,a,a,a,a,a,a,a,a,a];
+			BLACK[3] = [a,a,a,a,a,a,a,a,a,a,a,a,q,r,r,r,r,r,r,r,r,r,q,a,a,a,a,a,a,a];
+			BLACK[4] = [a,a,a,a,a,a,a,a,a,a,q,r,r,r,r,r,r,r,r,r,r,r,r,r,r,q,a,a,a,a];
+			BLACK[5] = [a,a,a,a,a,a,a,a,a,q,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,q,a,a,a];
+			BLACK[6] = [a,a,a,a,a,a,a,q,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,a,a,a];
+			BLACK[7] = [a,a,a,a,a,a,q,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,a,a,a];
+			BLACK[8] = [a,a,a,a,a,r,r,r,r,r,r,r,r,r,r,q,q,q,q,q,q,q,q,q,r,r,r,q,a,a];
+			BLACK[9] = [a,a,a,a,a,r,r,r,r,r,r,r,r,q,q,q,q,q,q,q,q,q,q,q,q,q,r,r,a,a];
+			BLACK[10] = [a,a,a,a,a,r,r,r,r,r,r,q,q,q,q,q,r,q,q,q,q,q,q,q,q,q,r,r,a,a];
+			BLACK[11] = [a,a,a,a,a,r,r,r,q,q,q,q,q,q,q,r,r,r,q,q,q,q,q,q,q,r,r,q,a,a];
+			BLACK[12] = [a,a,a,a,a,a,q,r,r,q,q,q,q,q,q,q,r,r,q,q,q,q,r,r,r,r,q,a,a,a];
+			BLACK[13] = [a,a,a,a,a,a,a,q,r,r,r,q,q,q,q,q,r,r,r,r,r,r,r,q,a,a,a,a,a,a];
+			BLACK[14] = [a,a,a,a,a,a,a,a,a,q,r,r,r,r,r,r,r,r,r,a,a,a,a,a,a,a,a,a,a,a];
+			BLACK[15] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,r,r,a,a,a,a,a,a,a,a,a,a,a];
+			BLACK[16] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,r,r,r,a,a,a,a,a,a,a,a,a,a,a];
+			BLACK[17] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,q,r,r,q,a,a,a,a,a,a,a,a,a,a,a];
+			BLACK[18] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,q,r,r,r,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLACK[19] = [a,a,a,a,a,a,a,a,a,a,a,a,a,q,r,r,r,q,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLACK[20] = [a,a,a,a,a,a,a,a,a,a,a,a,q,r,r,r,r,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLACK[21] = [a,a,a,a,a,a,a,a,a,a,a,a,r,r,r,r,r,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLACK[22] = [a,a,a,a,a,a,a,a,a,a,a,q,r,r,r,r,q,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLACK[23] = [a,a,a,a,a,a,a,a,a,a,a,r,r,r,r,r,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLACK[24] = [a,a,a,a,a,a,a,a,a,a,a,r,r,r,r,r,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLACK[25] = [a,a,a,a,a,a,a,a,a,a,a,r,r,r,r,r,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLACK[26] = [a,a,a,a,a,a,a,a,a,a,a,r,r,r,r,r,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLACK[27] = [a,a,a,a,a,a,a,a,a,a,a,a,q,r,r,r,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLACK[28] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLACK[29] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			black.pic = BLACK;
+			black.points = 0;
+
+			white = new thing();
+			white.name = White;
+			WHITE = new Array(30);
+			WHITE[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			WHITE[1] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			WHITE[2] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			WHITE[3] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,q,q,q,q,q,q,a,a,a,a,a,a,a,a,a];
+			WHITE[4] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,q,q,f,f,f,f,f,q,q,a,a,a,a,a,a,a];
+			WHITE[5] = [a,a,a,a,a,a,a,a,a,a,q,q,q,q,f,f,f,f,f,f,f,f,f,q,a,a,a,a,a,a];
+			WHITE[6] = [a,a,a,a,a,a,a,q,q,q,q,q,f,f,f,f,f,f,f,f,f,f,f,f,q,a,a,a,a,a];
+			WHITE[7] = [a,a,a,a,a,a,q,q,q,q,f,f,f,f,f,f,f,f,f,f,f,f,f,f,q,a,a,a,a,a];
+			WHITE[8] = [a,a,a,a,a,q,q,q,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,q,a,a,a,a];
+			WHITE[9] = [a,a,a,a,a,q,q,q,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,q,a,a,a,a];
+			WHITE[10] = [a,a,a,a,q,q,q,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,q,a,a,a,a];
+			WHITE[11] = [a,a,a,q,q,q,q,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,q,a,a,a];
+			WHITE[12] = [a,a,q,q,q,q,q,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,q,a,a,a];
+			WHITE[13] = [a,a,q,q,q,q,q,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,q,a,a,a];
+			WHITE[14] = [a,a,q,q,q,q,q,q,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,q,a,a,a];
+			WHITE[15] = [a,a,q,q,q,q,q,q,q,q,q,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,q,a,a,a];
+			WHITE[16] = [a,a,a,q,q,q,q,q,q,q,q,q,q,f,f,f,f,f,f,f,f,f,f,f,f,q,a,a,a,a];
+			WHITE[17] = [a,a,a,a,q,q,q,q,q,q,q,q,q,q,q,f,f,f,f,f,f,f,f,q,q,a,a,a,a,a];
+			WHITE[18] = [a,a,a,a,a,a,a,a,a,a,a,q,f,f,q,q,q,q,q,q,f,q,q,a,a,a,a,a,a,a];
+			WHITE[19] = [a,a,a,a,a,a,a,a,a,a,a,q,f,f,f,f,f,f,f,f,q,a,a,a,a,a,a,a,a,a];
+			WHITE[20] = [a,a,a,a,a,a,a,a,a,a,a,q,q,q,f,f,f,f,f,f,q,a,a,a,a,a,a,a,a,a];
+			WHITE[21] = [a,a,a,a,a,a,a,a,a,a,a,q,q,q,q,q,f,f,f,q,a,a,a,a,a,a,a,a,a,a];
+			WHITE[22] = [a,a,a,a,a,a,a,a,a,a,a,a,q,q,q,q,q,q,q,a,a,a,a,a,a,a,a,a,a,a];
+			WHITE[23] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			WHITE[24] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			WHITE[25] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			WHITE[26] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			WHITE[27] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			WHITE[28] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			WHITE[29] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			white.pic = WHITE;
+			white.points = 0;
+
+			orange = new thing();
+			orange.name = Orange;
+			ORANGE = new Array(30);
+			ORANGE[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			ORANGE[1] = [a,a,a,a,k,k,k,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			ORANGE[2] = [a,a,k,k,k,k,k,k,a,a,a,a,a,a,a,a,a,a,g,g,g,g,g,a,a,a,a,a,a,a];
+			ORANGE[3] = [a,a,k,k,k,k,k,k,a,a,a,a,a,a,a,a,a,g,g,g,g,g,g,a,a,a,a,a,a,a];
+			ORANGE[4] = [a,a,k,k,k,k,k,a,a,a,a,a,a,a,a,a,a,g,g,g,g,g,g,a,a,a,a,a,a,a];
+			ORANGE[5] = [a,a,a,k,k,k,a,a,a,a,a,a,a,a,a,a,a,g,g,g,g,g,a,a,a,a,a,a,a,a];
+			ORANGE[6] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,g,g,a,a,a,a,a,a,a,a,a];
+			ORANGE[7] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			ORANGE[8] = [a,a,a,a,a,a,a,a,a,a,a,u,u,u,u,u,u,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			ORANGE[9] = [a,a,a,a,a,a,a,a,a,a,a,a,a,u,u,u,u,u,a,a,a,a,a,a,a,a,a,a,a,a];
+			ORANGE[10] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,u,u,u,u,u,a,a,a,a,a,a,a,a,a,a,a];
+			ORANGE[11] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,u,u,u,u,u,a,a,a,a,a,a,a,a,a,a];
+			ORANGE[12] = [a,a,u,u,u,u,a,a,a,a,a,a,a,a,j,j,j,j,j,j,j,j,j,a,a,a,a,a,a,a];
+			ORANGE[13] = [a,a,a,u,u,u,u,u,j,j,j,j,j,j,j,j,j,j,j,j,j,j,j,j,j,a,a,a,a,a];
+			ORANGE[14] = [a,a,a,a,u,u,u,u,u,j,j,j,j,j,j,j,j,j,j,j,j,j,r,r,j,j,a,a,a,a];
+			ORANGE[15] = [a,a,a,a,a,u,u,u,u,u,j,j,j,j,j,j,j,j,j,j,j,j,r,r,j,j,j,a,a,a];
+			ORANGE[16] = [a,a,a,a,a,u,u,u,u,u,j,j,j,j,j,j,j,j,j,j,j,j,j,j,j,j,j,j,a,a];
+			ORANGE[17] = [a,a,a,a,a,u,u,u,u,u,j,j,j,j,j,j,j,j,j,j,j,j,j,j,j,j,j,a,a,a];
+			ORANGE[18] = [a,a,a,a,a,u,u,u,u,u,j,j,j,j,j,j,j,j,j,j,j,j,j,j,j,j,j,j,a,a];
+			ORANGE[19] = [a,a,a,a,a,u,u,u,u,j,j,j,j,j,j,u,u,u,u,u,j,j,j,j,j,j,j,a,a,a];
+			ORANGE[20] = [a,a,a,a,u,u,u,u,u,j,j,j,j,j,u,u,u,u,u,u,j,j,j,j,j,j,a,a,a,a];
+			ORANGE[21] = [a,a,a,u,u,u,u,u,a,a,a,j,j,j,u,u,u,u,u,u,j,j,j,a,a,a,a,a,a,a];
+			ORANGE[22] = [a,a,u,u,u,u,a,a,a,a,a,a,a,u,u,u,u,u,u,a,a,a,a,a,a,a,a,a,a,a];
+			ORANGE[23] = [a,a,a,a,a,a,a,a,a,a,a,a,u,u,u,u,u,u,a,a,a,a,a,a,a,a,a,a,a,a];
+			ORANGE[24] = [a,a,a,a,a,a,a,a,a,a,a,u,u,u,u,u,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			ORANGE[25] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			ORANGE[26] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			ORANGE[27] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			ORANGE[28] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			ORANGE[29] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			orange.pic = ORANGE;
+			orange.points = 2;
+
+			green = new thing();
+			green.name = Green;
+			GREEN = new Array(30);
+			GREEN[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GREEN[1] = [a,a,a,a,a,a,a,a,a,a,a,a,d,d,d,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GREEN[2] = [a,g,g,g,g,a,a,a,a,a,a,d,d,d,d,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GREEN[3] = [a,g,g,g,g,g,a,a,a,a,d,d,d,d,d,d,a,a,a,a,a,a,a,a,a,a,r,a,a,a];
+			GREEN[4] = [a,g,g,g,g,g,a,a,a,a,d,d,d,d,d,d,a,a,a,r,q,a,a,a,a,a,r,a,a,a];
+			GREEN[5] = [a,g,g,g,g,g,a,a,a,a,d,d,d,d,d,a,a,a,a,a,r,q,a,e,e,q,r,a,a,a];
+			GREEN[6] = [a,a,g,g,g,a,a,a,a,a,a,a,d,d,a,a,a,a,a,a,a,r,e,e,e,r,e,a,a,a];
+			GREEN[7] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,e,r,e,e,r,e,a,a,a];
+			GREEN[8] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,e,h,h,e,e,e,e,e,e,a,a,a];
+			GREEN[9] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,e,e,e,h,e,e,e,e,e,e,a,a,a];
+			GREEN[10] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,e,e,e,e,h,e,e,e,e,e,e,a,a,a];
+			GREEN[11] = [a,a,a,a,a,a,a,a,a,a,e,e,a,a,a,a,e,e,e,e,h,h,e,e,e,e,a,a,a,a];
+			GREEN[12] = [a,a,a,a,a,a,a,a,a,e,e,e,h,a,e,h,e,e,e,e,e,h,a,e,e,a,a,a,a,a];
+			GREEN[13] = [a,a,a,a,a,a,a,a,e,e,e,e,h,e,e,h,e,e,e,e,e,a,a,a,a,a,a,a,a,a];
+			GREEN[14] = [a,a,a,a,a,a,e,h,e,e,e,e,h,e,e,h,e,e,e,e,e,a,a,a,a,a,a,a,a,a];
+			GREEN[15] = [a,a,a,a,a,e,e,h,e,e,e,e,h,h,e,e,h,e,e,e,a,a,a,a,a,a,a,a,a,a];
+			GREEN[16] = [a,a,a,a,e,e,e,h,h,e,e,e,e,h,e,e,e,h,a,a,a,a,a,a,a,a,a,a,a,a];
+			GREEN[17] = [a,a,a,a,e,e,e,e,h,e,e,e,e,h,e,e,e,e,a,a,a,a,a,a,a,a,a,a,a,a];
+			GREEN[18] = [a,a,e,h,e,e,e,e,h,e,e,e,a,a,a,e,e,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GREEN[19] = [a,e,e,h,h,e,e,e,h,h,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GREEN[20] = [a,e,e,e,h,e,e,e,e,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GREEN[21] = [a,e,e,e,h,h,e,e,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GREEN[22] = [a,e,e,e,e,h,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GREEN[23] = [a,a,e,e,e,e,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GREEN[24] = [a,a,a,e,e,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GREEN[25] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GREEN[26] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GREEN[27] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GREEN[28] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GREEN[29] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			green.pic = GREEN;
+			green.points = 2;
+
+			violet = new thing();
+			violet.name = Violet;
+			VIOLET = new Array(30);
+			VIOLET[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			VIOLET[1] = [a,a,a,d,d,d,d,d,d,a,a,a,a,a,a,a,a,a,k,k,k,k,k,k,a,a,a,a,a,a];
+			VIOLET[2] = [a,a,d,d,d,d,d,d,d,d,a,a,a,a,a,a,a,k,k,k,k,k,k,k,k,a,a,a,a,a];
+			VIOLET[3] = [a,a,a,d,d,d,d,d,d,a,a,a,a,a,a,a,a,a,a,k,k,k,k,k,a,a,a,a,a,a];
+			VIOLET[4] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			VIOLET[5] = [a,a,r,r,r,r,r,r,a,a,a,a,a,a,a,a,a,a,a,a,a,r,r,r,r,r,r,a,a,a];
+			VIOLET[6] = [a,r,r,r,r,r,r,r,r,a,a,a,r,a,a,a,p,a,a,a,r,r,r,r,r,r,r,r,a,a];
+			VIOLET[7] = [a,r,r,r,r,n,r,n,r,r,a,a,a,p,a,p,a,a,a,r,r,n,r,n,r,r,r,r,a,a];
+			VIOLET[8] = [a,r,r,n,n,r,r,n,n,r,r,a,a,a,r,a,a,a,r,r,n,n,r,r,n,n,r,r,a,a];
+			VIOLET[9] = [a,r,r,n,n,n,n,r,n,n,n,r,a,a,r,a,a,r,r,n,n,r,n,n,n,n,r,r,a,a];
+			VIOLET[10] = [a,r,r,n,r,r,r,r,n,n,n,r,r,r,r,r,r,r,n,n,n,r,r,r,r,n,r,r,a,a];
+			VIOLET[11] = [a,r,r,r,r,n,n,n,r,n,n,n,n,r,r,r,n,n,n,n,r,n,n,n,r,r,r,r,a,a];
+			VIOLET[12] = [a,a,r,r,n,n,n,n,n,r,n,n,n,r,r,r,n,n,n,r,n,n,n,n,n,r,r,a,a,a];
+			VIOLET[13] = [a,a,a,r,r,n,n,n,n,n,r,r,n,r,r,r,n,r,r,n,n,n,n,n,r,r,a,a,a,a];
+			VIOLET[14] = [a,a,a,r,r,r,n,n,n,n,n,n,r,r,r,r,r,n,n,n,n,n,n,r,r,r,a,a,a,a];
+			VIOLET[15] = [a,a,a,a,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,a,a,a,a,a];
+			VIOLET[16] = [a,a,a,a,a,a,a,r,r,n,n,n,n,r,r,r,n,n,n,n,r,r,a,a,a,a,a,a,a,a];
+			VIOLET[17] = [a,a,a,a,a,a,r,r,n,n,n,n,n,r,r,r,n,n,n,n,n,r,r,a,a,a,a,a,a,a];
+			VIOLET[18] = [a,a,a,a,a,r,r,n,n,n,n,n,r,r,r,r,r,n,n,n,n,n,r,r,a,a,a,a,a,a];
+			VIOLET[19] = [a,a,a,a,a,r,r,n,n,n,r,r,n,r,r,r,n,r,r,n,n,n,r,r,a,a,a,a,a,a];
+			VIOLET[20] = [a,a,a,a,r,r,n,n,n,r,n,r,n,r,r,r,n,r,n,r,n,n,n,r,r,a,a,a,a,a];
+			VIOLET[21] = [a,a,a,a,r,r,n,n,r,n,n,r,n,r,r,r,n,r,n,n,r,n,n,r,r,a,a,a,a,a];
+			VIOLET[22] = [a,a,a,a,r,r,r,r,n,n,r,n,r,r,r,r,r,n,r,n,n,r,r,r,r,a,a,a,a,a];
+			VIOLET[23] = [a,a,a,a,a,r,r,r,r,r,r,r,a,a,r,a,a,r,n,n,n,n,n,r,a,a,a,a,a,a];
+			VIOLET[24] = [a,a,a,a,a,a,r,r,r,r,r,a,a,a,r,a,a,a,r,r,r,r,r,a,a,a,a,a,a,a];
+			VIOLET[25] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			VIOLET[26] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			VIOLET[27] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			VIOLET[28] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			VIOLET[29] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			violet.pic = VIOLET;
+			violet.points = 2;
+
+			web = new thing();
+			WEB = new Array(30);
+			WEB[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			WEB[1] = [a,a,a,a,a,a,a,r,a,a,a,a,a,a,a,a,a,a,p,r,r,r,r,a,a,a,a,a,a,a];
+			WEB[2] = [a,a,a,a,a,a,a,r,r,a,a,p,r,r,r,r,r,r,r,a,a,r,a,r,a,a,a,a,a,a];
+			WEB[3] = [a,a,a,a,a,a,r,a,r,r,r,r,a,a,a,a,a,a,a,a,a,r,a,r,p,a,a,a,a,a];
+			WEB[4] = [a,a,a,a,a,p,r,a,r,r,a,a,a,a,a,a,a,p,r,r,r,r,a,a,r,p,a,a,a,a];
+			WEB[5] = [a,a,a,a,a,r,a,r,a,a,r,a,a,p,r,r,r,r,a,r,a,r,a,a,a,r,a,a,a,a];
+			WEB[6] = [a,a,a,a,p,r,a,r,a,a,a,r,r,r,a,a,a,a,a,r,a,a,r,a,a,a,r,a,a,a];
+			WEB[7] = [a,a,a,a,r,a,p,r,a,a,a,r,a,a,a,a,a,a,r,a,a,a,r,p,a,a,r,p,a,a];
+			WEB[8] = [a,a,a,p,r,a,r,a,a,a,p,r,r,a,p,r,r,r,r,a,a,a,a,r,a,a,a,r,r,a];
+			WEB[9] = [a,a,a,r,a,p,r,a,a,a,r,a,a,r,r,a,a,r,a,r,a,a,a,r,a,r,r,r,r,a];
+			WEB[10] = [a,a,a,r,a,r,a,a,a,p,r,a,a,a,r,a,r,a,a,r,p,a,r,r,r,a,a,a,r,a];
+			WEB[11] = [a,a,r,r,r,r,a,a,a,r,a,a,a,a,r,r,a,a,a,r,r,r,a,a,r,a,a,a,r,a];
+			WEB[12] = [a,a,r,a,a,r,r,r,r,r,r,r,r,a,a,r,r,r,r,a,a,r,a,a,r,a,a,a,r,a];
+			WEB[13] = [a,a,r,a,a,r,a,a,r,a,a,a,a,r,r,r,r,a,a,a,a,r,a,a,r,a,a,a,r,a];
+			WEB[14] = [a,a,r,a,a,r,a,a,r,a,a,a,a,r,a,r,a,r,r,a,a,r,a,a,r,a,a,a,r,a];
+			WEB[15] = [a,a,r,a,a,r,a,a,p,r,a,r,r,a,a,r,a,a,a,r,r,r,a,a,r,a,a,r,p,a];
+			WEB[16] = [a,a,r,a,a,r,a,a,a,r,r,a,a,a,a,a,r,a,a,a,r,r,r,a,r,a,a,r,a,a];
+			WEB[17] = [a,a,r,a,a,p,r,a,a,r,r,r,r,r,a,a,r,a,a,r,p,a,a,r,r,a,a,r,a,a];
+			WEB[18] = [a,a,r,a,a,a,r,r,r,a,a,a,a,p,r,r,r,r,r,p,a,a,a,r,a,r,r,r,a,a];
+			WEB[19] = [a,a,r,a,a,a,r,a,a,a,a,a,a,a,a,a,r,a,a,a,a,a,r,p,a,a,r,r,r,a];
+			WEB[20] = [a,a,r,a,a,r,r,r,r,r,a,a,a,a,a,a,r,a,a,a,r,r,p,a,a,r,p,a,a,a];
+			WEB[21] = [a,a,r,r,r,a,a,a,a,p,r,r,r,r,r,r,a,r,a,r,p,a,a,r,r,p,a,a,a,a];
+			WEB[22] = [a,a,r,a,a,a,a,a,a,a,a,a,a,a,a,p,r,r,r,p,a,a,r,p,a,a,a,a,a,a];
+			WEB[23] = [a,r,r,r,r,r,a,a,a,a,a,a,a,a,a,a,a,r,a,a,a,r,p,a,a,a,a,a,a,a];
+			WEB[24] = [a,a,a,a,a,p,r,r,r,r,r,a,a,a,a,a,a,r,a,r,r,p,a,a,a,a,a,a,a,a];
+			WEB[25] = [a,a,a,a,a,a,a,a,a,a,p,r,r,r,r,r,a,r,r,a,a,a,a,a,a,a,a,a,a,a];
+			WEB[26] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,p,r,r,r,a,a,a,a,a,a,a,a,a,a,a];
+			WEB[27] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,r,a,a,a,a,a,a,a,a,a,a,a];
+			WEB[28] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,r,a,a,a,a,a,a,a,a,a,a,a];
+			WEB[29] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			web.name = Web;
+			web.pic = WEB;
+			web.points = 0;
+
+			brown = new thing();
+			BROWN = new Array(30);
+			BROWN[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BROWN[1] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BROWN[2] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BROWN[3] = [a,a,a,d,d,d,d,a,a,a,a,a,a,g,g,g,a,a,a,a,a,a,k,k,k,a,a,a,a,a];
+			BROWN[4] = [a,a,a,d,d,d,d,a,a,a,a,a,g,g,g,g,g,a,a,a,a,k,k,k,k,a,a,a,a,a];
+			BROWN[5] = [a,a,a,d,d,d,a,a,a,a,a,g,g,g,g,g,g,a,a,a,a,k,k,k,k,k,a,a,a,a];
+			BROWN[6] = [a,a,a,a,a,a,a,a,a,a,a,g,g,g,g,g,a,a,a,a,a,k,k,k,k,k,a,a,a,a];
+			BROWN[7] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,k,k,k,a,a,a,a,a];
+			BROWN[8] = [a,a,a,a,a,a,a,a,a,a,a,t,t,s,t,t,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BROWN[9] = [a,a,a,a,a,a,t,s,t,t,s,t,s,t,t,t,t,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BROWN[10] = [a,a,a,a,a,s,t,t,s,t,s,t,s,t,s,s,s,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BROWN[11] = [a,a,a,a,t,t,s,t,t,a,a,a,a,s,t,t,t,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BROWN[12] = [a,a,a,a,t,t,t,a,a,a,a,a,a,t,t,t,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BROWN[13] = [a,a,a,a,s,s,a,a,a,a,a,a,a,s,s,s,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BROWN[14] = [a,a,a,a,t,t,a,a,a,a,a,a,t,t,t,t,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BROWN[15] = [a,a,a,a,t,a,a,a,a,a,a,s,s,s,s,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BROWN[16] = [a,a,a,a,a,a,a,a,a,a,t,t,t,t,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BROWN[17] = [a,a,a,a,a,a,a,a,a,a,s,s,t,t,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BROWN[18] = [a,a,a,a,a,a,a,a,a,t,t,t,s,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BROWN[19] = [a,a,a,a,a,a,a,a,s,s,s,t,t,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BROWN[20] = [a,a,a,a,a,a,a,a,t,t,t,s,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BROWN[21] = [a,a,a,a,a,a,a,s,s,s,s,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BROWN[22] = [a,a,a,a,a,a,a,t,t,t,a,a,a,a,a,a,t,t,t,s,t,t,a,a,a,a,a,a,a,a];
+			BROWN[23] = [a,a,a,a,a,a,a,t,s,s,a,a,a,a,t,t,t,t,t,s,s,t,t,t,a,a,a,a,a,a];
+			BROWN[24] = [a,a,a,a,a,a,a,s,t,t,a,a,a,t,t,t,t,t,t,t,s,t,t,t,t,t,a,a,a,a];
+			BROWN[25] = [a,a,a,a,a,a,a,t,t,s,t,s,t,s,t,t,t,t,t,t,a,a,a,t,t,t,t,a,a,a];
+			BROWN[26] = [a,a,a,a,a,a,a,t,s,t,t,s,t,t,s,t,t,t,t,a,a,a,a,a,t,t,t,a,a,a];
+			BROWN[27] = [a,a,a,a,a,a,a,a,a,t,t,s,t,t,s,t,t,a,a,a,a,a,a,a,a,t,t,a,a,a];
+			BROWN[28] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BROWN[29] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			brown.name = Brown;
+			brown.pic = BROWN;
+			brown.points = 4;
+
+			gray = new thing();
+			GRAY = new Array(30);
+			GRAY[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GRAY[1] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,r,r,f,r,r,a,a,a,a];
+			GRAY[2] = [a,r,r,r,r,r,a,a,a,a,a,p,q,a,a,q,p,a,a,a,r,q,f,f,f,q,r,a,a,a];
+			GRAY[3] = [a,r,r,r,r,r,r,a,a,a,a,a,p,a,a,p,a,a,a,a,f,f,f,f,f,f,f,a,a,a];
+			GRAY[4] = [a,r,r,r,r,r,r,a,a,a,a,a,p,a,a,p,a,a,a,a,r,f,f,f,f,f,r,a,a,a];
+			GRAY[5] = [a,a,r,r,r,r,a,a,a,a,a,a,p,p,p,p,a,a,a,a,r,q,f,f,f,q,r,a,a,a];
+			GRAY[6] = [a,a,r,r,r,a,a,a,a,a,a,p,p,p,p,p,p,a,a,a,a,r,r,f,r,r,a,a,a,a];
+			GRAY[7] = [a,a,a,a,a,a,a,a,a,a,p,p,p,q,q,q,p,p,a,a,a,a,a,a,a,a,a,a,a,a];
+			GRAY[8] = [a,a,a,a,a,a,a,a,p,p,p,q,q,p,p,p,q,q,p,p,a,a,a,a,a,a,a,a,a,a];
+			GRAY[9] = [a,a,a,a,a,a,a,a,a,p,p,p,p,p,p,p,p,p,p,a,a,a,a,a,a,a,a,a,a,a];
+			GRAY[10] = [a,a,a,a,a,a,a,a,p,p,p,p,p,q,q,q,p,p,p,a,p,a,a,a,a,a,a,a,a,a];
+			GRAY[11] = [a,a,a,a,a,a,a,a,a,p,q,q,q,p,p,p,q,q,a,p,a,a,a,a,a,a,a,a,a,a];
+			GRAY[12] = [a,a,a,a,a,a,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,a,a,a,a,a,a,a,a];
+			GRAY[13] = [a,a,a,a,a,a,a,a,p,p,p,p,p,p,p,p,p,p,p,p,a,a,a,a,a,a,a,a,a,a];
+			GRAY[14] = [a,a,a,a,a,a,p,p,p,q,q,q,q,q,q,q,q,q,q,p,p,p,a,a,a,a,a,a,a,a];
+			GRAY[15] = [a,a,a,a,a,a,a,a,p,p,p,p,p,p,p,p,p,p,p,p,a,a,a,a,a,a,a,a,a,a];
+			GRAY[16] = [a,a,a,a,a,a,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,a,a,a,a,a,a,a,a];
+			GRAY[17] = [a,a,a,a,a,a,a,a,p,q,q,q,q,q,q,q,q,q,q,p,a,a,a,a,a,a,a,a,a,a];
+			GRAY[18] = [a,a,a,a,a,a,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,a,a,a,a,a,a,a,a];
+			GRAY[19] = [a,a,a,a,a,a,a,a,p,p,p,p,p,p,p,p,p,p,p,p,a,a,a,a,a,a,a,a,a,a];
+			GRAY[20] = [a,a,a,a,a,a,a,p,p,p,q,q,q,p,p,p,q,q,p,p,p,p,a,a,a,a,a,a,a,a];
+			GRAY[21] = [a,a,a,a,a,a,a,a,a,p,p,p,p,q,q,q,p,p,p,a,a,a,a,a,a,a,a,a,a,a];
+			GRAY[22] = [a,a,a,a,a,a,a,a,p,p,p,p,p,p,p,p,p,p,p,p,p,a,a,a,a,a,a,a,a,a];
+			GRAY[23] = [a,a,a,a,a,a,a,a,a,a,p,q,q,p,p,q,q,p,p,a,a,a,a,a,a,a,a,a,a,a];
+			GRAY[24] = [a,a,a,a,a,a,a,a,a,a,p,p,p,q,q,p,p,p,a,p,a,a,a,a,a,a,a,a,a,a];
+			GRAY[25] = [a,a,a,a,a,a,a,a,a,p,a,p,p,p,p,p,p,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GRAY[26] = [a,a,a,a,a,a,a,a,a,a,a,a,p,p,p,p,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GRAY[27] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GRAY[28] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			GRAY[29] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			gray.name = Gray;
+			gray.pic = GRAY;
+			gray.points = 4
+
+			newt = new thing();
+			NEWT = new Array(30);
+			NEWT[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			NEWT[1] = [a,a,a,k,k,k,k,k,k,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			NEWT[2] = [a,a,k,k,k,k,k,k,k,a,a,a,a,a,a,a,a,a,k,k,k,k,a,a,a,a,a,a,a,a];
+			NEWT[3] = [a,a,k,k,k,k,k,k,k,a,a,a,a,a,a,a,a,k,k,k,k,k,k,k,a,a,a,a,a,a];
+			NEWT[4] = [a,a,a,k,k,k,k,k,k,a,a,a,a,a,a,a,a,k,k,k,k,k,k,k,a,a,a,a,a,a];
+			NEWT[5] = [a,a,a,a,k,k,k,k,a,a,a,a,a,a,a,a,a,k,k,k,k,k,k,a,a,a,a,a,a,a];
+			NEWT[6] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,k,k,k,k,a,a,a,a,a,a,a,a];
+			NEWT[7] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			NEWT[8] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			NEWT[9] = [a,a,a,a,a,m,k,m,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			NEWT[10] = [a,a,a,r,r,k,k,k,m,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			NEWT[11] = [a,a,m,r,r,k,k,k,k,m,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			NEWT[12] = [a,m,k,k,k,k,j,k,k,k,k,m,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			NEWT[13] = [a,k,k,k,k,j,j,k,k,k,k,k,m,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			NEWT[14] = [a,a,j,j,j,j,k,k,k,k,k,k,k,m,a,a,a,a,a,a,a,a,a,a,a,a,k,m,a,a];
+			NEWT[15] = [a,a,a,a,a,a,a,a,k,k,k,k,k,k,k,m,a,a,a,a,a,a,a,a,a,a,a,k,m,a];
+			NEWT[16] = [a,a,a,a,a,a,a,a,a,k,k,k,k,k,k,k,m,a,a,a,a,a,a,a,a,a,a,k,k,a];
+			NEWT[17] = [a,a,a,a,a,a,a,a,m,k,k,k,j,k,k,k,k,k,m,a,a,a,a,a,a,a,m,k,k,a];
+			NEWT[18] = [a,a,a,a,a,a,a,m,k,k,a,k,j,j,k,k,k,k,k,m,a,a,a,a,a,m,k,k,m,a];
+			NEWT[19] = [a,a,a,a,a,a,k,k,m,a,a,j,j,j,k,k,k,k,k,k,k,m,a,a,m,k,k,m,a,a];
+			NEWT[20] = [a,a,a,a,a,a,a,a,a,a,m,j,j,a,a,k,k,k,j,k,k,k,k,k,k,k,m,a,a,a];
+			NEWT[21] = [a,a,a,a,a,a,a,a,a,j,j,j,a,a,a,a,m,k,j,j,k,k,k,k,k,m,a,a,a,a];
+			NEWT[22] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,m,j,j,j,j,j,k,k,m,a,a,a,a,a,a];
+			NEWT[23] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,j,j,j,j,a,a,k,k,m,a,a,a,a,a,a,a];
+			NEWT[24] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,k,k,a,a,a,a,a,a,a,a];
+			NEWT[25] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,k,k,k,m,a,a,a,a,a,a,a,a];
+			NEWT[26] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			NEWT[27] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			NEWT[28] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			NEWT[29] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			newt.name = Newt;
+			newt.points = 5;
+			newt.pic = NEWT;
+
+			duck = new thing();
+			DUCK = new Array(30);
+			DUCK[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			DUCK[1] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			DUCK[2] = [a,a,a,a,g,g,g,g,a,a,a,g,g,g,g,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			DUCK[3] = [a,a,a,g,g,g,g,g,a,a,a,g,g,g,g,g,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			DUCK[4] = [a,a,a,g,g,g,g,g,a,a,a,g,g,g,g,g,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			DUCK[5] = [a,a,a,g,g,g,g,g,a,a,a,g,g,g,g,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			DUCK[6] = [a,a,a,g,g,g,g,a,a,a,a,g,g,g,a,a,a,a,a,g,g,g,g,a,a,a,a,a,a,a];
+			DUCK[7] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,g,g,g,g,g,g,g,g,g,a,a,a,a,a];
+			DUCK[8] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,g,g,g,g,g,g,r,r,g,a,a,a,a,a];
+			DUCK[9] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,g,g,g,g,g,g,g,r,r,g,g,a,a,a,a];
+			DUCK[10] = [a,a,g,a,a,a,a,a,a,a,a,a,a,a,a,g,g,g,g,g,g,g,g,g,g,g,a,a,a,a];
+			DUCK[11] = [a,a,g,g,g,a,a,a,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,j,j,j,a,a];
+			DUCK[12] = [a,a,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,j,j,j,j,a];
+			DUCK[13] = [a,a,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,a,a,a,a,a];
+			DUCK[14] = [a,a,a,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,a,a,a,a,a];
+			DUCK[15] = [a,a,a,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,a,a,a,a,a,a,a];
+			DUCK[16] = [a,a,a,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,a,a,a,a,a,a,a,a,a];
+			DUCK[17] = [a,a,a,a,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,a,a,a,a,a,a,a,a,a];
+			DUCK[18] = [a,a,a,a,a,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,a,a,a,a,a,a,a,a,a,a];
+			DUCK[19] = [a,a,a,a,a,g,g,g,g,g,g,g,g,g,g,g,g,g,g,g,a,a,a,a,a,a,a,a,a,a];
+			DUCK[20] = [a,a,a,a,a,a,a,g,g,g,g,g,g,g,g,g,g,g,a,a,a,a,a,a,a,a,a,a,a,a];
+			DUCK[21] = [a,a,a,a,a,a,a,a,a,g,g,g,g,g,g,g,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			DUCK[22] = [a,a,a,a,a,a,a,a,a,j,a,a,a,a,j,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			DUCK[23] = [a,a,a,a,a,a,a,a,a,j,a,a,a,a,j,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			DUCK[24] = [a,a,a,a,a,a,a,a,j,j,j,a,a,a,j,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			DUCK[25] = [a,a,a,a,a,a,a,a,a,j,j,j,a,j,j,j,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			DUCK[26] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,j,j,j,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			DUCK[27] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			DUCK[28] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			DUCK[29] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			duck.name = Duck;
+			duck.pic = DUCK;
+			duck.points = 5;
+
+			fly = new thing();
+			FLY = new Array(30);
+			FLY[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			FLY[1] = [a,a,a,d,d,d,d,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			FLY[2] = [a,a,d,d,d,d,d,d,a,a,a,a,a,a,a,a,a,a,a,a,a,a,d,d,d,a,a,a,a,a];
+			FLY[3] = [a,a,d,d,d,d,d,d,a,a,a,a,a,a,a,a,a,a,a,a,a,d,d,d,d,d,a,a,a,a];
+			FLY[4] = [a,a,d,d,d,d,d,d,a,a,a,a,a,a,a,a,a,a,a,a,a,d,d,d,d,d,a,a,a,a];
+			FLY[5] = [a,a,a,a,d,d,d,a,a,a,a,a,a,a,a,a,a,a,a,a,a,d,d,d,d,d,a,a,a,a];
+			FLY[6] = [a,a,a,a,a,a,a,a,a,a,a,a,a,r,d,r,a,a,a,a,a,a,d,d,d,a,a,a,a,a];
+			FLY[7] = [a,a,a,a,a,a,a,a,a,a,a,r,a,d,d,d,a,r,a,a,a,a,a,a,a,a,a,a,a,a];
+			FLY[8] = [a,a,a,a,a,a,a,a,a,a,a,p,r,a,d,a,r,p,a,a,a,a,a,a,a,a,a,a,a,a];
+			FLY[9] = [a,a,c,c,c,c,c,c,c,c,c,c,a,d,d,d,a,c,c,c,c,c,c,c,c,c,c,c,a,a];
+			FLY[10] = [a,c,c,f,f,f,f,f,f,f,f,c,c,c,d,c,c,f,f,f,f,f,f,f,f,f,f,c,c,a];
+			FLY[11] = [a,a,a,c,c,c,c,c,c,c,c,c,a,d,d,d,a,c,c,c,c,c,c,c,c,c,c,a,a,a];
+			FLY[12] = [a,a,a,a,a,c,c,f,f,f,c,a,a,c,d,c,a,a,c,f,f,f,c,c,a,a,a,a,a,a];
+			FLY[13] = [a,a,a,a,c,f,f,f,f,c,a,a,a,a,d,a,a,a,a,c,f,f,f,f,c,a,a,a,a,a];
+			FLY[14] = [a,a,a,c,f,f,f,c,c,a,a,a,a,c,d,c,a,a,a,a,c,c,f,f,f,c,a,a,a,a];
+			FLY[15] = [a,a,c,f,c,c,c,a,a,a,a,a,a,d,d,d,a,a,a,a,a,a,c,c,c,f,c,a,a,a];
+			FLY[16] = [a,a,c,c,a,a,a,a,a,a,a,a,a,d,d,d,a,a,a,a,a,a,a,a,a,c,c,a,a,a];
+			FLY[17] = [a,a,a,a,a,a,a,a,a,a,a,a,a,d,d,d,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			FLY[18] = [a,a,a,a,a,a,a,a,a,a,a,a,a,d,d,d,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			FLY[19] = [a,a,a,a,a,a,a,a,a,a,a,a,a,d,d,d,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			FLY[20] = [a,a,a,a,a,a,a,a,a,a,a,a,a,d,d,d,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			FLY[21] = [a,a,a,a,a,a,a,a,a,a,a,a,a,d,d,d,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			FLY[22] = [a,a,a,a,a,a,a,a,a,a,a,a,a,d,d,d,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			FLY[23] = [a,a,a,a,a,a,a,a,a,a,a,a,a,d,d,d,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			FLY[24] = [a,a,a,a,a,a,a,a,a,a,a,a,a,d,d,d,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			FLY[25] = [a,a,a,a,a,a,a,a,a,a,a,a,a,d,d,d,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			FLY[26] = [a,a,a,a,a,a,a,a,a,a,a,a,a,c,d,c,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			FLY[27] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			FLY[28] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			FLY[29] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			fly.name = Fly;
+			fly.pic = FLY
+			fly.points = 5;
+
+			RICON = new Array(15);
+			RICON[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			RICON[1] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			RICON[2] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			RICON[3] = [a,a,a,a,a,k,k,k,a,a,a,a,a,a,a];
+			RICON[4] = [a,a,a,a,k,k,k,k,k,k,a,a,a,a,a];
+			RICON[5] = [a,a,a,a,k,k,k,k,k,k,k,a,a,a,a];
+			RICON[6] = [a,a,a,a,k,k,k,k,k,k,k,k,a,a,a];
+			RICON[7] = [a,a,a,k,k,k,k,k,k,k,k,k,a,a,a];
+			RICON[8] = [a,a,a,k,k,k,k,k,k,k,k,a,a,a,a];
+			RICON[9] = [a,a,a,a,a,k,k,k,k,k,k,a,a,a,a];
+			RICON[10] = [a,a,a,a,a,a,k,k,k,a,a,a,a,a,a];
+			RICON[11] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			RICON[12] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			RICON[13] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			RICON[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+			BICON = new Array(15);
+			BICON[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BICON[1] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BICON[2] = [a,a,a,a,a,a,d,d,a,a,a,a,a,a,a];
+			BICON[3] = [a,a,a,a,a,a,d,d,d,a,a,a,a,a,a];
+			BICON[4] = [a,a,a,a,a,a,d,d,a,a,a,a,a,a,a];
+			BICON[5] = [a,a,a,a,a,a,d,d,a,a,a,a,a,a,a];
+			BICON[6] = [a,a,a,a,a,a,d,d,d,a,a,a,a,a,a];
+			BICON[7] = [a,a,a,d,d,d,d,d,d,d,d,d,a,a,a];
+			BICON[8] = [a,a,d,d,d,d,d,d,d,d,d,a,a,a,a];
+			BICON[9] = [a,a,a,a,a,d,d,a,a,a,a,a,a,a,a];
+			BICON[10] = [a,a,a,a,a,d,d,a,a,a,a,a,a,a,a];
+			BICON[11] = [a,a,a,a,a,a,d,d,a,a,a,a,a,a,a];
+			BICON[12] = [a,a,a,a,a,a,d,d,a,a,a,a,a,a,a];
+			BICON[13] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BICON[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+			YICON = new Array(15);
+			YICON[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YICON[1] = [a,a,a,a,a,a,g,g,g,g,g,g,a,a,a];
+			YICON[2] = [a,a,a,g,g,g,g,g,g,g,g,a,a,a,a];
+			YICON[3] = [a,a,a,g,g,g,g,g,g,g,g,a,a,a,a];
+			YICON[4] = [a,a,g,g,g,g,g,g,g,a,a,a,a,a,a];
+			YICON[5] = [a,a,g,g,g,g,g,g,g,g,a,a,a,a,a];
+			YICON[6] = [a,a,a,g,g,g,g,g,g,g,g,g,g,a,a];
+			YICON[7] = [a,a,a,a,g,g,g,g,g,g,g,g,g,a,a];
+			YICON[8] = [a,a,a,a,g,g,g,g,g,g,g,g,a,a,a];
+			YICON[9] = [a,a,a,a,g,g,g,g,g,g,g,g,a,a,a];
+			YICON[10] = [a,a,a,g,g,g,g,g,g,g,g,g,a,a,a];
+			YICON[11] = [a,a,a,a,g,g,g,g,g,g,g,a,a,a,a];
+			YICON[12] = [a,a,a,a,a,g,g,g,g,g,g,a,a,a,a];
+			YICON[13] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			YICON[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+			BLICON = new Array(15);
+			BLICON[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLICON[1] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLICON[2] = [a,a,a,a,a,r,r,a,a,a,a,a,a,a,a];
+			BLICON[3] = [a,a,a,a,r,r,r,a,a,a,a,a,a,a,a];
+			BLICON[4] = [a,a,a,a,r,r,a,a,a,r,r,r,a,a,a];
+			BLICON[5] = [a,a,a,r,r,a,a,a,a,r,r,r,r,a,a];
+			BLICON[6] = [a,a,a,a,r,r,r,r,r,r,r,r,r,r,a];
+			BLICON[7] = [a,a,a,a,a,a,r,r,r,r,r,a,a,r,a];
+			BLICON[8] = [a,a,a,a,a,a,a,a,r,r,r,a,a,a,a];
+			BLICON[9] = [a,a,r,a,a,a,a,a,r,r,r,a,r,a,a];
+			BLICON[10] = [a,a,r,a,a,r,r,r,r,r,a,a,r,r,a];
+			BLICON[11] = [a,a,r,r,a,r,r,r,a,r,r,r,r,r,a];
+			BLICON[12] = [a,a,a,r,r,r,r,a,a,r,r,r,r,a,a];
+			BLICON[13] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			BLICON[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+			WICON = new Array(15);
+			WICON[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			WICON[1] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			WICON[2] = [a,a,a,a,a,a,a,r,r,a,a,a,a,a,a];
+			WICON[3] = [a,a,a,a,a,r,f,f,f,f,r,a,a,a,a];
+			WICON[4] = [a,a,a,r,f,f,f,f,f,f,f,a,a,a,a];
+			WICON[5] = [a,a,a,r,f,f,f,f,f,f,f,r,a,a,a];
+			WICON[6] = [a,a,a,f,f,f,f,f,f,f,f,r,a,a,a];
+			WICON[7] = [a,a,r,f,f,f,f,f,f,f,f,r,a,a,a];
+			WICON[8] = [a,a,r,f,f,f,f,f,f,f,f,f,a,a,a];
+			WICON[9] = [a,a,a,f,f,f,f,f,f,f,f,f,a,a,a];
+			WICON[10] = [a,a,r,f,f,f,f,f,f,f,r,a,a,a,a];
+			WICON[11] = [a,a,a,r,f,f,f,f,f,f,r,a,a,a,a];
+			WICON[12] = [a,a,a,a,a,r,f,r,r,a,a,a,a,a,a];
+			WICON[13] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+			WICON[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+
+			canHop = new Array(19);
+			topLevel = new Array(18);
+			topLevel = [red,red,red,red,yellow,yellow,yellow,yellow,blue,blue,blue,blue,orange,orange,green,green,violet,violet];
+			midLevel = new Array(19);
+			midLevel = [red,red,red,yellow,yellow,yellow,blue,blue,blue,orange,green,violet,brown,black,black,white,white,gray,gray];
+			botLevel = new Array(19);
+			botLevel = [red,red,red,yellow,yellow,yellow,blue,blue,blue,newt,fly,duck,brown,black,black,white,white,gray,gray];
+			content = new Array(19);
+			for (iii=0;iii<19;iii++){
+				content[iii]=new Array(3);
+			}
+			let xcoord=0;   //coord of frog
+			let ycoord=0;
+			xCoords = new Array(19);   //listing the coordinates of each of the spaces on the boord
+			xCoords = [2,4,6,1,3,5,7,0,2,4,6,8,1,3,5,7,2,4,6];
+			yCoords = new Array(19)
+			yCoords = [0,0,0,1,1,1,1,2,2,2,2,2,3,3,3,3,4,4,4];
+			let rednum = 0;
+			let bluenum = 0;
+			let yellownum = 0;
+			let blacknum = 0;
+			let whitenum = 0;
+			let fillin = 0;
+			let isPaused = false;
+			let prior = 0;  // number for prior square
+			let gameOver = false;
+			let thepoints = 0;
+			let pointdisp = 0;
+			let scorestring = "";
+			gameStart();
+			reset();
+		</script>
+	</body>
+</html>

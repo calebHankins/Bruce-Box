@@ -1,0 +1,25 @@
+{
+  "name": "bruce-box",
+  "version": "0.1.0",
+  "description": "Showcase arcade website hosted on GitHub Pages featuring browser games by Bruce Baskir.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "serve": "node scripts/serve.mjs",
+    "sync-games": "node .agents/skills/game-intake/sync-games.mjs",
+    "sync-games:dry": "node .agents/skills/game-intake/sync-games.mjs --dry-run"
+  },
+  "keywords": [
+    "arcade",
+    "games",
+    "browser-games",
+    "github-pages",
+    "vanilla-js"
+  ],
+  "authors": [
+    "Caleb Hankins",
+    "Bruce Baskir"
+  ],
+  "license": "MIT"
+}

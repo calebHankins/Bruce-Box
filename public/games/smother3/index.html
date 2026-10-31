@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Smother 3 - Bruce-Box Arcade</title>
+		<meta charset="utf-8">
+		<style>
+			.outside{
+				float:left;
+				height: 310px;
+				width: 420px;
+				background-color: aqua;
+			}
+            .frame{
+                float: left;
+                height: 300px;
+                width: 300px;
+                border-style: solid;
+                border-width: 5px;
+                border-color:black;
+                background-color: gray;
+            }
+			.theButton{
+                width: 100px;
+                height: 100px;
+                border-style:solid;
+                border-width:5px;
+                border-color:black;
+                float:left;
+                text-align:center;
+                background-color: lightgreen;
+            }
+            .blankButton{
+                width: 110px;
+                height: 110px;
+                float:left;
+                background-color: white;
+            }
+
+			.banner{
+				float: left;
+				width: 110px;
+				height: 200px;
+				color: black;
+				text-align: center;
+				font-size: 12px;
+				background-color: beige;
+			}
+
+            .whiteBox{
+                height: 2px;
+                width: 2px;
+                float: left;
+                background-color: white;
+            }
+            .silverBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:silver;
+            }
+            .cyanBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:cyan;
+            }
+            .blueBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:blue;
+            }
+            .greenBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:green;
+            }
+            .lightgreenBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:lightgreen;
+            }
+            .yellowBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:yellow;
+            }
+            .greenyellowBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:greenyellow;
+            }
+            .orangeBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:orange;
+            }
+            .redBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:red;
+            }
+            .pinkBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:pink;
+            }
+            .violetBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:violet;
+            }
+            .grayBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:gray;
+            }
+            .lightgrayBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:lightgray;
+            }
+            .blackBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:black;
+            }
+            .brownBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:brown;
+            }
+            .tanBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:tan;
+            }
+            .goldBox{
+                float: left;
+                height: 2px;
+                width: 2px;
+                background-color:gold;
+            }
+
+        </style>
+		<script>
+			function setup(){     //initial set up, call only when window is opened
+                theBox = document.getElementById("gameboard");
+                for (var ii = 0; ii < 22500; ii++){      //150 x 150 elements
+                    divAdd = document.createElement("div");
+                    theBox.appendChild(divAdd);
+                    theBox.children[ii].className = "whiteBox";
+				}
+                player = new Thing;
+                sbutton.innerHTML = "<br>CLICK HERE<br>TO START<br>ROUND 1";
+            }
+            function Thing(phase,pic,dir,locfrom,locto,xcoord,ycoord){     //constructor for Thing object, either player or wall
+                this.phase = phase;
+                this.pic = pic;
+                this.dir = dir;          //dir = 0 for an object at rest, dir = -1 for absence of wall
+                this.locfrom = locfrom;
+                this.locto = locto;
+                this.xcoord = xcoord;
+                this.ycoord = ycoord;
+            }
+
+            function printIcon(pic,hor,ver){    //prints icon "pic" with upper left corner "hor" and "ver"
+                locH = hor;
+                locV = ver;
+                for (ii = 0;ii<15; ii++){
+                    for (jj = 0; jj<15; jj++){
+                        hue = pic[ii][jj];
+                        cell = locat.children[(ii+locV)*150+jj+locH];
+                        cell.className = rainbow[hue]+"Box";
+                    }
+                }
+            }
+
+            function blank(blankh,blankv){
+                locat = document.getElementById("gameboard")
+                for (hh=0;hh<15;hh++){
+                    for (vv=0;vv<15;vv++){
+                        cell = locat.children[(blankh+hh+150*(blankv+vv))]
+                        cell.className = "whiteBox";
+                    }
+                }
+            }
+
+            function blankboard(){
+                for (bb=0;bb<22500;bb++){
+                    gb = document
+                    locat.children[bb].className = "whiteBox";
+                }
+            }
+
+            
+
+            function newGame(){
+                round = 0;
+                newRound();
+            }
+
+            function newRound(){
+                blankboard();
+                clearblock();
+                sbutton.innerHTML = "";
+                sbutton.className = "blankButton";
+                player.dir = 0;        //player starts at rest in upper left corner, looking to the right
+                player.pic = WALKR0;
+                player.phase = 0;
+                player.locfrom = 0;
+                player.locto = 0;
+                player.xcoord = 0;
+                player.ycoord = 0;
+                printPlayer();
+                for (iii=0;iii<20;iii++){
+                    walls[iii].phase = 0;
+                    walls[iii].dir = -1;   //all walls asleep to start
+                    locwall = allwalls[round][iii];
+                    walls[iii].locfrom = locwall;
+                    walls[iii].locto = locwall;
+                    walls[iii].xcoord = (locwall%10)*15;
+                    walls[iii].ycoord = 15*Math.floor(locwall/10);
+                    walls[iii].pic = BLOCK0;
+                    printIcon(walls[iii].pic,walls[iii].xcoord,walls[iii].ycoord);
+                }
+                printIcon(STAR,135,135);
+
+                gameLoop();
+            }
+
+            function clearblock(){         //zeroes the "block" array
+                for (jj=0;jj<100;jj++){
+                    block[jj]=0;
+                }
+            }
+
+            function setblock(){                //sets block array elements to 1 in each occupies space
+                block[player.locfrom]=1;
+                block[player.locto]=1;
+                for (jj=0;jj<20;jj++){
+                    block[walls[jj].locfrom]=1;
+                    block[walls[jj].locto]=1;
+                }
+            }
+
+            function printPlayer(){
+                printIcon(player.pic, player.xcoord , player.ycoord);
+            }
+
+
+            function clicked(){
+                if (gameflag==1){return;}  //does nothing during the game
+                if (gameflag==0){   //new round
+                    gameflag=1;
+                    newRound();
+                }
+                if (gameflag==2){   //new game
+                    gameflag=1;
+                    newGame();
+                }
+            }
+
+            function pickkey(theKey){     //initiated if key is pressed
+                if (gameflag!=1){return;}   //clicking keys does nothing if game not in motion
+                if (player.dir>0){return;}  //no action if player already in motion
+                theKey = theKey.which;    //will need to check for collision
+                locnow = player.locfrom;
+                if (theKey==39){
+                    if (locnow%10==9){return;}   //player in right column
+                    if (block[locnow+1]==1){return;}   //space to the right is occupied
+                    player.dir=right;
+                    player.locto=player.locfrom+1;    //new location is one to the right of old location
+       //             return;
+                }
+                else if (theKey==40){
+                    if (locnow>89){return;}  //player on bottom row
+                    if (block[locnow+10]==1){return;}   //space down one is occupied
+                    player.dir=down;
+                    player.locto=player.locfrom+10;
+      //              return;
+                }
+                else if (theKey==37){
+                    if (locnow%10==0){return;}  //player in left column
+                    if (block[locnow-1]==1){return;}   //space to the left is occupied
+                    player.dir=left;
+                    player.locto=player.locfrom-1;
+      //              return;
+                }
+                else if (theKey==38){
+                    if (locnow<10){return;}    //player in top row
+                    if (block[locnow-10]==1){return;}   //space one up is occupied
+                    player.dir=up;
+                    player.locto=player.locfrom-10;
+       //             return;
+                }
+                block[player.locto]=1;
+                return
+            }
+
+            function gameLoop(){
+                clearblock();    //clears, then repopulates block array to show which spaces are empty
+                setblock();
+                if (player.dir>0){    //player is moving
+                    blank(player.xcoord,player.ycoord);   //erase current image
+                    player.phase++;
+                    if (player.dir==right){
+                        player.xcoord = player.xcoord+3;
+                        player.pic = WalkR[player.phase];
+                    }
+                    else if (player.dir==down){
+                        player.ycoord = player.ycoord+3;
+                        player.pic = WalkD[player.phase];
+                    }
+                    else if (player.dir==left){
+                        player.xcoord = player.xcoord-3;
+                        player.pic = WalkL[player.phase];
+                    }
+                    else if (player.dir==up){
+                        player.ycoord = player.ycoord-3;
+                        player.pic = WalkU[player.phase];
+                    }
+                    printPlayer();
+                    if (player.phase==5){     //finishes the step
+                        player.phase = 0;
+                        player.dir = 0;
+                        player.locfrom = player.locto;
+                    }
+                }
+                if (player.locfrom==99){     //completes the round
+                    roundover();
+                    return;
+                }
+                for (kk=0;kk<20;kk++){
+                    movewall(kk);
+                }
+                    
+                if (player.dir==0){    //checks if player is surrounded if player not moving
+                    if (surround(player.locfrom)){
+                        gamelost();return;
+                    }
+                }
+                setTimeout(gameLoop,80 - 2*round);
+            }
+
+            function movewall(nn){
+                if (walls[nn].dir>0){      //wall in motion, blank prior picture, advance phase
+                    blank(walls[nn].xcoord,walls[nn].ycoord);
+                    walls[nn].phase++
+
+                    if (walls[nn].dir==left){
+                        walls[nn].xcoord = walls[nn].xcoord-3;
+                        walls[nn].pic = BlockL[walls[nn].phase];
+                    }
+                    else if (walls[nn].dir==right){
+                        walls[nn].xcoord = walls[nn].xcoord+3;
+                        walls[nn].pic = BlockR[walls[nn].phase];
+                    }
+                    else if (walls[nn].dir==up){
+                        walls[nn].ycoord = walls[nn].ycoord-3;
+                        walls[nn].pic = BlockU[walls[nn].phase];
+                    }
+                    else if (walls[nn].dir==down){
+                        walls[nn].ycoord = walls[nn].ycoord+3;
+                        walls[nn].pic = BlockD[walls[nn].phase];
+                    }
+                    printIcon(walls[nn].pic,walls[nn].xcoord,walls[nn].ycoord);
+                    if (walls[nn].phase==5){     //move is finished
+                        walls[nn].phase=0;
+                        walls[nn].dir = -1;   //wall asleep
+                        walls[nn].locfrom = walls[nn].locto;
+                    }
+                    return;
+                }
+                //wall not in motion
+                if (walls[nn].dir==-1){     //wall asleep
+            //        if (Math.random()*(active*2-round)>1){return;} 
+                    if (Math.random()*(active*3-round*2)>1){return;} 
+                    walls[nn].dir=0;     //wakes up
+                    eyenum = Math.random();
+                    if (eyenum<.25) {walls[nn].pic = LEFTEYE;}
+                    else if (eyenum<.5) {walls[nn].pic = RIGHTEYE;}
+                    else if (eyenum<.75){walls[nn].pic = UPEYE;}
+                    else {walls[nn].pic = DOWNEYE;}
+                    printIcon(walls[nn].pic,walls[nn].xcoord,walls[nn].ycoord);
+                    return;
+                }
+                //wall awake
+                if (Math.random()*(active-round)>1){return;}   //only initiates movement 1/active fraction of the time
+                if (Math.random()<0.5){ //checks horizontal
+                    if (player.xcoord>walls[nn].xcoord){
+                        if (block[walls[nn].locfrom+1]==1){return;}   //block moving into is occupied
+                        if (walls[nn].locfrom==98){return;}   //will not enter exit space
+                        walls[nn].dir = right;
+                        walls[nn].locto = walls[nn].locfrom+1;
+                        block[walls[nn].locto]=1;  //blocks out space wall is moving into
+                    }
+                    else if (player.xcoord<walls[nn].xcoord){
+                        if (block[walls[nn].locfrom-1]==1){return;}   //block moving into is occupied
+                        walls[nn].dir = left;
+                        walls[nn].locto = walls[nn].locfrom-1;
+                        block[walls[nn].locto]=1;  //blocks out space wall is moving into
+                    }
+                    return;
+                }
+                else {       //checks vertical
+                    if (player.ycoord>walls[nn].ycoord){
+                        if (block[walls[nn].locfrom+10]==1){return;}   //block moving into is occupied
+                        if (walls[nn].locfrom==89){return;}     //will not enter exit space
+                        walls[nn].dir = down;
+                        walls[nn].locto = walls[nn].locfrom+10;
+                        block[walls[nn].locto]=1;  //blocks out space wall is moving into
+                    }
+                    else if (player.ycoord<walls[nn].ycoord){
+                        if (block[walls[nn].locfrom-10]==1){return;}   //block moving into is occupied
+                        walls[nn].dir = up;
+                        walls[nn].locto = walls[nn].locfrom-10;
+                        block[walls[nn].locto]=1;  //blocks out space wall is moving into
+                    }
+                }
+            }
+
+            function roundover(){
+                round++;   //will need to check if round = 10
+                if (round==10){gamewon();return}
+                gameflag = 0;
+                sbutton.className = "theButton";
+                sbutton.innerHTML = "<br>CLICK HERE<br>TO START<br>ROUND "+(round+1);
+            }
+
+            function surround(zz){    //zz is player's current location
+                if (zz>9){
+                    if (empty(zz-10)){   //checks if space above is empty
+                        return false;
+                    }
+                }
+                if (zz<90){
+                    if (empty(zz+10)){    //checks if space below is empty
+                        return false;
+                    }
+                }
+                if (zz%10 != 0){    //checks if space to left is empty
+                    if (empty(zz-1)){
+                        return false;
+                    }
+                }
+                if (zz%10 != 9){    //checks if space to right is empty
+                    if (empty(zz+1)){
+                        return false;
+                    }
+                }
+                return true;     //returns true if no adjacent spaces are empty
+            }
+
+            function empty(zzz){
+                for (iter = 0;iter<20;iter++){
+                    if ((walls[iter].dir<1)){    //only checks walls at rest
+                        if (walls[iter].locto==zzz){
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+
+            function gamelost(){
+                gameflag = 2;
+                sbutton.className = "theButton";
+                sbutton.innerHTML = "YOU HAVE<br>LOST!!!!<br>CLICK HERE<br>TO PLAY<br>AGAIN";
+            }
+
+            function gamewon(){
+                gameflag = 2;
+                sbutton.className = "theButton";
+                sbutton.innerHTML = "YOU HAVE<br>WON!!!!<br>CLICK HERE<br>TO PLAY<br>AGAIN";
+            }
+
+
+		</script>
+	</head>
+	<body>
+
+<!-- Bruce-Box Arcade Return Navigation -->
+<style id="bruce-box-nav-style">
+  .bruce-box-top-nav {
+    position: fixed;
+    top: 10px;
+    right: 12px;
+    z-index: 999999;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .bruce-box-top-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(17, 24, 39, 0.92);
+    color: #f3f4f6;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(6px);
+    transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+  }
+  .bruce-box-top-nav a:hover {
+    background: #111827;
+    border-color: #f59e0b;
+    color: #fbbf24;
+    transform: translateY(-1px);
+  }
+  .bruce-box-top-nav a:focus-visible {
+    outline: 2px solid #f59e0b;
+    outline-offset: 2px;
+  }
+</style>
+<div class="bruce-box-top-nav" aria-label="Arcade navigation">
+  <a href="../../" title="Return to Bruce-Box Arcade catalog">&larr; Bruce-Box Arcade</a>
+</div>
+<!-- End Bruce-Box Arcade Return Navigation -->
+
+		<div class = "outside">
+			<div class = "frame"  id = "gameboard"></div>
+			<div class = "theButton" id = "startbutton"  onclick = "clicked()"><br/><br/>CLICK HERE<br>TO BEGIN</div>
+			<div class = "banner" id = "message"><br><br>USE THE ARROW <br>KEYS TO MOVE<br>
+                    TO THE STAR  <br>AT THE LOWER<br> RIGHT.<br/>
+                    BEWARE -- WHEN<br>THE WALLS<br>AWAKE<br>THEY WILL MOVE<br>
+                    AND TRY TO<br>
+                    TRAP YOU!!!
+                </div>
+		</div>
+		<script>
+            
+            const a = 0;    //white
+            const b = 1;    //silver
+            const c = 2;    //cyan
+            const d = 3;    //blue
+            const e = 4;    //green
+            const f = 5;    //light green
+            const g = 6;    //yellow
+            const h = 7;    //greenyellow
+            const j = 8;    //orange
+            const k = 9;    //red
+            const m = 10;   //pink
+            const n = 11;   //violet
+            const p = 12;   //gray
+            const q = 13;   //light gray
+            const r = 14;   //black
+            const s = 15;   //brown
+            const t = 16;   //tan
+            const u = 17;   //gold
+            rainbow = new Array(18);
+            rainbow = ["white","silver","cyan","blue","green","lightgreen","yellow","greenyellow","orange","red","pink","violet","gray","lightgray","black","brown","tan","gold"];
+            const right = 1;
+            const down = 2;
+            const left = 3;
+            const up = 4;
+            player = new Thing;
+            allwalls = new Array(10);   //10 rounds, can be expanded
+            for (iii=0;iii<10;iii++){
+                allwalls[iii] = new Array(20);   //maximum 20 blocks, may need to be increased
+            }
+            walls = new Array(20);    //maximum number of walls is 20, may need to increase later
+            let locat = document.getElementById("gameboard");
+            let round = 0;
+            let active = 12;
+            let gameflag = 2;   //sets up new 
+            sbutton = document.getElementById("startbutton");
+            block = new Array(100);
+            for (ii=0;ii<20;ii++){
+                walls[ii] = new Thing;    //populates array "walls" with Things
+            }
+
+            allwalls[0] = [6,7,8,9,17,18,19,28,29,39,60,70,71,80,81,82,90,91,92,93];
+            allwalls[1] = [7,8,9,16,17,18,19,25,26,27,64,72,73,74,75,80,81,82,90,91];
+            allwalls[6] = [7,8,9,19,29,39,40,41,42,49,50,57,58,59,60,70,80,90,91,92];
+  //          allwalls[6] = [9,19,29,33,34,39,40,41,42,43,44,48,49,57,58,59,67,75,76,77];
+            allwalls[5] = [22,23,32,33,34,39,47,48,49,56,57,58,59,63,72,73,82,83,92,93];
+            allwalls[4] = [14,15,25,35,38,44,45,46,47,48,52,53,54,55,58,62,64,74,75,76];
+            allwalls[2] = [5,6,7,8,9,18,19,29,39,49,50,60,70,80,81,90,91,92,93,94];
+            //allwalls[5] = [5,6,15,25,35,38,39,49,50,51,52,59,60,61,64,65,69,75,85,95];
+            //allwalls[9] = [14,15,16,17,27,37,40,41,42,43,44,47,52,57,62,66,67,72,82,83];
+            allwalls[9] = [7,8,9,17,18,19,28,29,44,45,54,55,70,71,80,81,82,90,91,92];
+            allwalls[7] = [16,17,27,28,32,33,34,37,38,42,43,44,52,53,57,58,66,67,75,76];
+            allwalls[8] = [3,4,5,15,25,30,40,47,48,49,50,51,52,59,69,74,84,94,95,96];
+            allwalls[3] = [7,8,18,19,29,32,33,34,39,41,42,48,49,50,57,58,60,66,67,70];
+            
+            WALKR0 = new Array(15);
+            WALKR0[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKR0[1] = [a,a,a,a,d,d,d,t,a,a,a,a,a,a,a];
+            WALKR0[2] = [a,a,a,d,d,d,d,d,t,a,a,a,a,a,a];
+            WALKR0[3] = [a,a,a,d,d,d,d,d,t,a,a,a,a,a,a];
+            WALKR0[4] = [a,a,d,d,u,u,u,d,a,a,a,a,a,a,a];
+            WALKR0[5] = [a,a,d,u,u,u,u,u,s,t,a,a,a,a,a];
+            WALKR0[6] = [a,a,u,u,u,u,u,u,u,s,a,a,a,a,a];
+            WALKR0[7] = [a,a,u,u,u,u,u,u,u,a,a,a,a,a,a];
+            WALKR0[8] = [a,a,u,u,u,u,u,u,u,s,a,a,a,a,a];
+            WALKR0[9] = [a,a,d,u,u,u,u,u,s,t,a,a,a,a,a];
+            WALKR0[10] = [a,a,d,d,u,u,u,d,a,a,a,a,a,a,a];
+            WALKR0[11] = [a,a,a,d,d,d,d,d,t,a,a,a,a,a,a];
+            WALKR0[12] = [a,a,a,d,d,d,d,d,t,a,a,a,a,a,a];
+            WALKR0[13] = [a,a,a,a,d,d,d,t,a,a,a,a,a,a,a];
+            WALKR0[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+            WALKR1 = new Array(15);
+            WALKR1[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKR1[1] = [a,a,a,d,d,d,t,a,a,a,a,a,a,a,a];
+            WALKR1[2] = [a,a,d,d,d,d,d,t,a,a,a,a,a,a,a];
+            WALKR1[3] = [a,a,d,d,d,d,d,t,a,a,a,a,a,a,a];
+            WALKR1[4] = [a,a,a,d,d,u,u,u,p,p,p,p,s,a,a];
+            WALKR1[5] = [a,a,a,d,u,u,u,u,u,p,p,p,s,s,a];
+            WALKR1[6] = [a,a,a,u,u,u,u,u,u,u,p,p,s,s,a];
+            WALKR1[7] = [s,p,p,u,u,u,u,u,u,u,a,a,a,a,a];
+            WALKR1[8] = [s,p,p,u,u,u,u,u,u,u,a,a,a,a,a];
+            WALKR1[9] = [s,p,p,d,u,u,u,u,u,a,a,a,a,a,a];
+            WALKR1[10] = [a,s,s,d,d,u,u,u,d,d,d,t,a,a,a];
+            WALKR1[11] = [a,a,a,a,d,d,d,d,d,d,d,t,a,a,a];
+            WALKR1[12] = [a,a,a,a,d,d,d,d,d,d,d,t,a,a,a];
+            WALKR1[13] = [a,a,a,a,a,d,d,d,d,d,a,a,a,a,a];
+            WALKR1[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+            WALKR2 = new Array(15);
+            WALKR2[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKR2[1] = [a,a,a,d,d,d,d,t,a,a,a,a,a,a,a];
+            WALKR2[2] = [a,a,d,d,d,d,d,d,t,a,a,a,a,a,a];
+            WALKR2[3] = [a,a,d,d,d,d,d,d,t,a,a,a,a,a,a];
+            WALKR2[4] = [a,a,a,d,d,u,u,u,p,p,p,a,a,a,a];
+            WALKR2[5] = [a,a,a,d,u,u,u,u,u,p,p,s,a,a,a];
+            WALKR2[6] = [a,a,a,u,u,u,u,u,u,u,p,s,a,a,a];
+            WALKR2[7] = [a,a,s,u,u,u,u,u,u,u,a,a,a,a,a];
+            WALKR2[8] = [a,a,s,u,u,u,u,u,u,u,a,a,a,a,a];
+            WALKR2[9] = [a,a,s,d,u,u,u,u,u,a,a,a,a,a,a];
+            WALKR2[10] = [a,a,a,d,d,u,u,u,d,a,a,a,a,a,a];
+            WALKR2[11] = [a,a,a,a,d,d,d,d,d,t,a,a,a,a,a];
+            WALKR2[12] = [a,a,a,a,d,d,d,d,d,d,t,a,a,a,a];
+            WALKR2[13] = [a,a,a,a,a,d,d,d,d,d,t,a,a,a,a];
+            WALKR2[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+            WALKR3 = new Array(15);
+            WALKR3[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKR3[1] = [a,a,a,a,a,d,d,d,d,d,a,a,a,a,a];
+            WALKR3[2] = [a,a,a,a,d,d,d,d,d,d,d,t,a,a,a];
+            WALKR3[3] = [a,a,a,a,d,d,d,d,d,d,d,t,a,a,a];
+            WALKR3[4] = [a,s,s,d,d,u,u,u,d,d,d,t,a,a,a];
+            WALKR3[5] = [s,p,p,d,u,u,u,u,u,a,a,a,a,a,a];
+            WALKR3[6] = [s,p,p,u,u,u,u,u,u,u,a,a,a,a,a];
+            WALKR3[7] = [s,p,p,u,u,u,u,u,u,u,a,a,a,a,a];
+            WALKR3[8] = [a,a,a,u,u,u,u,u,u,u,p,p,s,s,a];
+            WALKR3[9] = [a,a,a,d,u,u,u,u,u,p,p,p,s,s,a];
+            WALKR3[10] = [a,a,a,d,d,u,u,u,p,p,p,p,s,a,a];
+            WALKR3[11] = [a,a,d,d,d,d,d,t,a,a,a,a,a,a,a];
+            WALKR3[12] = [a,a,d,d,d,d,d,t,a,a,a,a,a,a,a];
+            WALKR3[13] = [a,a,a,d,d,d,t,a,a,a,a,a,a,a,a];
+            WALKR3[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+            WALKR4 = new Array(15);
+            WALKR4[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKR4[1] = [a,a,a,a,a,d,d,d,d,d,t,a,a,a,a];
+            WALKR4[2] = [a,a,a,a,d,d,d,d,d,d,t,a,a,a,a];
+            WALKR4[3] = [a,a,a,a,d,d,d,d,d,t,a,a,a,a,a];
+            WALKR4[4] = [a,a,a,d,d,u,u,u,d,a,a,a,a,a,a];
+            WALKR4[5] = [a,a,p,d,u,u,u,u,u,a,a,a,a,a,a];
+            WALKR4[6] = [a,a,p,u,u,u,u,u,u,u,a,a,a,a,a];
+            WALKR4[7] = [a,a,p,u,u,u,u,u,u,u,a,a,a,a,a];
+            WALKR4[8] = [a,a,a,u,u,u,u,u,u,u,p,s,a,a,a];
+            WALKR4[9] = [a,a,a,d,u,u,u,u,u,p,p,s,a,a,a];
+            WALKR4[10] = [a,a,a,d,d,u,u,u,p,p,p,a,a,a,a];
+            WALKR4[11] = [a,a,d,d,d,d,d,d,t,a,a,a,a,a,a];
+            WALKR4[12] = [a,a,d,d,d,d,d,d,t,a,a,a,a,a,a];
+            WALKR4[13] = [a,a,a,d,d,d,d,t,a,a,a,a,a,a,a];
+            WALKR4[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+ 
+            WalkR = new Array(6);
+            WalkR = [WALKR0,WALKR1,WALKR2,WALKR3,WALKR4,WALKR0];
+
+            
+            WALKL0 = new Array(15);
+            WALKL0[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKL0[1] = [a,a,a,a,a,a,a,t,d,d,d,a,a,a,a];
+            WALKL0[2] = [a,a,a,a,a,a,t,d,d,d,d,d,a,a,a];
+            WALKL0[3] = [a,a,a,a,a,a,t,d,d,d,d,d,a,a,a];
+            WALKL0[4] = [a,a,a,a,a,a,a,d,u,u,u,d,d,a,a];
+            WALKL0[5] = [a,a,a,a,a,t,s,u,u,u,u,u,d,a,a];
+            WALKL0[6] = [a,a,a,a,a,s,u,u,u,u,u,u,u,a,a];
+            WALKL0[7] = [a,a,a,a,a,a,u,u,u,u,u,u,u,a,a];
+            WALKL0[8] = [a,a,a,a,a,s,u,u,u,u,u,u,u,a,a];
+            WALKL0[9] = [a,a,a,a,a,t,s,u,u,u,u,u,d,a,a];
+            WALKL0[10] = [a,a,a,a,a,a,a,d,u,u,u,d,d,a,a];
+            WALKL0[11] = [a,a,a,a,a,a,t,d,d,d,d,d,a,a,a];
+            WALKL0[12] = [a,a,a,a,a,a,t,d,d,d,d,d,a,a,a];
+            WALKL0[13] = [a,a,a,a,a,a,a,t,d,d,d,a,a,a,a];
+            WALKL0[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+            WALKL1 = new Array(15);
+            WALKL1[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKL1[1] = [a,a,a,a,a,a,a,a,t,d,d,d,a,a,a];
+            WALKL1[2] = [a,a,a,a,a,a,a,t,d,d,d,d,d,a,a];
+            WALKL1[3] = [a,a,a,a,a,a,a,t,d,d,d,d,d,a,a];
+            WALKL1[4] = [a,a,s,p,p,p,p,u,u,u,d,d,a,a,a];
+            WALKL1[5] = [a,s,s,p,p,p,u,u,u,u,u,d,a,a,a];
+            WALKL1[6] = [a,s,s,p,p,u,u,u,u,u,u,u,a,a,a];
+            WALKL1[7] = [a,a,a,a,a,u,u,u,u,u,u,u,p,p,s];
+            WALKL1[8] = [a,a,a,a,a,u,u,u,u,u,u,u,p,p,s];
+            WALKL1[9] = [a,a,a,a,a,a,u,u,u,u,u,d,p,p,s];
+            WALKL1[10] = [a,a,a,t,d,d,d,u,u,u,d,d,s,s,a];
+            WALKL1[11] = [a,a,a,t,d,d,d,d,d,d,d,a,a,a,a];
+            WALKL1[12] = [a,a,a,t,d,d,d,d,d,d,d,a,a,a,a];
+            WALKL1[13] = [a,a,a,a,a,d,d,d,d,d,a,a,a,a,a];
+            WALKL1[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+            WALKL2 = new Array(15);
+            WALKL2[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKL2[1] = [a,a,a,a,a,a,a,t,d,d,d,d,a,a,a];
+            WALKL2[2] = [a,a,a,a,a,a,t,d,d,d,d,d,d,a,a];
+            WALKL2[3] = [a,a,a,a,a,a,t,d,d,d,d,d,d,a,a];
+            WALKL2[4] = [a,a,a,a,p,p,p,u,u,u,d,d,a,a,a];
+            WALKL2[5] = [a,a,a,s,p,p,u,u,u,u,u,d,a,a,a];
+            WALKL2[6] = [a,a,a,s,p,u,u,u,u,u,u,u,a,a,a];
+            WALKL2[7] = [a,a,a,a,a,u,u,u,u,u,u,u,p,a,a];
+            WALKL2[8] = [a,a,a,a,a,u,u,u,u,u,u,u,p,a,a];
+            WALKL2[9] = [a,a,a,a,a,a,u,u,u,u,u,d,p,a,a];
+            WALKL2[10] = [a,a,a,a,a,a,d,u,u,u,d,d,a,a,a];
+            WALKL2[11] = [a,a,a,a,a,t,d,d,d,d,d,a,a,a,a];
+            WALKL2[12] = [a,a,a,a,t,d,d,d,d,d,d,a,a,a,a];
+            WALKL2[13] = [a,a,a,a,t,d,d,d,d,d,a,a,a,a,a];
+            WALKL2[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+            WALKL3 = new Array(15);
+            WALKL3[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKL3[1] = [a,a,a,a,a,d,d,d,d,d,a,a,a,a,a];
+            WALKL3[2] = [a,a,a,t,d,d,d,d,d,d,d,a,a,a,a];
+            WALKL3[3] = [a,a,a,t,d,d,d,d,d,d,d,a,a,a,a];
+            WALKL3[4] = [a,a,a,t,d,d,d,u,u,u,d,d,s,s,a];
+            WALKL3[5] = [a,a,a,a,a,a,u,u,u,u,u,d,p,p,s];
+            WALKL3[6] = [a,a,a,a,a,u,u,u,u,u,u,u,p,p,s];
+            WALKL3[7] = [a,a,a,a,a,u,u,u,u,u,u,u,p,p,s];
+            WALKL3[8] = [a,s,s,p,p,u,u,u,u,u,u,u,a,a,a];
+            WALKL3[9] = [a,s,s,p,p,p,u,u,u,u,u,d,a,a,a];
+            WALKL3[10] = [a,a,s,p,p,p,p,u,u,u,d,d,a,a,a];
+            WALKL3[11] = [a,a,a,a,a,a,a,t,d,d,d,d,d,a,a];
+            WALKL3[12] = [a,a,a,a,a,a,a,t,d,d,d,d,d,a,a];
+            WALKL3[13] = [a,a,a,a,a,a,a,a,t,d,d,d,a,a,a];
+            WALKL3[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+            WALKL4 = new Array(15);
+            WALKL4[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKL4[1] = [a,a,a,a,t,d,d,d,d,d,a,a,a,a,a];
+            WALKL4[2] = [a,a,a,a,t,d,d,d,d,d,d,a,a,a,a];
+            WALKL4[3] = [a,a,a,a,a,t,d,d,d,d,d,a,a,a,a];
+            WALKL4[4] = [a,a,a,a,a,a,d,u,u,u,d,d,a,a,a];
+            WALKL4[5] = [a,a,a,a,a,a,u,u,u,u,u,d,p,a,a];
+            WALKL4[6] = [a,a,a,a,a,u,u,u,u,u,u,u,p,a,a];
+            WALKL4[7] = [a,a,a,a,a,u,u,u,u,u,u,u,p,a,a];
+            WALKL4[8] = [a,a,a,s,p,u,u,u,u,u,u,u,a,a,a];
+            WALKL4[9] = [a,a,a,s,p,p,u,u,u,u,u,d,a,a,a];
+            WALKL4[10] = [a,a,a,a,p,p,p,u,u,u,d,d,a,a,a];
+            WALKL4[11] = [a,a,a,a,a,a,t,d,d,d,d,d,d,a,a];
+            WALKL4[12] = [a,a,a,a,a,a,t,d,d,d,d,d,d,a,a];
+            WALKL4[13] = [a,a,a,a,a,a,a,t,d,d,d,d,a,a,a];
+            WALKL4[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+            WalkL = new Array(6);
+            WalkL = [WALKL0,WALKL1,WALKL2,WALKL3,WALKL4,WALKL0];
+
+
+            WALKD0 = new Array(15);
+            WALKD0[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKD0[1] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKD0[2] = [a,a,a,a,d,d,u,u,u,d,d,a,a,a,a];
+            WALKD0[3] = [a,a,d,d,d,u,u,u,u,u,d,d,d,a,a];
+            WALKD0[4] = [a,d,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKD0[5] = [a,d,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKD0[6] = [a,d,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKD0[7] = [a,t,d,d,d,u,u,u,u,u,d,d,d,t,a];
+            WALKD0[8] = [a,a,t,t,a,s,u,u,u,s,a,t,t,a,a];
+            WALKD0[9] = [a,a,a,a,a,t,s,a,s,t,a,a,a,a,a];
+            WALKD0[10] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKD0[11] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKD0[12] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKD0[13] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKD0[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+            WALKD1 = new Array(15);
+            WALKD1[0] = [a,a,a,a,a,s,s,s,a,a,a,a,a,a,a];
+            WALKD1[1] = [a,a,a,a,s,p,p,p,a,a,a,a,a,a,a];
+            WALKD1[2] = [a,a,a,a,s,p,p,p,a,a,a,d,d,a,a];
+            WALKD1[3] = [a,a,a,a,d,d,u,u,u,d,d,d,d,d,a];
+            WALKD1[4] = [a,a,d,d,d,u,u,u,u,u,d,d,d,d,a];
+            WALKD1[5] = [a,d,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKD1[6] = [a,d,d,d,u,u,u,u,u,u,u,d,d,t,a];
+            WALKD1[7] = [a,d,d,d,u,u,u,u,u,u,u,t,t,a,a];
+            WALKD1[8] = [a,d,d,d,d,u,u,u,u,u,p,a,a,a,a];
+            WALKD1[9] = [a,d,d,d,d,a,u,u,u,p,p,a,a,a,a];
+            WALKD1[10] = [a,a,d,d,d,a,a,a,p,p,p,a,a,a,a];
+            WALKD1[11] = [a,a,t,t,t,a,a,a,p,p,p,a,a,a,a];
+            WALKD1[12] = [a,a,a,a,a,a,a,a,s,s,s,a,a,a,a];
+            WALKD1[13] = [a,a,a,a,a,a,a,a,s,s,a,a,a,a,a];
+            WALKD1[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+            WALKD2 = new Array(15);
+            WALKD2[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKD2[1] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKD2[2] = [a,a,a,a,a,s,s,s,a,a,a,d,d,a,a];
+            WALKD2[3] = [a,a,a,a,d,d,u,u,u,d,d,d,d,d,a];
+            WALKD2[4] = [a,a,d,d,d,u,u,u,u,u,d,d,d,d,a];
+            WALKD2[5] = [a,d,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKD2[6] = [a,d,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKD2[7] = [a,d,d,d,u,u,u,u,u,u,u,d,d,t,a];
+            WALKD2[8] = [a,d,d,d,d,u,u,u,u,u,p,t,t,a,a];
+            WALKD2[9] = [a,d,d,t,a,a,u,u,u,p,p,a,a,a,a];
+            WALKD2[10] = [a,t,t,a,a,a,a,a,p,p,p,a,a,a,a];
+            WALKD2[11] = [a,a,a,a,a,a,a,a,s,s,a,a,a,a,a];
+            WALKD2[12] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKD2[13] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKD2[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+            WALKD3 = new Array(15);
+            WALKD3[0] = [a,a,a,a,a,a,a,s,s,s,a,a,a,a,a];
+            WALKD3[1] = [a,a,a,a,a,a,a,p,p,p,s,a,a,a,a];
+            WALKD3[2] = [a,a,d,d,a,a,a,p,p,p,s,a,a,a,a];
+            WALKD3[3] = [a,d,d,d,d,d,u,u,u,d,d,a,a,a,a];
+            WALKD3[4] = [a,d,d,d,d,u,u,u,u,u,d,d,d,a,a];
+            WALKD3[5] = [a,d,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKD3[6] = [a,t,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKD3[7] = [a,a,t,t,u,u,u,u,u,u,u,d,d,d,a];
+            WALKD3[8] = [a,a,a,a,p,u,u,u,u,u,d,d,d,d,a];
+            WALKD3[9] = [a,a,a,a,p,p,u,u,u,a,d,d,d,d,a];
+            WALKD3[10] = [a,a,a,a,p,p,p,a,a,a,d,d,d,a,a];
+            WALKD3[11] = [a,a,a,a,p,p,p,a,a,a,t,t,t,a,a];
+            WALKD3[12] = [a,a,a,a,s,s,s,a,a,a,a,a,a,a,a];
+            WALKD3[13] = [a,a,a,a,a,s,s,a,a,a,a,a,a,a,a];
+            WALKD3[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+            WALKD4 = new Array(15);
+            WALKD4[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKD4[1] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKD4[2] = [a,a,d,d,a,a,a,a,s,s,s,a,a,a,a];
+            WALKD4[3] = [a,d,d,d,d,d,u,u,u,d,d,a,a,a,a];
+            WALKD4[4] = [a,d,d,d,d,u,u,u,u,u,d,d,d,a,a];
+            WALKD4[5] = [a,d,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKD4[6] = [a,d,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKD4[7] = [a,t,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKD4[8] = [a,a,t,t,p,u,u,u,u,u,d,d,d,d,a];
+            WALKD4[9] = [a,a,a,a,p,p,u,u,u,a,a,t,d,d,a];
+            WALKD4[10] = [a,a,a,a,p,p,p,a,a,a,a,a,t,t,a];
+            WALKD4[11] = [a,a,a,a,a,s,s,a,a,a,a,a,a,a,a];
+            WALKD4[12] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKD4[13] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKD4[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+            WalkD = new Array(6);
+            WalkD = [WALKD0,WALKD1,WALKD2,WALKD3,WALKD4,WALKD0];
+
+            
+            WALKU0 = new Array(15);
+            WALKU0[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKU0[1] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKU0[2] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKU0[3] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKU0[4] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKU0[5] = [a,a,a,a,a,t,s,a,s,t,a,a,a,a,a];
+            WALKU0[6] = [a,a,t,t,a,s,u,u,u,s,a,t,t,a,a];
+            WALKU0[7] = [a,t,d,d,d,u,u,u,u,u,d,d,d,t,a];
+            WALKU0[8] = [a,d,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKU0[9] = [a,d,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKU0[10] = [a,d,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKU0[11] = [a,a,d,d,d,u,u,u,u,u,d,d,d,a,a];
+            WALKU0[12] = [a,a,a,a,d,d,u,u,u,d,d,a,a,a,a];
+            WALKU0[13] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKU0[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+            WALKU1 = new Array(15);
+            WALKU1[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKU1[1] = [a,a,a,a,a,s,s,a,a,a,a,a,a,a,a];
+            WALKU1[2] = [a,a,a,a,s,s,s,a,a,a,a,a,a,a,a];
+            WALKU1[3] = [a,a,a,a,p,p,p,a,a,a,t,t,t,a,a];
+            WALKU1[4] = [a,a,a,a,p,p,p,a,a,a,d,d,d,a,a];
+            WALKU1[5] = [a,a,a,a,p,p,u,u,u,a,d,d,d,d,a];
+            WALKU1[6] = [a,a,a,a,p,u,u,u,u,u,d,d,d,d,a];
+            WALKU1[7] = [a,a,t,t,u,u,u,u,u,u,u,d,d,d,a];
+            WALKU1[8] = [a,t,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKU1[9] = [a,d,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKU1[10] = [a,d,d,d,d,u,u,u,u,u,d,d,d,a,a];
+            WALKU1[11] = [a,d,d,d,d,d,u,u,u,d,d,a,a,a,a];
+            WALKU1[12] = [a,a,d,d,a,a,a,p,p,p,s,a,a,a,a];
+            WALKU1[13] = [a,a,a,a,a,a,a,p,p,p,s,a,a,a,a];
+            WALKU1[14] = [a,a,a,a,a,a,a,s,s,s,a,a,a,a,a];
+
+            WALKU2 = new Array(15);
+            WALKU2[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKU2[1] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKU2[2] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKU2[3] = [a,a,a,a,a,s,s,a,a,a,a,a,a,a,a];
+            WALKU2[4] = [a,a,a,a,p,p,p,a,a,a,a,a,t,t,a];
+            WALKU2[5] = [a,a,a,a,p,p,u,u,u,a,a,t,d,d,a];
+            WALKU2[6] = [a,a,t,t,p,u,u,u,u,u,d,d,d,d,a];
+            WALKU2[7] = [a,t,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKU2[8] = [a,d,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKU2[9] = [a,d,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKU2[10] = [a,d,d,d,d,u,u,u,u,u,d,d,d,a,a];
+            WALKU2[11] = [a,d,d,d,d,d,u,u,u,d,d,a,a,a,a];
+            WALKU2[12] = [a,a,d,d,a,a,a,p,p,p,a,a,a,a,a];
+            WALKU2[13] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKU2[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+            WALKU3 = new Array(15);
+            WALKU3[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKU3[1] = [a,a,a,a,a,a,a,a,s,s,a,a,a,a,a];
+            WALKU3[2] = [a,a,a,a,a,a,a,a,s,s,s,a,a,a,a];
+            WALKU3[3] = [a,a,t,t,t,a,a,a,p,p,p,a,a,a,a];
+            WALKU3[4] = [a,a,d,d,d,a,a,a,p,p,p,a,a,a,a];
+            WALKU3[5] = [a,d,d,d,d,a,u,u,u,p,p,a,a,a,a];
+            WALKU3[6] = [a,d,d,d,d,u,u,u,u,u,p,a,a,a,a];
+            WALKU3[7] = [a,d,d,d,u,u,u,u,u,u,u,t,t,a,a];
+            WALKU3[8] = [a,d,d,d,u,u,u,u,u,u,u,d,d,t,a];
+            WALKU3[9] = [a,d,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKU3[10] = [a,a,d,d,d,u,u,u,u,u,d,d,d,d,a];
+            WALKU3[11] = [a,a,a,a,d,d,u,u,u,d,d,d,d,d,a];
+            WALKU3[12] = [a,a,a,a,s,p,p,p,a,a,a,d,d,a,a];
+            WALKU3[13] = [a,a,a,a,s,p,p,p,a,a,a,a,a,a,a];
+            WALKU3[14] = [a,a,a,a,a,s,s,s,a,a,a,a,a,a,a];
+
+            WALKU4 = new Array(15);
+            WALKU4[0] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKU4[1] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKU4[2] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKU4[3] = [a,a,a,a,a,a,a,a,s,s,a,a,a,a,a];
+            WALKU4[4] = [a,t,t,a,a,a,a,a,p,p,p,a,a,a,a];
+            WALKU4[5] = [a,d,d,t,a,a,u,u,u,p,p,a,a,a,a];
+            WALKU4[6] = [a,d,d,d,d,u,u,u,u,u,p,t,t,a,a];
+            WALKU4[7] = [a,d,d,d,u,u,u,u,u,u,u,d,d,t,a];
+            WALKU4[8] = [a,d,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKU4[9] = [a,d,d,d,u,u,u,u,u,u,u,d,d,d,a];
+            WALKU4[10] = [a,a,d,d,d,u,u,u,u,u,d,d,d,d,a];
+            WALKU4[11] = [a,a,a,a,d,d,u,u,u,d,d,d,d,d,a];
+            WALKU4[12] = [a,a,a,a,a,p,p,p,a,a,a,d,d,a,a];
+            WALKU4[13] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+            WALKU4[14] = [a,a,a,a,a,a,a,a,a,a,a,a,a,a,a];
+
+            WalkU = new Array(6);
+            WalkU = [WALKU0,WALKU1,WALKU2,WALKU3,WALKU4,WALKU0];
+
+
+            BLOCK0 = new Array(15);
+            BLOCK0[0] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCK0[1] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCK0[2] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCK0[3] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCK0[4] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCK0[5] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCK0[6] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCK0[7] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCK0[8] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCK0[9] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCK0[10] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCK0[11] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCK0[12] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCK0[13] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCK0[14] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+
+            BLOCKR1 = new Array(15);
+            BLOCKR1[0] = [a,a,p,r,r,r,r,r,r,r,a,a,a,a,a];
+            BLOCKR1[1] = [p,r,r,r,r,r,r,r,r,r,p,a,a,a,a];
+            BLOCKR1[2] = [r,r,r,r,r,r,r,r,r,r,r,a,a,a,a];
+            BLOCKR1[3] = [r,r,r,r,r,r,r,r,r,r,r,p,a,a,a];
+            BLOCKR1[4] = [r,r,r,r,r,r,r,r,r,r,r,r,p,a,a];
+            BLOCKR1[5] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,p];
+            BLOCKR1[6] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR1[7] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR1[8] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR1[9] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,p];
+            BLOCKR1[10] = [r,r,r,r,r,r,r,r,r,r,r,r,p,a,a];
+            BLOCKR1[11] = [r,r,r,r,r,r,r,r,r,r,r,p,a,a,a];
+            BLOCKR1[12] = [r,r,r,r,r,r,r,r,r,r,r,a,a,a,a];
+            BLOCKR1[13] = [p,r,r,r,r,r,r,r,r,r,p,a,a,a,a];
+            BLOCKR1[14] = [a,a,p,r,r,r,r,r,r,r,a,a,a,a,a];
+
+            BLOCKR2 = new Array(15);
+            BLOCKR2[0] = [a,a,a,p,r,r,r,r,r,r,r,a,a,a,a];
+            BLOCKR2[1] = [a,a,a,r,r,r,r,r,r,r,r,p,a,a,a];
+            BLOCKR2[2] = [a,a,p,r,r,r,r,r,r,r,r,r,p,a,a];
+            BLOCKR2[3] = [r,r,r,r,r,r,r,r,r,r,r,r,r,a,a];
+            BLOCKR2[4] = [r,r,r,r,r,r,r,r,r,r,r,r,r,p,a];
+            BLOCKR2[5] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR2[6] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR2[7] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR2[8] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR2[9] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR2[10] = [r,r,r,r,r,r,r,r,r,r,r,r,r,p,a];
+            BLOCKR2[11] = [p,r,r,r,r,r,r,r,r,r,r,r,r,a,a];
+            BLOCKR2[12] = [a,a,p,r,r,r,r,r,r,r,r,r,p,a,a];
+            BLOCKR2[13] = [a,a,a,r,r,r,r,r,r,r,r,p,a,a,a];
+            BLOCKR2[14] = [a,a,a,p,r,r,r,r,r,r,r,a,a,a,a];
+
+            BLOCKR3 = new Array(15);
+            BLOCKR3[0] = [a,a,a,a,r,r,r,r,r,r,r,p,a,a,a];
+            BLOCKR3[1] = [a,a,a,p,r,r,r,r,r,r,r,r,a,a,a];
+            BLOCKR3[2] = [a,a,p,r,r,r,r,r,r,r,r,r,p,a,a];
+            BLOCKR3[3] = [a,a,r,r,r,r,r,r,r,r,r,r,r,r,p];
+            BLOCKR3[4] = [a,p,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR3[5] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR3[6] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR3[7] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR3[8] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR3[9] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR3[10] = [a,p,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR3[11] = [a,a,r,r,r,r,r,r,r,r,r,r,r,r,p];
+            BLOCKR3[12] = [a,a,p,r,r,r,r,r,r,r,r,r,p,a,a];
+            BLOCKR3[13] = [a,a,a,p,r,r,r,r,r,r,r,r,a,a,a];
+            BLOCKR3[14] = [a,a,a,a,r,r,r,r,r,r,r,p,a,a,a];
+
+            BLOCKR4 = new Array(15);
+            BLOCKR4[0] = [a,a,a,a,a,r,r,r,r,r,r,r,p,a,a];
+            BLOCKR4[1] = [a,a,a,a,p,r,r,r,r,r,r,r,r,r,p];
+            BLOCKR4[2] = [a,a,a,a,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR4[3] = [a,a,a,p,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR4[4] = [a,a,p,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR4[5] = [p,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR4[6] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR4[7] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR4[8] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR4[9] = [p,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR4[10] = [a,a,p,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR4[11] = [a,a,a,p,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR4[12] = [a,a,a,a,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKR4[13] = [a,a,a,a,p,r,r,r,r,r,r,r,r,r,p];
+            BLOCKR4[14] = [a,a,a,a,a,r,r,r,r,r,r,r,p,a,a];
+
+            BlockR = new Array(6);
+            BlockR = [BLOCK0,BLOCKR1,BLOCKR2,BLOCKR3,BLOCKR4,BLOCK0];
+
+            BlockL = new Array(6);
+            BlockL = [BLOCK0,BLOCKR4,BLOCKR3,BLOCKR2,BLOCKR1,BLOCK0];  //moving left is inverse of moving right
+
+            
+            BLOCKD1 = new Array(6);
+            BLOCKD1[0] = [a,p,r,r,r,r,r,r,r,r,r,r,r,p,a];
+            BLOCKD1[1] = [a,r,r,r,r,r,r,r,r,r,r,r,r,r,a];
+            BLOCKD1[2] = [p,r,r,r,r,r,r,r,r,r,r,r,r,r,p];
+            BLOCKD1[3] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD1[4] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD1[5] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD1[6] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD1[7] = [a,p,r,r,r,r,r,r,r,r,r,r,r,p,a];
+            BLOCKD1[8] = [a,a,a,a,p,r,r,r,r,r,p,a,a,a,a];
+            BLOCKD1[9] = [a,a,a,a,a,r,r,r,r,r,a,a,a,a,a];
+            BLOCKD1[10] = [a,a,a,a,a,p,r,r,r,p,a,a,a,a,a];
+            BLOCKD1[11] = [a,a,a,a,a,a,r,r,r,a,a,a,a,a,a];
+            BLOCKD1[12] = [a,a,a,a,a,a,p,r,p,a,a,a,a,a,a];
+            BLOCKD1[13] = [a,a,a,a,a,a,p,r,p,a,a,a,a,a,a];
+            BLOCKD1[14] = [a,a,a,a,a,a,p,r,p,a,a,a,a,a,a];
+
+            BLOCKD2 = new Array(15);
+            BLOCKD2[0] = [a,a,a,p,r,r,r,r,r,r,r,p,a,a,a];
+            BLOCKD2[1] = [a,a,a,r,r,r,r,r,r,r,r,r,a,a,a];
+            BLOCKD2[2] = [a,a,p,r,r,r,r,r,r,r,r,r,p,a,a];
+            BLOCKD2[3] = [p,r,r,r,r,r,r,r,r,r,r,r,r,r,p];
+            BLOCKD2[4] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD2[5] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD2[6] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD2[7] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD2[8] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD2[9] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD2[10] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD2[11] = [a,p,r,r,r,r,r,r,r,r,r,r,r,p,a];
+            BLOCKD2[12] = [a,a,p,r,r,r,r,r,r,r,r,r,p,a,a];
+            BLOCKD2[13] = [a,a,a,a,p,r,r,r,r,r,p,a,a,a,a];
+            BLOCKD2[14] = [a,a,a,a,a,r,r,r,r,r,a,a,a,a,a];
+
+            BLOCKD3 = new Array(15);
+            BLOCKD3[0] = [a,a,a,a,a,r,r,r,r,r,a,a,a,a,a];
+            BLOCKD3[1] = [a,a,a,a,p,r,r,r,r,r,p,a,a,a,a];
+            BLOCKD3[2] = [a,a,p,r,r,r,r,r,r,r,r,r,p,a,a];
+            BLOCKD3[3] = [a,p,r,r,r,r,r,r,r,r,r,r,r,p,a];
+            BLOCKD3[4] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD3[5] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD3[6] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD3[7] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD3[8] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD3[9] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD3[10] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD3[11] = [p,r,r,r,r,r,r,r,r,r,r,r,r,r,p];
+            BLOCKD3[12] = [a,a,p,r,r,r,r,r,r,r,r,r,p,a,a];
+            BLOCKD3[13] = [a,a,a,r,r,r,r,r,r,r,r,r,a,a,a];
+            BLOCKD3[14] = [a,a,a,p,r,r,r,r,r,r,r,p,a,a,a];
+
+            BLOCKD4 = new Array(15);
+            BLOCKD4[0] = [a,a,a,a,a,a,p,r,p,a,a,a,a,a,a];
+            BLOCKD4[1] = [a,a,a,a,a,a,p,r,p,a,a,a,a,a,a];
+            BLOCKD4[2] = [a,a,a,a,a,a,p,r,p,a,a,a,a,a,a];
+            BLOCKD4[3] = [a,a,a,a,a,a,r,r,r,a,a,a,a,a,a];
+            BLOCKD4[4] = [a,a,a,a,a,p,r,r,r,p,a,a,a,a,a];
+            BLOCKD4[5] = [a,a,a,a,a,r,r,r,r,r,a,a,a,a,a];
+            BLOCKD4[6] = [a,a,a,a,p,r,r,r,r,r,p,a,a,a,a];
+            BLOCKD4[7] = [a,p,r,r,r,r,r,r,r,r,r,r,r,p,a];
+            BLOCKD4[8] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD4[9] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD4[10] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD4[11] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            BLOCKD4[12] = [p,r,r,r,r,r,r,r,r,r,r,r,r,r,p];
+            BLOCKD4[13] = [a,r,r,r,r,r,r,r,r,r,r,r,r,r,a];
+            BLOCKD4[14] = [a,p,r,r,r,r,r,r,r,r,r,r,r,p,a];
+
+            BlockD = new Array(6);
+            BlockD = [BLOCK0,BLOCKD1,BLOCKD2,BLOCKD3,BLOCKD4,BLOCK0];
+            
+            BlockU = new Array(6);
+            BlockU = [BLOCK0,BLOCKD4,BLOCKD3,BLOCKD2,BLOCKD1,BLOCK0];  //moving up is inverse of moving down
+
+            RIGHTEYE = new Array(15);
+            RIGHTEYE[0] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            RIGHTEYE[1] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            RIGHTEYE[2] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            RIGHTEYE[3] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            RIGHTEYE[4] = [r,r,r,p,a,a,a,p,r,r,r,r,r,r,r];
+            RIGHTEYE[5] = [r,r,r,a,a,a,a,a,m,k,k,k,r,r,r];
+            RIGHTEYE[6] = [r,r,r,a,a,a,a,a,k,k,r,r,k,r,r];
+            RIGHTEYE[7] = [r,r,r,a,a,a,a,a,k,k,r,r,k,r,r];
+            RIGHTEYE[8] = [r,r,r,a,a,a,a,a,m,k,k,k,k,r,r];
+            RIGHTEYE[9] = [r,r,r,r,p,a,a,a,a,m,k,m,r,r,r];
+            RIGHTEYE[10] = [r,r,r,r,r,r,r,p,a,a,a,r,r,r,r];
+            RIGHTEYE[11] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            RIGHTEYE[12] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            RIGHTEYE[13] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            RIGHTEYE[14] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+
+            LEFTEYE = new Array(15);
+            LEFTEYE[0] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            LEFTEYE[1] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            LEFTEYE[2] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            LEFTEYE[3] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            LEFTEYE[4] = [r,r,r,r,r,r,r,p,a,a,a,p,r,r,r];
+            LEFTEYE[5] = [r,r,r,k,k,k,m,a,a,a,a,a,r,r,r];
+            LEFTEYE[6] = [r,r,k,r,r,k,k,a,a,a,a,a,r,r,r];
+            LEFTEYE[7] = [r,r,k,r,r,k,k,a,a,a,a,a,r,r,r];
+            LEFTEYE[8] = [r,r,k,k,k,k,m,a,a,a,a,a,r,r,r];
+            LEFTEYE[9] = [r,r,r,m,k,m,a,a,a,a,p,r,r,r,r];
+            LEFTEYE[10] = [r,r,r,r,a,a,a,p,r,r,r,r,r,r,r];
+            LEFTEYE[11] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            LEFTEYE[12] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            LEFTEYE[13] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            LEFTEYE[14] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+
+            UPEYE = new Array(15);
+            UPEYE[0] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            UPEYE[1] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            UPEYE[2] = [r,r,r,r,r,r,k,k,k,k,k,r,r,r,r];
+            UPEYE[3] = [r,r,r,r,r,k,k,k,r,r,k,k,k,r,r];
+            UPEYE[4] = [r,r,r,r,k,k,k,k,r,r,k,k,k,r,r];
+            UPEYE[5] = [r,r,r,r,m,k,k,k,k,k,k,k,k,r,r];
+            UPEYE[6] = [r,r,r,a,a,m,k,k,k,k,k,k,k,r,r];
+            UPEYE[7] = [r,r,r,a,a,a,m,k,k,k,k,m,a,r,r];
+            UPEYE[8] = [r,r,r,a,a,a,a,a,a,a,a,a,a,r,r];
+            UPEYE[9] = [r,r,r,p,a,a,a,a,a,a,a,a,p,r,r];
+            UPEYE[10] = [r,r,r,r,p,a,a,a,a,a,a,p,r,r,r];
+            UPEYE[11] = [r,r,r,r,r,p,a,a,a,a,p,r,r,r,r];
+            UPEYE[12] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            UPEYE[13] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            UPEYE[14] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+
+            DOWNEYE = new Array(15);
+            DOWNEYE[0] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            DOWNEYE[1] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            DOWNEYE[2] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            DOWNEYE[3] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            DOWNEYE[4] = [r,r,r,r,p,a,a,a,a,a,p,r,r,r,r];
+            DOWNEYE[5] = [r,r,r,p,a,a,a,a,a,a,a,p,r,r,r];
+            DOWNEYE[6] = [r,r,r,a,a,a,a,a,a,a,a,a,r,r,r];
+            DOWNEYE[7] = [r,r,r,a,a,a,m,k,k,m,a,a,r,r,r];
+            DOWNEYE[8] = [r,r,r,a,m,k,k,k,k,k,k,m,r,r,r];
+            DOWNEYE[9] = [r,r,r,k,k,k,k,k,k,k,k,k,r,r,r];
+            DOWNEYE[10] = [r,r,r,k,k,k,r,r,k,k,k,k,r,r,r];
+            DOWNEYE[11] = [r,r,r,r,k,k,r,r,k,k,k,r,r,r,r];
+            DOWNEYE[12] = [r,r,r,r,r,k,k,k,r,r,r,r,r,r,r];
+            DOWNEYE[13] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            DOWNEYE[14] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+
+            STAR = new Array(15);
+            STAR[0] = [a,a,a,a,a,a,a,p,a,a,a,a,a,a,a];
+            STAR[1] = [a,a,a,a,a,a,p,r,p,a,a,a,a,a,a];
+            STAR[2] = [a,a,a,a,a,p,r,r,r,p,a,a,a,a,a];
+            STAR[3] = [a,a,a,a,p,r,r,r,r,r,p,a,a,a,a];
+            STAR[4] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            STAR[5] = [p,r,r,r,r,r,r,r,r,r,r,r,r,r,p];
+            STAR[6] = [a,p,r,r,r,r,r,r,r,r,r,r,r,p,a];
+            STAR[7] = [a,a,r,r,r,r,r,r,r,r,r,r,r,a,a];
+            STAR[8] = [a,p,r,r,r,r,r,r,r,r,r,r,r,p,a];
+            STAR[9] = [p,r,r,r,r,r,r,r,r,r,r,r,r,r,p];
+            STAR[10] = [r,r,r,r,r,r,r,r,r,r,r,r,r,r,r];
+            STAR[11] = [a,a,a,a,p,r,r,r,r,r,p,a,a,a,a];
+            STAR[12] = [a,a,a,a,a,p,r,r,r,p,a,a,a,a,a];
+            STAR[13] = [a,a,a,a,a,a,p,r,p,a,a,a,a,a,a];
+            STAR[14] = [a,a,a,a,a,a,a,p,a,a,a,a,a,a,a];
+
+            document.addEventListener("keydown",pickkey);
+			setup();
+  //          newGame();
+		</script>
+	</body>
+</html>

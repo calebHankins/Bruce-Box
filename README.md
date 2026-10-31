@@ -1,4 +1,4 @@
-# Bruce-Box Arcade
+# Bruce-Box
 
 A lightweight, zero-dependency browser games arcade hosted on GitHub Pages, featuring original HTML/JS games designed and created by **Bruce Baskir**.
 
@@ -6,7 +6,7 @@ The arcade features a framework-free catalog landing page, responsive dark arcad
 
 ## Live Site
 
-- **Arcade Showcase**: [Bruce-Box/](https://calebHankins.github.io/Bruce-Box/) *(or your configured GitHub Pages domain)*
+- **Showcase**: [Bruce-Box](https://calebHankins.github.io/Bruce-Box/)
 
 ## Game Catalog
 

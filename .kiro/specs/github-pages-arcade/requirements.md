@@ -48,14 +48,15 @@ The repository also includes standard project maintenance files: `README.md`, `L
 - **FR-4.2 (LICENSE)**: An permissive, zero-warranty open-source license (MIT License) clarifying the code is provided "as is" with no warranty or support liability.
 - **FR-4.3 (AGENTS.md & Agent Skills)**:
   - Concise `AGENTS.md` defining project guidelines, boundaries, and pointers to agent skills.
-  - An Agent Skill in `.agents/skills/game-intake/` containing instructions/scripts for taking a raw game file from `games/` and publishing it into the public web root.
+  - An Agent Skill in `.agents/skills/game-intake/` containing instructions and a vanilla JavaScript `.mjs` script, runnable with Node.js, for taking a raw game file from `games/` and publishing it into the public web root.
 - **FR-4.4 (CONTRIBUTING.md)**: Human-oriented instructions for adding a new game, updating existing games, reporting issues, and testing locally.
+- **FR-4.5 (Node.js Maintenance Scripts)**: Any project-authored maintenance or local-server scripts must be vanilla JavaScript in `.mjs` files runnable with Node.js. Scripts must use only Node.js built-in modules; Python, PowerShell, external packages, and build tooling must not be required.
 
 ---
 
 ## 4. Non-Functional Requirements
 
-- **NFR-1 (Portability & Simplicity)**: The site must be testable locally with any standard static HTTP server (e.g., Python `http.server`, Node `npx serve`, or VS Code Live Server) with no build step required.
+- **NFR-1 (Portability & Simplicity)**: The static site must be testable locally using the repository's Node.js built-in static server (`node scripts/serve.mjs`) with no installation or build step. Node.js is needed only for local maintenance and preview; the deployed site is static and requires no server runtime.
 - **NFR-2 (Performance)**: Page load time for the landing page should be virtually instantaneous (< 500ms on broadband), relying on lightweight native CSS and minimal assets.
 - **NFR-3 (Context Efficiency for Agents)**: Documentation and skills must be terse, high-signal, and modular to prevent LLM context exhaustion.
 

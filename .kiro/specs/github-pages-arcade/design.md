@@ -10,7 +10,7 @@ Bruce-Box/
 │   └── skills/
 │       └── game-intake/
 │           ├── SKILL.md
-│           └── sync-games.ps1 (or python/node script)
+│           └── sync-games.mjs
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml
@@ -41,11 +41,15 @@ Bruce-Box/
 │   └── index.html             <-- Landing page ("Bruce-Box Arcade")
 ├── scratch/
 │   └── mood_board.md
+├── scripts/
+│   └── serve.mjs               <-- Node.js built-in static preview server
 ├── AGENTS.md
 ├── CONTRIBUTING.md
 ├── LICENSE (MIT)
 └── README.md
 ```
+
+Maintenance scripts use vanilla JavaScript in `.mjs` files and run with Node.js. They must use Node.js built-in modules only; do not introduce Python, PowerShell, external packages, or a build step. The published site remains static HTML, CSS, and browser JavaScript and does not require Node.js at runtime.
 
 ---
 

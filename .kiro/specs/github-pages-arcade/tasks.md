@@ -36,8 +36,10 @@
     - Frontmatter (`name`, `description`).
     - Step-by-step instructions for ingesting, slugifying, and publishing Bruce's new game drops.
     - Checklist for updating landing page cards when new games are added.
+  - [ ] 5.3 Create `.agents/skills/game-intake/sync-games.mjs` as a vanilla JavaScript script runnable with Node.js to copy a selected raw game into its stable published path without modifying the source. Use Node.js built-in modules only.
 
 - [ ] **Task 6: Verification & Validation**
-  - [ ] 6.1 Test local static serving of `public/` directory (e.g. via Python static server).
-  - [ ] 6.2 Validate link integrity: Landing page -> each game, and verify all 4 games load without JavaScript or path errors.
-  - [ ] 6.3 Verify all files requested in `mood_board.md` are accounted for and properly linked.
+  - [ ] 6.1 Create `scripts/serve.mjs`, a vanilla JavaScript static HTTP server using Node.js built-in modules only, and document `node scripts/serve.mjs` as the local preview command.
+  - [ ] 6.2 Test local static serving of `public/` with `node scripts/serve.mjs`; no Python, PowerShell, external packages, or build step may be required.
+  - [ ] 6.3 Validate link integrity: Landing page -> each game, and verify all 4 games load without JavaScript or path errors.
+  - [ ] 6.4 Verify all files requested in `mood_board.md` are accounted for and properly linked.

@@ -34,7 +34,6 @@ Game code copied to `public/games/<slug>/index.html` must remain identical to Br
 
 1. Standard `<meta charset="utf-8">` and viewport tags if missing.
 2. Descriptive `<title>` tag.
-3. The lightweight, non-invasive `<div class="bruce-box-top-nav">` return button.
 
 ---
 

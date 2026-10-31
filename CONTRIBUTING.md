@@ -52,7 +52,6 @@ Verify:
 - The landing page at `http://localhost:8080/` loads cleanly.
 - Bruce-Box-hosted game links navigate to `/games/<slug>/`; external game links open the intended hosted game.
 - Each game runs without console errors.
-- The "← Bruce-Box Arcade" return button in each game returns to the catalog.
 
 ---
 

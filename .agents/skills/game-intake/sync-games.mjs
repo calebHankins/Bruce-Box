@@ -58,55 +58,6 @@ export const GAME_MANIFEST = [
 ];
 
 /**
- * Floating arcade back-navigation widget.
- * Non-invasive, fixed position in the top-right corner with low z-index conflict risk.
- */
-function getArcadeNavSnippet(title) {
-  return `
-<!-- Bruce-Box Arcade Return Navigation -->
-<style id="bruce-box-nav-style">
-  .bruce-box-top-nav {
-    position: fixed;
-    top: 10px;
-    right: 12px;
-    z-index: 999999;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  }
-  .bruce-box-top-nav a {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(17, 24, 39, 0.92);
-    color: #f3f4f6;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 6px 12px;
-    border-radius: 9999px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(6px);
-    transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
-  }
-  .bruce-box-top-nav a:hover {
-    background: #111827;
-    border-color: #f59e0b;
-    color: #fbbf24;
-    transform: translateY(-1px);
-  }
-  .bruce-box-top-nav a:focus-visible {
-    outline: 2px solid #f59e0b;
-    outline-offset: 2px;
-  }
-</style>
-<div class="bruce-box-top-nav" aria-label="Arcade navigation">
-  <a href="../../" title="Return to Bruce-Box Arcade catalog">&larr; Bruce-Box Arcade</a>
-</div>
-<!-- End Bruce-Box Arcade Return Navigation -->
-`;
-}
-
-/**
  * Syncs raw game files to their public endpoints while preserving game logic.
  */
 export function syncGames({ dryRun = false } = {}) {
@@ -142,16 +93,6 @@ export function syncGames({ dryRun = false } = {}) {
     if (!/<meta\s+name=["']viewport["']/i.test(content)) {
       if (/<head[^>]*>/i.test(content)) {
         content = content.replace(/<head[^>]*>/i, '$&\n\t\t<meta name="viewport" content="width=device-width, initial-scale=1.0">');
-      }
-    }
-
-    // 4. Inject lightweight non-invasive return navigation
-    if (!content.includes('bruce-box-nav-style')) {
-      const navSnippet = getArcadeNavSnippet(game.title);
-      if (/<body[^>]*>/i.test(content)) {
-        content = content.replace(/<body[^>]*>/i, `$&\n${navSnippet}`);
-      } else {
-        content = navSnippet + content;
       }
     }
 

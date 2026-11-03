@@ -1,6 +1,6 @@
 # Contributing to Bruce-Box
 
-Thank you for your interest in maintaining or contributing to the Bruce-Box Arcade!
+Thank you for your interest in maintaining or contributing to the Bruce-Box!
 
 Bruce-Box is a lightweight showcase website hosted on GitHub Pages that archives and presents browser games created by **Bruce Baskir**.
 

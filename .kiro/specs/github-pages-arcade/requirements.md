@@ -2,7 +2,7 @@
 
 ## 1. Overview & Goals
 
-Bruce-Box is a lightweight showcase website hosted on GitHub Pages that catalogs browser-based games created by Bruce Baskir. Games may be hosted in Bruce-Box or linked from another host. The system provides a clean, framework-free landing page ("Bruce-Box Arcade"), presents each game at a stable playable URL, and keeps raw original files isolated so new game drops from Bruce can be imported cleanly without overwriting release history.
+Bruce-Box is a lightweight showcase website hosted on GitHub Pages that catalogs browser-based games created by Bruce Baskir. Games may be hosted in Bruce-Box or linked from another host. The system provides a clean, framework-free landing page ("Bruce-Box"), presents each game at a stable playable URL, and keeps raw original files isolated so new game drops from Bruce can be imported cleanly without overwriting release history.
 
 The repository also includes standard project maintenance files: `README.md`, `LICENSE` (MIT), `AGENTS.md` (with `.agents/skills` for agent tooling), `CONTRIBUTING.md`, and an automated GitHub Actions deployment workflow for GitHub Pages.
 
@@ -29,7 +29,7 @@ The repository also includes standard project maintenance files: `README.md`, `L
   - My Garden Grow: `/games/my-garden-grow/`
   - Smother 3: `/games/smother3/`
 
-### 3.2 Landing Page (Bruce-Box Arcade)
+### 3.2 Landing Page (Bruce-Box)
 - **FR-2.1 (Framework-Free Architecture)**: The landing page (`index.html`) must use pure HTML5, CSS3, and vanilla JavaScript with zero external frameworks or heavy runtime dependencies.
 - **FR-2.2 (Game Catalog Presentation)**: The landing page must present a clean, aesthetic card or list view of all featured games, including:
   - Game Title

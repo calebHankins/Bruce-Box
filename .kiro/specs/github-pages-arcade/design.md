@@ -38,7 +38,7 @@ Bruce-Box/
 │   │   └── smother3/
 │   │       └── index.html
 │   ├── favicon.ico (optional SVG/ICO)
-│   └── index.html             <-- Landing page ("Bruce-Box Arcade")
+│   └── index.html             <-- Landing page ("Bruce-Box")
 ├── scratch/
 │   └── mood_board.md
 ├── scripts/

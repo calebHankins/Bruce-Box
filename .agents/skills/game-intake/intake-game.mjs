@@ -86,7 +86,7 @@ export function intakeGame({ slug, dryRun = false } = {}) {
     content = content.replace(/<head[^>]*>/i, '$&\n\t\t<meta charset="utf-8">');
   }
 
-  const titleTag = `<title>${game.title} - Bruce-Box Arcade</title>`;
+  const titleTag = `<title>${game.title} - Bruce-Box</title>`;
   if (/<title[\s\S]*?<\/title>/i.test(content)) {
     content = content.replace(/<title[\s\S]*?<\/title>/i, titleTag);
   } else if (/<head[^>]*>/i.test(content)) {

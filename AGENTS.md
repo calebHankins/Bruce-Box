@@ -1,6 +1,6 @@
 # Bruce-Box Agent Instructions
 
-This repository hosts **Bruce-Box Arcade**, a lightweight GitHub Pages site showcasing browser-based games created by **Bruce Baskir**.
+This repository hosts **Bruce-Box**, a lightweight GitHub Pages site showcasing browser-based games created by **Bruce Baskir**.
 
 Agents operating on this repository must adhere to the rules, boundaries, and workflows outlined below.
 

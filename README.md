@@ -51,7 +51,7 @@ Bruce-Box/
 ├── public/                      # Web root deployed to GitHub Pages
 │   ├── css/style.css            # Framework-free arcade styling
 │   ├── games/<slug>/index.html  # Stable, durable game endpoints
-│   └── index.html               # Main Bruce-Box arcade landing page
+│   └── index.html               # Main Bruce-Box landing page
 ├── scripts/serve.mjs            # Zero-dependency local preview server
 ├── AGENTS.md                    # Instructions and boundaries for AI coding agents
 ├── CONTRIBUTING.md              # Human maintainer guidelines
